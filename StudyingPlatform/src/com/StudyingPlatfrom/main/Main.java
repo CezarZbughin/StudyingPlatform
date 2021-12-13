@@ -14,5 +14,6 @@ public class Main {
         JFrame frame = MainFrame.getInstance().getFrame();
         frame.add(new TestView());
         frame.setVisible(true);
+
     }
 }
