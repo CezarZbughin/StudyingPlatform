@@ -1,49 +1,77 @@
 package com.StudyingPlatfrom.view;
 
+import com.StudyingPlatfrom.service.UserService;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
 public class LogInView extends JPanel {
-    private JLabel jcomp1;
-    private JLabel jcomp2;
-    private JTextField jcomp3;
-    private JLabel jcomp4;
-    private JTextField jcomp5;
-    private JButton jcomp6;
-    private JButton jcomp7;
+    //header
+    private JLabel header;
+    //title
+    private JPanel titlePanel;
+    private JLabel title;
+    //username panel
+    private JPanel usernamePanel;
+    private JLabel usernameLabel;
+    private JTextField usernameText;
+    //password panel
+    private JPanel passwordPanel;
+    private JLabel passwordLabel;
+    private JPasswordField passwordText;
+    //buttons
+    private JPanel buttonsPanel;
+    private JButton logInButton;
+    private JButton signUpButton;
+    //center panel
+    private JPanel centerPanel;
 
     public LogInView() {
-        //construct components
-        jcomp1 = new JLabel ("Studying PLatfrom");
-        jcomp2 = new JLabel ("Login:");
-        jcomp3 = new JTextField (5);
-        jcomp4 = new JLabel ("Password:");
-        jcomp5 = new JTextField (5);
-        jcomp6 = new JButton ("Log In");
-        jcomp7 = new JButton ("Sign Up");
-
-        //adjust size and set layout
-        setPreferredSize (new Dimension (624, 334));
-        setLayout (null);
-
-        //add components
-        add (jcomp1);
-        add (jcomp2);
-        add (jcomp3);
-        add (jcomp4);
-        add (jcomp5);
-        add (jcomp6);
-        add (jcomp7);
-
-        //set component bounds (only needed by Absolute Positioning)
-        jcomp1.setBounds (40, 5, 140, 65);
-        jcomp2.setBounds (25, 75, 65, 25);
-        jcomp3.setBounds (100, 75, 100, 25);
-        jcomp4.setBounds (0, 115, 100, 25);
-        jcomp5.setBounds (100, 115, 100, 25);
-        jcomp6.setBounds (15, 165, 100, 25);
-        jcomp7.setBounds (125, 165, 100, 25);
+        BorderLayout layout = new BorderLayout(0, 0);
+        setLayout (layout);
+        //header
+        header = new JLabel(" ");
+        //title
+        title = new JLabel("Studying Platform");
+        titlePanel = new JPanel();
+        titlePanel.add(title);
+        //username Panel
+        usernamePanel = new JPanel();
+        usernameLabel = new JLabel("Username:");
+        usernameText = new JTextField(11);
+        usernamePanel.add(usernameLabel);
+        usernamePanel.add(usernameText);
+        usernamePanel.setLayout(new FlowLayout());
+        //password Panel
+        passwordPanel = new JPanel();
+        passwordLabel = new JLabel("Password:");
+        passwordText = new JPasswordField("",11);
+        passwordPanel.add(passwordLabel);
+        passwordPanel.add(passwordText);
+        passwordPanel.setLayout(new FlowLayout());
+        //buttons
+        logInButton = new JButton("Log In");
+        logInButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UserService.logIn(usernameText.getText(),String.valueOf(passwordText.getPassword()));
+            }
+        });
+        signUpButton = new JButton("Sign Up");
+        buttonsPanel = new JPanel();
+        buttonsPanel.setLayout(new FlowLayout());
+        buttonsPanel.add(logInButton);
+        buttonsPanel.add(signUpButton);
+        //center panel
+        centerPanel = new JPanel();
+        centerPanel.add(header);
+        centerPanel.add(titlePanel);
+        centerPanel.add(usernamePanel);
+        centerPanel.add(passwordPanel);
+        centerPanel.add(buttonsPanel);
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        add (centerPanel, BorderLayout.CENTER);
     }
 }

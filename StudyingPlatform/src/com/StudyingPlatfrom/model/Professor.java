@@ -9,7 +9,7 @@ public class Professor extends User{
 
     }
 
-    public Professor(int id, String username, String password, Role role, String cnp,
+    public Professor(int id, String username, String password, String role, String cnp,
                      String firstName, String lastName, Address address, String phone,
                      String email, String iban, String contractNumber, boolean isAdmin,
                      boolean isSuperAdmin, int minTeachingHours, int maxTeachingHours, String department) {

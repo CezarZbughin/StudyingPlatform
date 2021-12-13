@@ -4,7 +4,10 @@ public class Student extends User{
     private int year;
     private int minStudyingHours;
 
-    public Student(int id, String username, String password, Role role, String cnp,
+    public Student(){
+
+    }
+    public Student(int id, String username, String password, String role, String cnp,
                    String firstName, String lastName, Address address, String phone,
                    String email, String iban, String contractNumber, boolean isAdmin,
                    boolean isSuperAdmin, int year, int minStudyingHours) {
