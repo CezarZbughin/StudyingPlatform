@@ -1,2 +1,0 @@
-# StudyingPlatform
- Proiect UTCN
