@@ -1,7 +1,6 @@
 package com.StudyingPlatform.model;
 
 public class Address {
-    int id;
     private String country;
     private String region;
     private String town;
@@ -12,21 +11,12 @@ public class Address {
 
     }
 
-    public Address(int id, String country, String region, String town, String streetAddress, String postalCode) {
-        this.id = id;
+    public Address(String country, String region, String town, String streetAddress, String postalCode) {
         this.country = country;
         this.region = region;
         this.town = town;
         this.streetAddress = streetAddress;
         this.postalCode = postalCode;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCountry() {
