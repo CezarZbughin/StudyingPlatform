@@ -32,20 +32,23 @@ public class LogInController {
         try {
             AccountService.logIn(usernameField.getText(), passwordField.getText());
         }catch(LoginException e){
-            if(e.getMessage().equals("username not found")){
-                errorLabel.setText("The username that you've entered doesn't belong to an account.");
-            }else if(e.getMessage().equals("wrong password")){
-                errorLabel.setText("Your password was incorrect. Try again");
+            switch(e.getMessage()){
+                case "username not found":
+                    errorLabel.setText("The username that you've entered doesn't belong to an account.");
+                    break;
+                case "wrong password":
+                    errorLabel.setText("Your password was incorrect. Try again");
+                    break;
+                default:
+                    errorLabel.setText("Sorry, something went wrong.");
             }
             errorLabel.setVisible(true);
             return;
         }
-
         URL url = StudyingApplication.class.getResource("green.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         stage.setScene(scene);
-
     }
 
     @FXML

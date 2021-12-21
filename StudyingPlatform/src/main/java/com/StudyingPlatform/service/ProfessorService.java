@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProfessorService extends UserService{
-
-
     public static Professor mapResultSet(ResultSet resultSet) {
         try {
             if (resultSet.next()){
