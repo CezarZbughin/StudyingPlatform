@@ -22,6 +22,7 @@ public class ProfessorService{
                         new Address(
                                 resultSet.getString("country"),
                                 resultSet.getString("town"),
+                                resultSet.getString("region"),
                                 resultSet.getString("street_address"),
                                 resultSet.getString("postal_code")
                         ),
