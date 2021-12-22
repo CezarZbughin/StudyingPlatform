@@ -21,7 +21,6 @@ public class ProfessorService extends UserService{
                         resultSet.getString("last_name"),
                         new Address(
                                 resultSet.getString("country"),
-                                resultSet.getString("region"),
                                 resultSet.getString("town"),
                                 resultSet.getString("street_address"),
                                 resultSet.getString("postal_code")

@@ -52,8 +52,6 @@ public class LogInController {
     }
 
     @FXML
-    public void onCreateAccountClick(){
-
-    }
+    public void onCreateAccountClick(){}
 
 }
