@@ -7,7 +7,7 @@ import com.StudyingPlatform.model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProfessorService extends UserService{
+public class ProfessorService{
     public static Professor mapResultSet(ResultSet resultSet) {
         try {
             if (resultSet.next()){

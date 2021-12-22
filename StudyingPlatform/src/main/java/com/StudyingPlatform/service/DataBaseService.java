@@ -54,7 +54,7 @@ public class DataBaseService {
                 }
             }
         }catch(SQLException e){
-            e.printStackTrace();
+            return null;
         }
         return null;
     }
@@ -72,6 +72,60 @@ public class DataBaseService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void insertUser(User user) throws SQLException{
+        final String INSERT_USER = "insert into user(username,password,role,CNP,first_name,last_name,phone,email,iban,contract_number,is_admin,is_super_admin) VALUES " +
+                "(?,?,?,?,?,?,?,?,?,?,?,?)";
+        final String INSERT_STUDENT = "insert into student(id,year,min_studying_hours) VALUES (?, ?, ?)";
+        final String INSERT_PROFESSOR = "insert into professor(id,min_teaching_hours,max_teaching_hours,department) VALUES (?, ?, ?, ?)";
+        final String INSERT_ADDRESS = "insert into address(id,country,region,town,street_address,postal_code) VALUES (?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement statementUser = connection.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
+        statementUser.setString(1,user.getUsername());
+        statementUser.setString(2,user.getPassword());
+        statementUser.setString(3,user.getRole());
+        statementUser.setString(4,user.getCnp());
+        statementUser.setString(5,user.getFirstName());
+        statementUser.setString(6,user.getLastName());
+        statementUser.setString(7,user.getPhone());
+        statementUser.setString(8,user.getEmail());
+        statementUser.setString(9,user.getIban());
+        statementUser.setString(10,user.getContractNumber());
+        statementUser.setBoolean(11,user.isAdmin());
+        statementUser.setBoolean(12,user.isSuperAdmin());
+        statementUser.executeUpdate();
+
+        ResultSet generatedKeys = statementUser.getGeneratedKeys();
+        if(generatedKeys.next()){
+            int id = generatedKeys.getInt(1);
+
+            PreparedStatement statementAddress = connection.prepareStatement(INSERT_ADDRESS);
+            statementAddress.setInt(1,id);
+            statementAddress.setString(2,user.getAddress().getCountry());
+            statementAddress.setString(3,user.getAddress().getRegion());
+            statementAddress.setString(4,user.getAddress().getTown());
+            statementAddress.setString(5,user.getAddress().getStreetAddress());
+            statementAddress.setString(6,user.getAddress().getPostalCode());
+            statementAddress.executeUpdate();
+
+            if(user instanceof Student){
+                Student student = (Student) user;
+                PreparedStatement statementStudent = connection.prepareStatement(INSERT_STUDENT);
+                statementStudent.setInt(1,id);
+                statementStudent.setInt(2,student.getYear());
+                statementStudent.setInt(3,student.getMinStudyingHours());
+                statementAddress.executeUpdate();
+            }else{
+                Professor professor = (Professor) user;
+                PreparedStatement statementProfessor = connection.prepareStatement(INSERT_PROFESSOR);
+                statementProfessor.setInt(1,id);
+                statementProfessor.setInt(2,professor.getMinTeachingHours());
+                statementProfessor.setInt(3,professor.getMaxTeachingHours());
+                statementProfessor.setString(4,professor.getDepartment());
+                statementProfessor.executeUpdate();
+            }
+        }else throw new SQLException("Could not generate an id");
     }
 
     public static Connection getConnection(){

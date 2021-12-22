@@ -1,6 +1,7 @@
 package com.StudyingPlatform.controllers;
 
 import com.StudyingPlatform.application.StudyingApplication;
+import com.StudyingPlatform.model.User;
 import com.StudyingPlatform.service.AccountService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,9 +29,9 @@ public class LogInController {
 
     @FXML
     public void onLogInButtonClick() throws IOException {
-        Stage stage = (Stage) root.getScene().getWindow();
+        Stage stage = StudyingApplication.getPrimaryStage();
         try {
-            AccountService.logIn(usernameField.getText(), passwordField.getText());
+            SuperController.activeUser = AccountService.logIn(usernameField.getText(), passwordField.getText());
         }catch(LoginException e){
             switch(e.getMessage()){
                 case "username not found":
@@ -52,8 +53,12 @@ public class LogInController {
     }
 
     @FXML
-    public void onCreateAccountClick(){
-
+    public void onCreateAccountClick() throws IOException{
+        Stage stage = StudyingApplication.getPrimaryStage();
+        URL url = StudyingApplication.class.getResource("sign-up-view.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+        stage.setScene(scene);
     }
 
 }
