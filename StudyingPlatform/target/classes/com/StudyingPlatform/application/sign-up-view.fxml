@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
@@ -10,17 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_RIGHT" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_RIGHT" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.SingUpController">
    <children>
-      <HBox alignment="TOP_CENTER" prefHeight="66.0" prefWidth="400.0">
-         <children>
-            <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" prefHeight="75.0" prefWidth="400.0" text="New account">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="66.0" prefWidth="400.0" />
       <VBox alignment="TOP_CENTER" prefHeight="75.0" prefWidth="400.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="400.0">
@@ -53,7 +46,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="189.0" promptText="town" />
+                  <TextField prefHeight="26.0" prefWidth="189.0" promptText="region" />
                </children>
             </HBox>
          </children>
@@ -62,14 +55,19 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="190.0" promptText="street" />
+                  <TextField prefHeight="26.0" prefWidth="190.0" promptText="town" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="189.0" promptText="postal code" />
+                  <TextField prefHeight="26.0" prefWidth="189.0" promptText="street" />
                </children>
             </HBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="75.0" prefWidth="400.0">
+         <children>
+            <TextField prefHeight="26.0" prefWidth="190.0" promptText="postal code" />
          </children>
       </HBox>
       <HBox prefHeight="75.0" prefWidth="400.0">
@@ -92,7 +90,7 @@
             <TextField prefHeight="26.0" prefWidth="190.0" promptText="contract number" />
          </children>
       </HBox>
-      <HBox prefHeight="75.0" prefWidth="400.0">
+      <HBox prefHeight="80.0" prefWidth="400.0">
          <children>
             <TextField prefHeight="26.0" prefWidth="190.0" promptText="username" />
             <Label prefHeight="26.0" prefWidth="105.0" text="   already used" textFill="RED" visible="false">
@@ -104,26 +102,45 @@
       </HBox>
       <HBox prefHeight="80.0" prefWidth="400.0">
          <children>
-            <PasswordField prefHeight="26.0" prefWidth="190.0" promptText="password" />
+            <PasswordField prefHeight="26.0" prefWidth="190.0" promptText=" password" />
          </children>
       </HBox>
-      <HBox prefHeight="80.0" prefWidth="400.0">
+      <HBox prefHeight="75.0" prefWidth="400.0">
          <children>
             <PasswordField prefHeight="26.0" prefWidth="190.0" promptText="confirm password" />
-            <Label fx:id="error1" prefHeight="24.0" prefWidth="148.0" text="password doesn't match" textFill="#ff0202" visible="false" />
+            <Label fx:id="error1" prefHeight="24.0" prefWidth="148.0" text="   password doesn't match" textFill="#ff0202" visible="false" />
          </children>
       </HBox>
-      <HBox prefHeight="85.0" prefWidth="400.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="400.0">
          <children>
-            <RadioButton fx:id="StudentButton" mnemonicParsing="false" text="Student" />
-            <RadioButton mnemonicParsing="false" text="Professor" />
-            <RadioButton mnemonicParsing="false" text="Admin" />
-            <RadioButton mnemonicParsing="false" text="Super Admin" />
-            <HBox alignment="TOP_CENTER" prefHeight="48.0" prefWidth="118.0">
+            <RadioButton fx:id="StudentButton" mnemonicParsing="false" onMouseClicked="#onStudentButtonClick" text="Student            " />
+            <RadioButton mnemonicParsing="false" onMouseClicked="#onProfessorButtonClick" text="Professor" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <VBox fx:id="studentBox" prefHeight="200.0" prefWidth="100.0" visible="false">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" text="CONTINUE" visible="false" />
+                  <TextField promptText="year of study" />
+                  <TextField />
+                  <TextField />
                </children>
-            </HBox>
+            </VBox>
+            <VBox fx:id="professorBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <TextField alignment="CENTER" promptText="departament" />
+                  <TextField />
+                  <TextField />
+               </children>
+            </VBox>
+            <Label alignment="BOTTOM_RIGHT" contentDisplay="BOTTOM" prefHeight="70.0" prefWidth="198.0" text="complete all fields    " textFill="RED" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Hyperlink alignment="CENTER" onMouseClicked="#onAlreadyHaveAnAccountLogInClick" prefHeight="24.0" prefWidth="184.0" text="Already have an account?Log in" />
+            <TextField prefHeight="26.0" prefWidth="103.0" visible="false" />
+            <Button alignment="CENTER" disable="true" mnemonicParsing="false" prefHeight="39.0" prefWidth="130.0" text="CONTINUE" />
          </children>
       </HBox>
    </children>

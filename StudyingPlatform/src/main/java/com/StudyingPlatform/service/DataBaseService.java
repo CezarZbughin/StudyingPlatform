@@ -8,8 +8,8 @@ import java.sql.*;
 
 public class DataBaseService {
     public final static String DB_USERNAME = "root";
-    public final static String DB_PASSWORD = "root";
-    public final static String DB_NAME = "StudyingPlatform";
+    public final static String DB_PASSWORD = "alabala";
+    public final static String DB_NAME = "mydb";
     public final static String DB_CONNECTION_LINK = "jdbc:mysql://localhost:3306/";
 
     private final static String PROFESSOR_BY_ID_QUERY = "select al1.id, username, password, role, CNP, first_name, last_name, phone, email, iban, contract_number, is_admin, is_super_admin, min_teaching_hours, max_teaching_hours, department, country, region, town, street_address, postal_code from ((select * from user u where u.id = ?) as al1 left join professor p on p.id = ? left join address a on a.id = ?)";

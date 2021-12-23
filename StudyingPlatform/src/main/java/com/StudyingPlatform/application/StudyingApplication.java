@@ -19,7 +19,7 @@ public class StudyingApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        URL url = StudyingApplication.class.getResource("home-student.fxml");
+        URL url = StudyingApplication.class.getResource("log-in-view.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         stage.setTitle("Studying Platform");
@@ -52,7 +52,7 @@ public class StudyingApplication extends Application {
                 4,
                 40
         );
-        try {
+      try {
             DataBaseService.insertUser(student);
             System.out.println("inserted with no exception");
         }catch (SQLException e){
@@ -65,3 +65,4 @@ public class StudyingApplication extends Application {
         return primaryStage;
     }
 }
+
