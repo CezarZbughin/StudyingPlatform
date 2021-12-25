@@ -2,25 +2,29 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_RIGHT" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_RIGHT" cache="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.SingUpController">
    <children>
-      <HBox alignment="TOP_CENTER" prefHeight="66.0" prefWidth="400.0">
+      <VBox prefHeight="95.0" prefWidth="400.0">
          <children>
-            <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" prefHeight="75.0" prefWidth="400.0" text="New account">
+            <Label alignment="CENTER" prefHeight="33.0" prefWidth="394.0" text="New account">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
          </children>
-      </HBox>
+      </VBox>
+      <HBox alignment="TOP_CENTER" prefHeight="66.0" prefWidth="400.0" />
       <VBox alignment="TOP_CENTER" prefHeight="75.0" prefWidth="400.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="400.0">
@@ -32,7 +36,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField prefHeight="26.0" prefWidth="186.0" promptText="Last Name" />
+                        <TextField fx:id="lastName" prefHeight="26.0" prefWidth="186.0" promptText="Last Name" />
                      </children>
                   </HBox>
                </children>
@@ -41,19 +45,19 @@
       </VBox>
       <HBox prefHeight="75.0" prefWidth="400.0">
          <children>
-            <TextField prefHeight="26.0" prefWidth="190.0" promptText="CNP" />
+            <TextField fx:id="CNP" prefHeight="26.0" prefWidth="190.0" promptText="CNP" />
          </children>
       </HBox>
       <HBox prefHeight="75.0" prefWidth="400.0">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="190.0" promptText="country" />
+                  <TextField fx:id="country" prefHeight="26.0" prefWidth="190.0" promptText="country" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="189.0" promptText="town" />
+                  <TextField fx:id="region" prefHeight="26.0" prefWidth="189.0" promptText="region" />
                </children>
             </HBox>
          </children>
@@ -62,39 +66,44 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="190.0" promptText="street" />
+                  <TextField fx:id="town" prefHeight="26.0" prefWidth="190.0" promptText="town" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="189.0" promptText="postal code" />
+                  <TextField fx:id="street" prefHeight="26.0" prefWidth="189.0" promptText="street" />
                </children>
             </HBox>
          </children>
       </HBox>
       <HBox prefHeight="75.0" prefWidth="400.0">
          <children>
-            <TextField prefHeight="26.0" prefWidth="190.0" promptText="phone" />
+            <TextField fx:id="postalCode" prefHeight="26.0" prefWidth="190.0" promptText="postal code" />
          </children>
       </HBox>
       <HBox prefHeight="75.0" prefWidth="400.0">
          <children>
-            <TextField prefHeight="26.0" prefWidth="190.0" promptText="email" />
+            <TextField fx:id="phone" prefHeight="26.0" prefWidth="190.0" promptText="phone" />
          </children>
       </HBox>
       <HBox prefHeight="75.0" prefWidth="400.0">
          <children>
-            <TextField prefHeight="26.0" prefWidth="190.0" promptText="IBAN" />
+            <TextField fx:id="email" prefHeight="26.0" prefWidth="190.0" promptText="email" />
          </children>
       </HBox>
       <HBox prefHeight="75.0" prefWidth="400.0">
          <children>
-            <TextField prefHeight="26.0" prefWidth="190.0" promptText="contract number" />
+            <TextField fx:id="iban" prefHeight="26.0" prefWidth="190.0" promptText="IBAN" />
          </children>
       </HBox>
       <HBox prefHeight="75.0" prefWidth="400.0">
          <children>
-            <TextField prefHeight="26.0" prefWidth="190.0" promptText="username" />
+            <TextField fx:id="contractNumber" prefHeight="26.0" prefWidth="190.0" promptText="contract number" />
+         </children>
+      </HBox>
+      <HBox prefHeight="80.0" prefWidth="400.0">
+         <children>
+            <TextField fx:id="username" prefHeight="26.0" prefWidth="190.0" promptText="username" />
             <Label prefHeight="26.0" prefWidth="105.0" text="   already used" textFill="RED" visible="false">
                <font>
                   <Font size="14.0" />
@@ -104,26 +113,81 @@
       </HBox>
       <HBox prefHeight="80.0" prefWidth="400.0">
          <children>
-            <PasswordField prefHeight="26.0" prefWidth="190.0" promptText="password" />
+            <PasswordField fx:id="password" prefHeight="26.0" prefWidth="190.0" promptText=" password" />
          </children>
       </HBox>
-      <HBox prefHeight="80.0" prefWidth="400.0">
+      <HBox prefHeight="75.0" prefWidth="400.0">
          <children>
-            <PasswordField prefHeight="26.0" prefWidth="190.0" promptText="confirm password" />
-            <Label fx:id="error1" prefHeight="24.0" prefWidth="148.0" text="password doesn't match" textFill="#ff0202" visible="false" />
+            <PasswordField fx:id="confirmPassword" prefHeight="26.0" prefWidth="190.0" promptText="confirm password" />
          </children>
       </HBox>
-      <HBox prefHeight="85.0" prefWidth="400.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="400.0">
          <children>
-            <RadioButton fx:id="StudentButton" mnemonicParsing="false" text="Student" />
-            <RadioButton mnemonicParsing="false" text="Professor" />
-            <RadioButton mnemonicParsing="false" text="Admin" />
-            <RadioButton mnemonicParsing="false" text="Super Admin" />
-            <HBox alignment="TOP_CENTER" prefHeight="48.0" prefWidth="118.0">
+            <RadioButton fx:id="studentButton" mnemonicParsing="false" onMouseClicked="#onStudentButtonClick" text="Student            ">
+               <toggleGroup>
+                  <ToggleGroup fx:id="type" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="professorButton" mnemonicParsing="false" onMouseClicked="#onProfessorButtonClick" text="Professor" toggleGroup="$type" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="74.0" prefWidth="400.0">
+         <children>
+            <VBox fx:id="studentBox" visible="false">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="90.0" text="CONTINUE" visible="false" />
+                  <HBox>
+                     <children>
+                        <Label text="Year of study: " />
+                        <ChoiceBox fx:id="yearOfStudy" prefHeight="26.0" prefWidth="57.0" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="110.0" text="min studying hours: " />
+                        <Label fx:id="minStudyingHours" alignment="CENTER_RIGHT" text="10" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="110.0" text="max studying hours: " />
+                        <Label fx:id="maxStudyingHours" alignment="CENTER_RIGHT" text="20" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
+            <VBox fx:id="professorBox" alignment="CENTER" prefHeight="61.0" prefWidth="153.0" visible="false">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="85.0" text="department" />
+                        <ChoiceBox fx:id="departament" prefHeight="26.0" prefWidth="58.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="18.0" prefWidth="109.0">
+                     <children>
+                        <Label text="min teaching hours: " />
+                        <Label fx:id="minTeachingHours" prefHeight="18.0" prefWidth="38.0" text="10" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="max teaching hours: " />
+                        <Label fx:id="maxTeachingHours" text="10" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox>
+         <children>
+            <Label fx:id="incompleteFields" alignment="CENTER" prefHeight="18.0" prefWidth="404.0" textFill="RED" />
+         </children>
+      </VBox>
+      <HBox prefHeight="89.0" prefWidth="400.0">
+         <children>
+            <Hyperlink alignment="CENTER" onMouseClicked="#onAlreadyHaveAnAccountLogInClick" prefHeight="24.0" prefWidth="184.0" text="Already have an account?Log in" />
+            <TextField prefHeight="26.0" prefWidth="103.0" visible="false" />
+            <Button fx:id="continueButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onContinueButtonClick" prefHeight="39.0" prefWidth="130.0" text="CONTINUE" />
          </children>
       </HBox>
    </children>

@@ -35,3 +35,4 @@ public class StudyingApplication extends Application {
         return primaryStage;
     }
 }
+

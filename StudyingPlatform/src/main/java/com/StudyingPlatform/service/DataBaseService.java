@@ -3,13 +3,14 @@ package com.StudyingPlatform.service;
 import com.StudyingPlatform.model.Professor;
 import com.StudyingPlatform.model.Student;
 import com.StudyingPlatform.model.User;
+import javafx.scene.control.TextField;
 
 import java.sql.*;
 
 public class DataBaseService {
     public final static String DB_USERNAME = "root";
-    public final static String DB_PASSWORD = "root";
-    public final static String DB_NAME = "StudyingPlatform";
+    public final static String DB_PASSWORD = "alabala";
+    public final static String DB_NAME = "mydb";
     public final static String DB_CONNECTION_LINK = "jdbc:mysql://localhost:3306/";
 
     static Connection connection;
