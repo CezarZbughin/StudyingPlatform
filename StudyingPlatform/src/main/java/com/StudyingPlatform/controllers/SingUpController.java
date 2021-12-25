@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -14,17 +15,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
-public class SingUpController {
-    ObservableList<Integer> yearOfStudyList = FXCollections.observableArrayList(1, 2, 3, 4);
-    ObservableList<String> departamentList = FXCollections.observableArrayList("math", "computer sciene", "data base");
+public class SingUpController{
     @FXML
     private TextField firstName;
     @FXML
     private TextField lastName;
     @FXML
     private TextField CNP;
-
     @FXML
     private TextField country;
     @FXML
@@ -50,14 +49,9 @@ public class SingUpController {
     @FXML
     private PasswordField confirmPassword;
     @FXML
-    private RadioButton studentButton;
+    private Button studentButton;
     @FXML
-    private RadioButton professorButton;
-    @FXML
-    private ChoiceBox yearOfStudy;
-    @FXML
-    private ChoiceBox departament;
-
+    private Button professorButton;
     @FXML
     private VBox studentBox;
     @FXML
@@ -74,24 +68,34 @@ public class SingUpController {
     private Label minTeachingHours;
     @FXML
     private Label maxTeachingHours;
-
+    @FXML
+    private Label dynamicLabel;
+    @FXML
+    private TextField dynamicTextField;
     @FXML
     private void initialize() {
-        yearOfStudy.setItems(yearOfStudyList);
-        departament.setItems(departamentList);
-    }
 
+    }
 
     @FXML
     public void onStudentButtonClick() {
-
-        professorBox.setVisible(false);
-        studentBox.setVisible(true);
+        studentButton.setDisable(true);
+        professorButton.setDisable(false);
+        dynamicLabel.setVisible(true);
+        dynamicTextField.setVisible(true);
+        dynamicLabel.setText("Year of Study: ");
+        dynamicTextField.setText("");
         studentBox.managedProperty().bind(studentBox.visibleProperty());
     }
 
     @FXML
     public void onProfessorButtonClick() {
+        studentButton.setDisable(false);
+        professorButton.setDisable(true);
+        dynamicLabel.setVisible(true);
+        dynamicTextField.setVisible(true);
+        dynamicLabel.setText("Department: ");
+        dynamicTextField.setText("");
         studentBox.setVisible(false);
         professorBox.setVisible(true);
         professorBox.managedProperty().bind(professorBox.visibleProperty());
@@ -112,11 +116,9 @@ public class SingUpController {
         if (firstName.getText().trim().isEmpty()) {
             incompleteFields.setText("First name field can not be empty");
             return 0;
-
         }
         if (lastName.getText().trim().isEmpty()) {
             incompleteFields.setText("Last name field can not be empty");
-
             return 0;
         }
         if (CNP.getText().trim().isEmpty()) {
@@ -164,7 +166,7 @@ public class SingUpController {
             return 0;
         } else {
             String usernameString = username.getText();
-            User user = DataBaseService.getUserByUsername(usernameString);
+            User user = null;
             if (user != null) {
                 incompleteFields.setText("Username field can not be empty");
                 return 0;
@@ -178,34 +180,29 @@ public class SingUpController {
             incompleteFields.setText("password doesn't match");
             return 0;
         }
-        if (!studentButton.isSelected() && !professorButton.isSelected()) {
+        if (!studentButton.isDisable() && !professorButton.isDisable()) {
             incompleteFields.setText("Select account type");
             return 0;
-
         }
-        if (studentButton.isSelected()) {
-            if (yearOfStudy.getSelectionModel().isEmpty()) {
+        if (studentButton.isDisable()) {
+            if (dynamicTextField.getText().trim().isEmpty()) {
                 incompleteFields.setText("Choose year of study");
                 return 0;
             }
         }
-        if (professorButton.isSelected()) {
-            if (departament.getSelectionModel().isEmpty()) {
+        if (professorButton.isDisable()) {
+            if (dynamicTextField.getText().trim().isEmpty()) {
                 incompleteFields.setText("Choose department");
                 return 0;
             }
         }
-
-
         return 1;
-
-
     }
 
     @FXML
     public void onContinueButtonClick() throws IOException {
         Integer v = validation();
-        if (v == 1) {
+        if (v.equals(1)) {
             Stage stage = StudyingApplication.getPrimaryStage();
             URL url = StudyingApplication.class.getResource("log-in-view.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(url);
@@ -213,6 +210,8 @@ public class SingUpController {
             stage.setScene(scene);
         }
     }
+
+
 }
 
 
