@@ -1,20 +1,47 @@
 package com.StudyingPlatform.service;
 
+import com.StudyingPlatform.model.Address;
 import com.StudyingPlatform.model.User;
+import com.StudyingPlatform.service.Exceptions.SignupException;
 
 import javax.security.auth.login.LoginException;
 import java.sql.*;
 
 public class AccountService {
     public static User logIn(String username,String password) throws LoginException{
-        User user = DataBaseService.getUserByUsername(username);
-        if(user == null){
-            throw new LoginException("username not found");
+        Connection connection = DataBaseService.getConnection();
+        try {
+            CallableStatement stmt = connection.prepareCall("call try_log_in(?,?)");
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet resultSet = stmt.executeQuery();
+            if(resultSet.next()){
+                String logInStatus = resultSet.getString("log_in_status");
+                int userId = resultSet.getInt("user_id");
+                switch (logInStatus){
+                    case "successful":
+                        return DataBaseService.getUserById(userId);
+                    case "username not found":
+                        throw new LoginException("username not found");
+                    case "wrong password":
+                        throw new LoginException("wrong password");
+                    default:
+                        throw new LoginException("failed");
+                }
+            }
+        }catch(SQLException e){
+            throw new LoginException("failed");
         }
-        if(!user.getPassword().equals(password)){
-            throw new LoginException("wrong password");
-        }
-        return user;
+        return null;
     }
 
+    public static void signUp(User user) throws SignupException {
+        try {
+            DataBaseService.insertUser(user);
+        }catch(SQLIntegrityConstraintViolationException e){
+            throw new SignupException("unique constraint violated");
+        }catch(SQLException e){
+            throw new SignupException("failed");
+        }
+    }
 }
