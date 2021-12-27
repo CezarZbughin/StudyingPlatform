@@ -1,5 +1,4 @@
 package com.StudyingPlatform.application;
-
 import com.StudyingPlatform.model.Address;
 import com.StudyingPlatform.model.Student;
 import com.StudyingPlatform.model.User;
@@ -25,6 +24,7 @@ public class StudyingApplication extends Application {
         stage.setTitle("Studying Platform");
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {
