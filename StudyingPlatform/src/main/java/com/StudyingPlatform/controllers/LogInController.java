@@ -48,7 +48,7 @@ public class LogInController {
         }
         URL url = StudyingApplication.class.getResource("green.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(), 700, 1000);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         stage.setScene(scene);
     }
 
@@ -57,7 +57,7 @@ public class LogInController {
         Stage stage = StudyingApplication.getPrimaryStage();
         URL url = StudyingApplication.class.getResource("sign-up-view.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(), 700, 1000);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         stage.setScene(scene);
     }
 

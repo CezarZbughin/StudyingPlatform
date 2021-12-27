@@ -41,6 +41,7 @@ public class AccountService {
         }catch(SQLIntegrityConstraintViolationException e){
             throw new SignupException("unique constraint violated");
         }catch(SQLException e){
+            e.printStackTrace();
             throw new SignupException("failed");
         }
     }
