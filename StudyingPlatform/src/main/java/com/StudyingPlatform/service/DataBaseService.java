@@ -53,7 +53,7 @@ public class DataBaseService {
                 stmt = connection.prepareCall(insertProfessorQuery);
                 stmt.setInt(17,((Professor)user).getMinTeachingHours());
                 stmt.setInt(18,((Professor)user).getMaxTeachingHours());
-                stmt.setString(18,((Professor)user).getDepartment());
+                stmt.setString(19,((Professor)user).getDepartment());
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + user.getRole());
