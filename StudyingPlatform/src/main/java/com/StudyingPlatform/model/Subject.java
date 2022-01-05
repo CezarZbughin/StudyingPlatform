@@ -49,7 +49,7 @@ public class Subject {
         this.description = description;
     }
 
-    public boolean isHasLecture() {
+    public boolean getHasLecture() {
         return hasLecture;
     }
 
@@ -57,7 +57,7 @@ public class Subject {
         this.hasLecture = hasLecture;
     }
 
-    public boolean isHasSeminar() {
+    public boolean getHasSeminar() {
         return hasSeminar;
     }
 
@@ -65,7 +65,7 @@ public class Subject {
         this.hasSeminar = hasSeminar;
     }
 
-    public boolean isHasLab() {
+    public boolean getHasLab() {
         return hasLab;
     }
 

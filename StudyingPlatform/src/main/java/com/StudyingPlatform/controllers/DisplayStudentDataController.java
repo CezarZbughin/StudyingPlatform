@@ -63,6 +63,5 @@ public class DisplayStudentDataController {
         this.postalCode.setText(address.getPostalCode());
         this.contractNumber.setText(contractNumber);
         this.yearOfStudy.setText(Integer.toString(year));
-
     }
 }

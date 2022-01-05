@@ -18,13 +18,12 @@ public class StudyingApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        URL url = StudyingApplication.class.getResource("log-in-view.fxml");
+        URL url = StudyingApplication.class.getResource("admin-modifies-student.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         stage.setTitle("Studying Platform");
         stage.setScene(scene);
         stage.show();
-
     }
 
     public static void main(String[] args) {

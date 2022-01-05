@@ -2,6 +2,7 @@ package com.StudyingPlatform.service;
 
 import com.StudyingPlatform.model.Professor;
 import com.StudyingPlatform.model.Student;
+import com.StudyingPlatform.model.Subject;
 import com.StudyingPlatform.model.User;
 import javafx.scene.control.TextField;
 
@@ -74,6 +75,19 @@ public class DataBaseService {
         stmt.setString(14,user.getContractNumber());
         stmt.setBoolean(15,user.isAdmin());
         stmt.setBoolean(16,user.isSuperAdmin());
+        stmt.execute();
+    }
+
+    public static void insertSubject(Subject subject) throws SQLException{
+        String insertSubjectQuery = "call insert_subject(?,?,?,?,?,?,?)";
+        CallableStatement stmt = connection.prepareCall(insertSubjectQuery);
+        stmt.setString(1,subject.getName());
+        stmt.setString(2,subject.getDescription());
+        stmt.setBoolean(3,subject.getHasLecture());
+        stmt.setBoolean(4,subject.getHasSeminar());
+        stmt.setBoolean(5,subject.getHasLab());
+        stmt.setDate(6,subject.getDateStart());
+        stmt.setDate(7,subject.getDateEnd());
         stmt.execute();
     }
 

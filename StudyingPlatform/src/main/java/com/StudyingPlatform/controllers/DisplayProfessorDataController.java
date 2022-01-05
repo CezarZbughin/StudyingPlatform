@@ -63,6 +63,5 @@ public class DisplayProfessorDataController {
         this.postalCode.setText(address.getPostalCode());
         this.contractNumber.setText(contractNumber);
         this.department.setText(department);
-
     }
 }
