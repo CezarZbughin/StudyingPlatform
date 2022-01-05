@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class AdminModifiesStudentController extends AdminModifiesUserController{
+public class AdminModifiesProfessorController extends AdminModifiesUserController{
     @FXML
-    private TextField yearField;
+    private TextField departmentField;
 
     @FXML
-    public void onEditYearClick(){
+    public void onEditDepartmentClick(){
         disableAll();
-        yearField.setDisable(false);
+        departmentField.setDisable(false);
     }
 
     @FXML
@@ -24,7 +24,7 @@ public class AdminModifiesStudentController extends AdminModifiesUserController{
     }
 
     void disableAll(){
-         disableAllSuper();
-         yearField.setDisable(true);
+        disableAllSuper();
+        departmentField.setDisable(true);
     }
 }
