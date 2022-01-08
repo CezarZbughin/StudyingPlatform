@@ -1,10 +1,20 @@
 package com.StudyingPlatform.controllers;
 
+import com.StudyingPlatform.application.StudyingApplication;
+import com.StudyingPlatform.model.User;
+import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-abstract class AdminModifiesUserController {
+import java.io.IOException;
+import java.net.URL;
+
+abstract class AdminModifiesUserController{
     @FXML
     private TextField firstNameField;
     @FXML
@@ -31,6 +41,8 @@ abstract class AdminModifiesUserController {
     private TextField contractNumberField;
     @FXML
     private Label title;
+
+    private User displayedUser;
 
     @FXML
     public void onEditFirstNameClick(){
@@ -106,7 +118,58 @@ abstract class AdminModifiesUserController {
          postalCodeField.setDisable(true);
          contractNumberField.setDisable(true);
     }
+
+    @FXML
+    public void onBackButtonClick() throws IOException {
+        Stage stage = StudyingApplication.getPrimaryStage();
+        URL url = StudyingApplication.class.getResource("user-list-view.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+        stage.setScene(scene);
+    }
+
     abstract void disableAll();
-    abstract void onBackButtonClick();
     abstract void onSaveChangesButtonClick();
+    abstract void updateView();
+
+    public void setUser(User user){
+        displayedUser = user;
+        updateView();
+    }
+
+    void updateSuper(){
+        firstNameField.setText(displayedUser.getFirstName());
+        lastNameField.setText(displayedUser.getLastName());
+        emailField.setText(displayedUser.getEmail());
+        phoneField.setText(displayedUser.getPhone());
+        cnpField.setText(displayedUser.getCnp());
+        ibanField.setText(displayedUser.getIban());
+        countryField.setText(displayedUser.getAddress().getCountry());
+        regionField.setText(displayedUser.getAddress().getRegion());
+        townField.setText(displayedUser.getAddress().getTown());
+        streetAddressField.setText(displayedUser.getAddress().getStreetAddress());
+        postalCodeField.setText(displayedUser.getAddress().getPostalCode());
+        contractNumberField.setText(displayedUser.getContractNumber());
+        //title.setText("ok");
+    }
+
+    public User getDisplayedUser() {
+        return displayedUser;
+    }
+
+    public void updateDisplayedUser(){
+        displayedUser.setFirstName(firstNameField.getText());
+        displayedUser.setLastName(lastNameField.getText());
+        displayedUser.setEmail(emailField.getText());
+        displayedUser.setPhone(phoneField.getText());
+        displayedUser.setCnp(cnpField.getText());
+        displayedUser.setIban(ibanField.getText());
+        displayedUser.getAddress().setCountry(countryField.getText());
+        displayedUser.getAddress().setRegion(regionField.getText());
+        displayedUser.getAddress().setTown(townField.getText());
+        displayedUser.getAddress().setStreetAddress(streetAddressField.getText());
+        displayedUser.getAddress().setPostalCode(postalCodeField.getText());
+        displayedUser.setContractNumber(contractNumberField.getText());
+    }
+
 }

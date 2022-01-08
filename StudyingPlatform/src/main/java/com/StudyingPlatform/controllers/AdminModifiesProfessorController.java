@@ -1,8 +1,12 @@
 package com.StudyingPlatform.controllers;
 
+import com.StudyingPlatform.model.Professor;
+import com.StudyingPlatform.service.DataBaseService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+import java.sql.SQLException;
 
 public class AdminModifiesProfessorController extends AdminModifiesUserController{
     @FXML
@@ -13,18 +17,23 @@ public class AdminModifiesProfessorController extends AdminModifiesUserControlle
         disableAll();
         departmentField.setDisable(false);
     }
-
-    @FXML
-    public void onBackButtonClick(){
-        System.out.println("back");
-    }
     @FXML
     public void onSaveChangesButtonClick(){
-        System.out.println("save changes");
+        updateDisplayedUser();
+        ((Professor)getDisplayedUser()).setDepartment(departmentField.getText());
+        try{
+            DataBaseService.updateUser(getDisplayedUser());
+        }catch(SQLException e){
+            System.out.println("something went worng");
+            return;
+        }
     }
-
     void disableAll(){
         disableAllSuper();
         departmentField.setDisable(true);
+    }
+    public void updateView(){
+        updateSuper();
+        departmentField.setText(((Professor)getDisplayedUser()).getDepartment());
     }
 }

@@ -3,6 +3,7 @@ package com.StudyingPlatform.service;
 import com.StudyingPlatform.model.Address;
 import com.StudyingPlatform.model.User;
 import com.StudyingPlatform.service.Exceptions.SignupException;
+import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
 
 import javax.security.auth.login.LoginException;
 import java.sql.*;
@@ -30,6 +31,8 @@ public class AccountService {
                 }
             }
         }catch(SQLException e){
+            throw new LoginException("failed");
+        }catch (UserNotFoundException e){
             throw new LoginException("failed");
         }
         return null;
