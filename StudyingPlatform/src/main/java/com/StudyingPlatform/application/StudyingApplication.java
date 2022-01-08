@@ -18,9 +18,9 @@ public class StudyingApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        URL url = StudyingApplication.class.getResource("add-subject-view.fxml");
+        URL url = StudyingApplication.class.getResource("admin-view.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+        Scene scene = new Scene(fxmlLoader.load(),400, 500);
         stage.setTitle("Studying Platform");
         stage.setScene(scene);
         stage.show();
