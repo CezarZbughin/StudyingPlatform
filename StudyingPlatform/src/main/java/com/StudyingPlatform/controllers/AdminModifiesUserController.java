@@ -129,7 +129,7 @@ abstract class AdminModifiesUserController{
     }
 
     abstract void disableAll();
-    abstract void onSaveChangesButtonClick();
+    abstract void onSaveChangesButtonClick() throws IOException ;
     abstract void updateView();
 
     public void setUser(User user){
