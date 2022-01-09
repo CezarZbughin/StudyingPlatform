@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -47,28 +48,14 @@ public class AssignProfessorToSubjectController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            listedProfessors = DataBaseService.getAllProfessor();
-            listedSubjects = DataBaseService.getAllSubjects();
-        } catch (UserNotFoundException e) {
-            listedProfessors = new ArrayList<>();
-            System.out.println("no professor found");
-        } catch (SubjectNotFoundException e) {
-            listedSubjects = new ArrayList<>();
-            System.out.println("no subject found");
-        } catch (SQLException e) {
-            System.out.println("something went wrong in assign professor to subject initialize");
-            e.printStackTrace();
-            return;
-        }
-        try {
-            updateView();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        resetView();
     }
 
     public void onSearchProfessorButtonClick() throws IOException {
+        if(firstNameField.getText().equals("") && lastNameField.getText().equals("")){
+            resetView();
+            return;
+        }
         try {
             List<User> namedUsers = DataBaseService.getUsersByName(firstNameField.getText(), lastNameField.getText());
             listedProfessors = new ArrayList<>();
@@ -79,9 +66,9 @@ public class AssignProfessorToSubjectController implements Initializable {
             }
         } catch (UserNotFoundException e) {
             listedProfessors = new ArrayList<>();
-            System.out.println("no professor found");
+            SuperController.popError("No professor goes by that name.");
         } catch (SQLException e) {
-            System.out.println("something went wrong in searching for professor");
+            SuperController.popError("Something went wrong, we are sorry.");
             e.printStackTrace();
             return;
         }
@@ -89,13 +76,17 @@ public class AssignProfessorToSubjectController implements Initializable {
     }
 
     public void onSearchSubjectButtonClick() throws IOException {
+        if(subjectNameField.getText().equals("")){
+            resetView();
+            return;
+        }
         try {
             listedSubjects = DataBaseService.getSubjectsByName(subjectNameField.getText());
         } catch (SubjectNotFoundException e) {
-            listedProfessors = new ArrayList<>();
-            System.out.println("no subject found");
+            listedSubjects = new ArrayList<>();
+            SuperController.popError("No subject with this name was found.");
         } catch (SQLException e) {
-            System.out.println("something went wrong in searching for professor");
+            SuperController.popError("Something went wrong, we are sorry.");
             e.printStackTrace();
             return;
         }
@@ -111,6 +102,10 @@ public class AssignProfessorToSubjectController implements Initializable {
     }
 
     public void onAssignButtonClick() throws IOException {
+        if(selectedSubject == null || selectedProfessor == null){
+            SuperController.popError("You must select a professor and a subject.");
+            return;
+        }
         try {
             ProfessorService.assignProfessorToSubject(selectedProfessor, selectedSubject);
             Stage stage = StudyingApplication.getPrimaryStage();
@@ -118,8 +113,11 @@ public class AssignProfessorToSubjectController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             Scene scene = new Scene(fxmlLoader.load(), 400, 500);
             stage.setScene(scene);
+        } catch (SQLIntegrityConstraintViolationException e){
+            SuperController.popError(selectedProfessor.getFirstName() + " " + selectedProfessor.getLastName() +
+                    "is already assigned to " + selectedSubject.getName());
         } catch (SQLException e) {
-            System.out.println("Something went wrong trying to assign professor to subject");
+            SuperController.popError("Something went wrong, we are sorry.");
             e.printStackTrace();
         }
     }
@@ -142,6 +140,28 @@ public class AssignProfessorToSubjectController implements Initializable {
             AssignProfessorToSubjectRowController controller = fxmlLoader.<AssignProfessorToSubjectRowController>getController();
             controller.setProfessor((Professor) user, this);
             professorsVBox.getChildren().add(row);
+        }
+    }
+
+    private void resetView(){
+        try {
+            listedProfessors = DataBaseService.getAllProfessor();
+            listedSubjects = DataBaseService.getAllSubjects();
+        } catch (UserNotFoundException e) {
+            listedProfessors = new ArrayList<>();
+            System.out.println("no professor found");
+        } catch (SubjectNotFoundException e) {
+            listedSubjects = new ArrayList<>();
+            System.out.println("no subject found");
+        } catch (SQLException e) {
+            System.out.println("something went wrong in assign professor to subject initialize");
+            e.printStackTrace();
+            return;
+        }
+        try {
+            updateView();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -5,17 +5,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="285.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="285.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.ErrorController">
    <children>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="53.0" prefWidth="285.0">
+      <HBox alignment="BOTTOM_CENTER" prefHeight="37.0" prefWidth="285.0">
          <children>
-            <Label fx:id="errorLabel" prefHeight="47.0" prefWidth="247.0" text="Error" textFill="RED" wrapText="true" />
+            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="247.0" text="Error" textFill="RED" wrapText="true" />
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="29.0" prefWidth="285.0">
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="33.0" prefWidth="285.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onCloseButtonClick" text="close" />
+            <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="78.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onCloseButtonClick" prefHeight="23.0" prefWidth="53.0" text="close" />
+               </children>
+            </HBox>
          </children>
       </HBox>
    </children>

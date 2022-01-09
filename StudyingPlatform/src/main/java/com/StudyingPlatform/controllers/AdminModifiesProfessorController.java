@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class AdminModifiesProfessorController extends AdminModifiesUserController{
@@ -18,14 +19,13 @@ public class AdminModifiesProfessorController extends AdminModifiesUserControlle
         departmentField.setDisable(false);
     }
     @FXML
-    public void onSaveChangesButtonClick(){
+    public void onSaveChangesButtonClick() throws IOException {
         updateDisplayedUser();
         ((Professor)getDisplayedUser()).setDepartment(departmentField.getText());
         try{
             DataBaseService.updateUser(getDisplayedUser());
         }catch(SQLException e){
-            System.out.println("something went worng");
-            return;
+            SuperController.popError("Something went wrong, we are sorry.");
         }
     }
     void disableAll(){
