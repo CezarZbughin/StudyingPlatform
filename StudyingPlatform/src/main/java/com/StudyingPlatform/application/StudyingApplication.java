@@ -20,12 +20,7 @@ public class StudyingApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        try {
-            SuperController.activeUser = DataBaseService.getUserById(3);
-        }catch (UserNotFoundException e){
-            System.out.println("User not found by id");
-        }
-        URL url = StudyingApplication.class.getResource("admin-modifies-subject.fxml");
+        URL url = StudyingApplication.class.getResource("log-in-view.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Scene scene = new Scene(fxmlLoader.load(),400, 500);
         stage.setTitle("Studying Platform");
