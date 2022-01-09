@@ -8,34 +8,38 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.AdminController">
    <children>
-      <VBox alignment="CENTER" prefHeight="336.0" prefWidth="400.0">
+      <VBox alignment="TOP_CENTER" prefHeight="327.0" prefWidth="400.0">
          <children>
-            <Label prefHeight="57.0" prefWidth="170.0" text="Admin Home">
-               <font>
-                  <Font name="System Bold" size="27.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER" prefHeight="65.0" prefWidth="500.0">
+            <HBox alignment="BOTTOM_CENTER" prefHeight="71.0" prefWidth="400.0">
                <children>
-                  <Button fx:id="userList" mnemonicParsing="false" onMouseClicked="#onUserListClick" prefHeight="51.0" prefWidth="209.0" text="User list">
+                  <Label alignment="BOTTOM_CENTER" prefHeight="57.0" prefWidth="170.0" text="Admin Home">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="84.0" prefWidth="400.0" style="-fx-pref-height: 80;">
+               <children>
+                  <Button fx:id="userList" mnemonicParsing="false" onMouseClicked="#onUserListClick" prefHeight="51.0" prefWidth="209.0" style="-fx-pref-height: 45;" text="User list">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="65.0" prefWidth="500.0">
+            <HBox alignment="BOTTOM_CENTER" prefHeight="79.0" prefWidth="400.0" style="-fx-pref-height: 80;">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#onCourseListClick" prefHeight="51.0" prefWidth="210.0" text="Course list">
+                  <Button mnemonicParsing="false" onMouseClicked="#onCourseListClick" prefHeight="51.0" prefWidth="210.0" style="-fx-pref-height: 45;" text="Course list">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="65.0" prefWidth="500.0">
+            <HBox alignment="BOTTOM_CENTER" prefHeight="69.0" prefWidth="400.0" style="-fx-pref-height: 80;">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="210.0" text="Assign Professor">
+                  <Button mnemonicParsing="false" onAction="#onAssignProfessorClick" prefHeight="50.0" prefWidth="210.0" style="-fx-pref-height: 45;" text="Assign Professor">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -44,13 +48,13 @@
             </HBox>
          </children>
       </VBox>
-      <VBox alignment="CENTER_RIGHT" prefHeight="186.0" prefWidth="365.0">
+      <VBox alignment="CENTER_RIGHT" prefHeight="123.0" prefWidth="400.0">
          <children>
             <HBox alignment="TOP_RIGHT">
                <children>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="142.0" prefWidth="390.0">
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="101.0" prefWidth="385.0">
                      <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="66.0" prefWidth="114.0" text="Back">
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="66.0" prefWidth="114.0" style="-fx-pref-height: 45;" text="Back">
                            <font>
                               <Font size="24.0" />
                            </font>

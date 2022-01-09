@@ -2,9 +2,12 @@ package com.StudyingPlatform.service;
 
 import com.StudyingPlatform.model.Address;
 import com.StudyingPlatform.model.Professor;
+import com.StudyingPlatform.model.Subject;
 import com.StudyingPlatform.model.User;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -42,5 +45,13 @@ public class ProfessorService {
             resultSet.previous();
             throw new EmptyResultSetException();
         }
+    }
+
+    public static void assignProfessorToSubject(Professor professor, Subject subject) throws SQLException {
+        Connection connection = DataBaseService.getConnection();
+        CallableStatement stmt = connection.prepareCall("call professor_assign_subject(?,?)");
+        stmt.setInt(1, professor.getId());
+        stmt.setInt(2, subject.getId());
+        stmt.execute();
     }
 }

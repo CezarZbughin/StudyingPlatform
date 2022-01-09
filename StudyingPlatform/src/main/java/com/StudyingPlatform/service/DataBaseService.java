@@ -5,14 +5,17 @@ import com.StudyingPlatform.model.Student;
 import com.StudyingPlatform.model.Subject;
 import com.StudyingPlatform.model.User;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
+import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
-import javafx.scene.control.TextField;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseService {
+    //
+    //CONNECTION
+    //
     public final static String DB_USERNAME = "root";
     public final static String DB_PASSWORD = "root";
     public final static String DB_NAME = "StudyingPlatform";
@@ -30,7 +33,12 @@ public class DataBaseService {
             e.printStackTrace();
         }
     }
-
+    public static Connection getConnection(){
+        return connection;
+    }
+    //
+    // USERS
+    //
     public static User getUserById(int id) throws UserNotFoundException {
         try{
             CallableStatement stmt = connection.prepareCall("call get_user_by_id(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -56,6 +64,51 @@ public class DataBaseService {
             idList.add(resultSet.getInt("id"));
         }
         return usersByIdList(idList);
+    }
+
+    public static List<User> getAllUsers() throws SQLException, UserNotFoundException{
+        List<Integer> idList = new ArrayList<>();
+        CallableStatement idsStmt = connection.prepareCall("call get_all_users_id()");
+        ResultSet resultSet = idsStmt.executeQuery();
+        while(resultSet.next()){
+            idList.add(resultSet.getInt("id"));
+        }
+        return usersByIdList(idList);
+    }
+
+    public static List<User> getAllStudents() throws SQLException, UserNotFoundException {
+        List<Integer> idList = new ArrayList<>();
+        CallableStatement idsStmt = connection.prepareCall("call get_all_students_id()");
+        ResultSet resultSet = idsStmt.executeQuery();
+        while(resultSet.next()){
+            idList.add(resultSet.getInt("id"));
+        }
+        return usersByIdList(idList);
+    }
+
+    public static List<User> getAllProfessor() throws SQLException, UserNotFoundException {
+        List<Integer> idList = new ArrayList<>();
+        CallableStatement idsStmt = connection.prepareCall("call get_all_professors_id()");
+        ResultSet resultSet = idsStmt.executeQuery();
+        while(resultSet.next()){
+            idList.add(resultSet.getInt("id"));
+        }
+        return usersByIdList(idList);
+    }
+
+    private static List<User> usersByIdList(List<Integer> idList) throws UserNotFoundException{
+        List<User> users = new ArrayList<>();
+        for(int id:idList) {
+            try {
+                users.add(DataBaseService.getUserById(id));
+            } catch (UserNotFoundException e) {
+                continue;
+            }
+        }
+        if(users.isEmpty()){
+            throw new UserNotFoundException("no user was found");
+        }
+        return users;
     }
 
     public static void insertUser(User user) throws SQLException {
@@ -96,49 +149,6 @@ public class DataBaseService {
         stmt.execute();
     }
 
-    public static void insertSubject(Subject subject) throws SQLException{
-        String insertSubjectQuery = "call insert_subject(?,?,?,?,?,?,?)";
-        CallableStatement stmt = connection.prepareCall(insertSubjectQuery);
-        stmt.setString(1,subject.getName());
-        stmt.setString(2,subject.getDescription());
-        stmt.setBoolean(3,subject.getHasLecture());
-        stmt.setBoolean(4,subject.getHasSeminar());
-        stmt.setBoolean(5,subject.getHasLab());
-        stmt.setDate(6,subject.getDateStart());
-        stmt.setDate(7,subject.getDateEnd());
-        stmt.execute();
-    }
-
-    public static List<User> getAllUsers() throws SQLException, UserNotFoundException{
-        List<Integer> idList = new ArrayList<>();
-        CallableStatement idsStmt = connection.prepareCall("call get_all_users_id()");
-        ResultSet resultSet = idsStmt.executeQuery();
-        while(resultSet.next()){
-            idList.add(resultSet.getInt("id"));
-        }
-        return usersByIdList(idList);
-    }
-
-    public static List<User> getAllStudents() throws SQLException, UserNotFoundException {
-        List<Integer> idList = new ArrayList<>();
-        CallableStatement idsStmt = connection.prepareCall("call get_all_students_id()");
-        ResultSet resultSet = idsStmt.executeQuery();
-        while(resultSet.next()){
-            idList.add(resultSet.getInt("id"));
-        }
-        return usersByIdList(idList);
-    }
-
-    public static List<User> getAllProfessor() throws SQLException, UserNotFoundException {
-        List<Integer> idList = new ArrayList<>();
-        CallableStatement idsStmt = connection.prepareCall("call get_all_professors_id()");
-        ResultSet resultSet = idsStmt.executeQuery();
-        while(resultSet.next()){
-            idList.add(resultSet.getInt("id"));
-        }
-        return usersByIdList(idList);
-    }
-
     public static void updateUser(User user)throws SQLException{
         String queryStudent = "call update_student(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String queryProfessor = "call update_professor(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -173,23 +183,61 @@ public class DataBaseService {
         stmt.setString(16, user.getAddress().getPostalCode());
         stmt.execute();
     }
-
-    private static List<User> usersByIdList(List<Integer> idList) throws UserNotFoundException{
-        List<User> users = new ArrayList<>();
-        for(int id:idList) {
-            try {
-                users.add(DataBaseService.getUserById(id));
-            } catch (UserNotFoundException e) {
-                continue;
-            }
+    //
+    // SUBJECTS
+    //
+    public static List<Subject> getAllSubjects() throws SQLException, SubjectNotFoundException {
+        CallableStatement stmt = connection.prepareCall("call get_all_subjects()", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        ResultSet resultSet = stmt.executeQuery();
+        List<Subject> subjectList;
+        try {
+            subjectList = SubjectService.mapFullResultSet(resultSet);
+        }catch (EmptyResultSetException e){
+            throw new SubjectNotFoundException();
         }
-        if(users.isEmpty()){
-            throw new UserNotFoundException("no user was found");
-        }
-        return users;
+        return subjectList;
     }
 
-    public static Connection getConnection(){
-        return connection;
+    public static List<Subject> getSubjectsByName(String name) throws SQLException,SubjectNotFoundException{
+        CallableStatement stmt = connection.prepareCall("call get_subject_by_name(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setString(1,name);
+        ResultSet resultSet = stmt.executeQuery();
+        try {
+            return SubjectService.mapFullResultSet(resultSet);
+        }catch (EmptyResultSetException e){
+            throw new SubjectNotFoundException();
+        }
+    }
+
+    public static void insertSubject(Subject subject) throws SQLException{
+        String insertSubjectQuery = "call insert_subject(?,?,?,?,?,?,?)";
+        CallableStatement stmt = connection.prepareCall(insertSubjectQuery);
+        stmt.setString(1,subject.getName());
+        stmt.setString(2,subject.getDescription());
+        stmt.setBoolean(3,subject.getHasLecture());
+        stmt.setBoolean(4,subject.getHasSeminar());
+        stmt.setBoolean(5,subject.getHasLab());
+        stmt.setDate(6,subject.getDateStart());
+        stmt.setDate(7,subject.getDateEnd());
+        stmt.execute();
+    }
+
+    public static void updateSubject(Subject subject)throws SQLException{
+        String querySubject = "call update_subject(?,?,?,?,?,?,?,?)";
+        CallableStatement stmt =  connection.prepareCall(querySubject);
+
+        stmt.setInt(1, subject.getId());
+        stmt.setString(2,subject.getName());
+        stmt.setString(3, subject.getDescription());
+        stmt.setBoolean(4, subject.getHasLecture());
+        stmt.setBoolean(5, subject.getHasSeminar());
+        stmt.setBoolean(6, subject.getHasLab());
+        stmt.setDate(7, subject.getDateStart());
+        stmt.setDate(8, subject.getDateEnd());
+
     }
 }
+
+
