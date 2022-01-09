@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.ErrorController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.AssignProfessorToSubjectController">
    <children>
       <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="400.0">
          <children>
@@ -49,7 +49,7 @@
                   <TextField fx:id="lastNameField" promptText="Last Name" style="-fx-pref-width: 90;" />
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="30.0" prefWidth="51.0" style="-fx-pref-width: ;">
+            <HBox alignment="BOTTOM_CENTER" prefHeight="30.0" prefWidth="55.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#onSearchProfessorButtonClick" text="search" />
                </children>

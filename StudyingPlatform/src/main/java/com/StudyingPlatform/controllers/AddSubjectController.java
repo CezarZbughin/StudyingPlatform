@@ -35,7 +35,7 @@ public class AddSubjectController {
     @FXML
     public void onCancelButtonClick() throws IOException{
         Stage stage = StudyingApplication.getPrimaryStage();
-        URL url = StudyingApplication.class.getResource("admin-view.fxml");
+        URL url = StudyingApplication.class.getResource("subject-list-view.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         stage.setScene(scene);
