@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.AssignProfessorToSubjectController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.ErrorController">
    <children>
       <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="400.0">
          <children>
@@ -59,7 +58,7 @@
       </HBox>
       <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="140.0" prefWidth="400.0">
          <children>
-            <ScrollPane prefHeight="140.0" prefWidth="275.0" style="-fx-pref-width: 320;">
+            <ScrollPane prefHeight="163.0" prefWidth="275.0" style="-fx-pref-width: 320;">
                <content>
                   <VBox fx:id="professorsVBox" prefHeight="119.0" prefWidth="100.0" />
                </content>
