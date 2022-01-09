@@ -25,7 +25,7 @@ public class StudyingApplication extends Application {
         }catch (UserNotFoundException e){
             System.out.println("User not found by id");
         }
-        URL url = StudyingApplication.class.getResource("display-student-data.fxml");
+        URL url = StudyingApplication.class.getResource("admin-modifies-subject.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Scene scene = new Scene(fxmlLoader.load(),400, 500);
         stage.setTitle("Studying Platform");

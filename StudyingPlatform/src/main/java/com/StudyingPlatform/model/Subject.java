@@ -1,5 +1,8 @@
 package com.StudyingPlatform.model;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+
 import java.sql.Date;
 import java.time.DayOfWeek;
 
@@ -57,8 +60,7 @@ public class Subject {
         this.hasLecture = hasLecture;
     }
 
-    public boolean getHasSeminar() {
-        return hasSeminar;
+    public boolean getHasSeminar() {return hasSeminar;
     }
 
     public void setHasSeminar(boolean hasSeminar) {

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class DataBaseService {
     public final static String DB_USERNAME = "root";
-    public final static String DB_PASSWORD = "root";
+    public final static String DB_PASSWORD = "alabala";
     public final static String DB_NAME = "StudyingPlatform";
     public final static String DB_CONNECTION_LINK = "jdbc:mysql://localhost:3306/";
 
@@ -172,6 +172,20 @@ public class DataBaseService {
         stmt.setString(15, user.getAddress().getStreetAddress());
         stmt.setString(16, user.getAddress().getPostalCode());
         stmt.execute();
+    }
+    public static void updateSubject(Subject subject)throws SQLException{
+        String querySubject = "call update_subject(?,?,?,?,?,?,?,?)";
+        CallableStatement stmt =  connection.prepareCall(querySubject);
+
+        stmt.setInt(1, subject.getId());
+        stmt.setString(2,subject.getName());
+        stmt.setString(3, subject.getDescription());
+        stmt.setBoolean(4, subject.getHasLecture());
+        stmt.setBoolean(5, subject.getHasSeminar());
+        stmt.setBoolean(6, subject.getHasLab());
+        stmt.setDate(7, subject.getDateStart());
+        stmt.setDate(8, subject.getDateEnd());
+
     }
 
     private static List<User> usersByIdList(List<Integer> idList) throws UserNotFoundException{

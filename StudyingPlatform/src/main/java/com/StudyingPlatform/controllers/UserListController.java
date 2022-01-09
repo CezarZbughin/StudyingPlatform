@@ -57,6 +57,7 @@ public class UserListController implements Initializable {
         try {
             listedUsers = DataBaseService.getAllUsers();
         }catch(SQLException e){
+
             e.printStackTrace();
         }catch (UserNotFoundException e){
             //consider showing error here;
