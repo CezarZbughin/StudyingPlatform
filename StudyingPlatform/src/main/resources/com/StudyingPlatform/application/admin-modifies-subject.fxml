@@ -24,17 +24,17 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0">
          <children>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" style="-fx-pref-width: 120;">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="174.0" text="Name:     " />
+                  <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="135.0" text="Name: " />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="287.0" style="-fx-pref-width: 230;">
                <children>
-                  <TextField fx:id="nameText" disable="true" />
+                  <TextField fx:id="nameField" disable="true" prefHeight="25.0" prefWidth="191.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-pref-width: 120;">
                <children>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditNameFieldClick" prefHeight="26.0" prefWidth="75.0" text="Edit" />
                </children>
@@ -43,17 +43,17 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0">
          <children>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" style="-fx-pref-width: 120;">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="174.0" text="Description:     " />
+                  <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="167.0" text="Description: " />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="225.0" style="-fx-pref-width: 230;">
                <children>
-                  <TextArea fx:id="descriptionText" disable="true" prefHeight="200.0" prefWidth="200.0" />
+                  <TextArea fx:id="descriptionText" disable="true" prefHeight="57.0" prefWidth="191.0" wrapText="true" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-pref-width: 120;">
                <children>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditDescriptionTextClick" prefHeight="26.0" prefWidth="75.0" text="Edit" />
                </children>
@@ -72,7 +72,7 @@
                <children>
                   <VBox alignment="BASELINE_LEFT" prefHeight="90.0" prefWidth="85.0">
                      <children>
-                        <CheckBox fx:id="lectureCheckBox" disable="true" mnemonicParsing="false" onAction="#onEditLectureCheckBoxClick" prefHeight="11.0" prefWidth="79.0" text="Lecture">
+                        <CheckBox fx:id="lectureCheckBox" disable="true" mnemonicParsing="false" prefHeight="11.0" prefWidth="79.0" text="Lecture">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -87,29 +87,6 @@
                               <Font size="14.0" />
                            </font>
                         </CheckBox>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="98.0" prefWidth="201.0">
-               <children>
-                  <VBox>
-                     <children>
-                        <HBox alignment="CENTER">
-                           <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Edit" />
-                           </children>
-                        </HBox>
-                        <HBox>
-                           <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditSeminarCheckBoxClick" prefHeight="26.0" prefWidth="75.0" text="Edit" />
-                           </children>
-                        </HBox>
-                        <HBox>
-                           <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditLabCheckBoxClick" prefHeight="26.0" prefWidth="75.0" text="Edit" />
-                           </children>
-                        </HBox>
                      </children>
                   </VBox>
                </children>
@@ -141,27 +118,9 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="74.0" prefWidth="176.0">
-               <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="200.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="135.0">
-                           <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditStartDatePickerClick" prefHeight="26.0" prefWidth="75.0" text="Edit" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditFinishDatePickerClick" prefHeight="26.0" prefWidth="75.0" text="Edit" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="59.0" prefWidth="400.0">
+      <HBox alignment="BOTTOM_CENTER" prefHeight="82.0" prefWidth="400.0">
          <children>
             <HBox alignment="BOTTOM_LEFT" style="-fx-pref-width: 155;">
                <children>

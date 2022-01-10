@@ -2,11 +2,12 @@ package com.StudyingPlatform.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class ErrorController {
+public class MessageController {
     @FXML
-    private Label errorLabel;
+    private Label messageLabel;
 
     private Stage myStage;
 
@@ -15,8 +16,9 @@ public class ErrorController {
         myStage.close();
     }
 
-    public void create(String message, Stage stage){
+    public void create(String message, Stage stage,Color color){
         myStage = stage;
-        errorLabel.setText(message);
+        messageLabel.setText(message);
+        messageLabel.setTextFill(color);
     }
 }

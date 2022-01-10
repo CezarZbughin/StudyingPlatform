@@ -21,7 +21,7 @@ public class UserListRowController {
     @FXML
     private Label lastNameLabel;
 
-    User listedUser;
+    private User listedUser;
 
     @FXML
     public void onViewProfileButtonClick() throws IOException {

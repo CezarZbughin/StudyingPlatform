@@ -17,7 +17,7 @@ public class DataBaseService {
     //CONNECTION
     //
     public final static String DB_USERNAME = "root";
-    public final static String DB_PASSWORD = "alabala";
+    public final static String DB_PASSWORD = "root";
     public final static String DB_NAME = "StudyingPlatform";
     public final static String DB_CONNECTION_LINK = "jdbc:mysql://localhost:3306/";
 
@@ -227,7 +227,6 @@ public class DataBaseService {
     public static void updateSubject(Subject subject)throws SQLException{
         String querySubject = "call update_subject(?,?,?,?,?,?,?,?)";
         CallableStatement stmt =  connection.prepareCall(querySubject);
-
         stmt.setInt(1, subject.getId());
         stmt.setString(2,subject.getName());
         stmt.setString(3, subject.getDescription());
@@ -236,6 +235,6 @@ public class DataBaseService {
         stmt.setBoolean(6, subject.getHasLab());
         stmt.setDate(7, subject.getDateStart());
         stmt.setDate(8, subject.getDateEnd());
-
+        stmt.execute();
     }
 }

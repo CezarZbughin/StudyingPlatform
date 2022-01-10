@@ -5,6 +5,7 @@ import com.StudyingPlatform.model.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,17 +13,29 @@ import java.net.URL;
 
 public class SuperController {
     public static User activeUser;
-
-    public static void popError(String message)throws IOException {
+    public static Stage popMessage(String message,Color color)throws IOException {
         Stage stage = new Stage();
-        URL url = StudyingApplication.class.getResource("error-pop-up.fxml");
+        URL url = StudyingApplication.class.getResource("message-pop-up.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Parent root = (Parent)fxmlLoader.load();
-        ErrorController controller = fxmlLoader.getController();
-        controller.create(message,stage);
+        MessageController controller = fxmlLoader.<MessageController>getController();
+        controller.create(message, stage, color);
         Scene scene = new Scene(root,270, 70);
-        stage.setTitle("Error");
+        stage.setTitle("Message");
         stage.setScene(scene);
         stage.show();
+        return stage;
     }
+
+    public static Stage popMessage(String message) throws IOException{
+        return popMessage(message,Color.color(0,0,0));
+    }
+
+    public static Stage popError(String message) throws IOException{
+        return popMessage(message,Color.color(1,0,0));
+    }
+
+
+
+
 }
