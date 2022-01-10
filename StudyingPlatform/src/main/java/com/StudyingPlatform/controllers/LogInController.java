@@ -29,7 +29,6 @@ public class LogInController {
 
     @FXML
     public void onLogInButtonClick() throws IOException {
-        Stage stage = StudyingApplication.getPrimaryStage();
         try {
             SuperController.activeUser = AccountService.logIn(usernameField.getText(), passwordField.getText());
         }catch(LoginException e){
@@ -46,10 +45,11 @@ public class LogInController {
             errorLabel.setVisible(true);
             return;
         }
-        URL url = StudyingApplication.class.getResource("green.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-        stage.setScene(scene);
+        if("STUDENT".equals(SuperController.activeUser.getRole())){
+            StudyingApplication.jumpToView("home-student.fxml");
+        }else if("PROFESSOR".equals(SuperController.activeUser.getRole())){
+            StudyingApplication.jumpToView("home-professor.fxml");
+        }else throw new IllegalStateException("Unexpected user role");
     }
 
     @FXML

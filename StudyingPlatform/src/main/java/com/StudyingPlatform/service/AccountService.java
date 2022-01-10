@@ -30,9 +30,7 @@ public class AccountService {
                         throw new LoginException("failed");
                 }
             }
-        }catch(SQLException e){
-            throw new LoginException("failed");
-        }catch (UserNotFoundException e){
+        }catch(SQLException | UserNotFoundException e){
             throw new LoginException("failed");
         }
         return null;

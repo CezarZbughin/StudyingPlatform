@@ -20,11 +20,13 @@ public class StudyingApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        URL url = StudyingApplication.class.getResource("subject-list-view.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(),400, 500);
-        stage.setTitle("Studying Platform");
-        stage.setScene(scene);
+        primaryStage.setTitle("Studying Platform");
+        try {
+            SuperController.activeUser = DataBaseService.getUserById(2);
+        }catch(UserNotFoundException e){
+            e.printStackTrace();
+        }
+        StudyingApplication.jumpToView("log-in-view.fxml");
         stage.show();
     }
 
@@ -34,6 +36,18 @@ public class StudyingApplication extends Application {
 
     public static Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public static void jumpToView(String view){
+        try {
+            URL url = StudyingApplication.class.getResource(view);
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+            primaryStage.setScene(scene);
+        }catch (IOException e){
+            SuperController.popError("Failed to jump to "+ view);
+            e.printStackTrace();
+        }
     }
 }
 
