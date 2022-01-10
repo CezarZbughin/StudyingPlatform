@@ -1,6 +1,7 @@
 package com.StudyingPlatform.application;
 import com.StudyingPlatform.controllers.SuperController;
 import com.StudyingPlatform.model.Address;
+import com.StudyingPlatform.model.ScheduleTime;
 import com.StudyingPlatform.model.Student;
 import com.StudyingPlatform.model.User;
 import com.StudyingPlatform.service.DataBaseService;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.DayOfWeek;
 import java.util.List;
 
 
@@ -19,6 +21,8 @@ public class StudyingApplication extends Application {
     private static Stage primaryStage;
     @Override
     public void start(Stage stage) throws IOException {
+        ScheduleTime scheduleTime = new ScheduleTime(DayOfWeek.valueOf("THURSDAY"),3);
+        System.out.println(scheduleTime.getDayOfWeek());
         primaryStage = stage;
         primaryStage.setTitle("Studying Platform");
         try {

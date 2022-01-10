@@ -15,7 +15,6 @@ public class SuperController {
     public static User activeUser;
     public static Stage popMessage(String message,Color color){
         try {
-
             Stage stage = new Stage();
             URL url = StudyingApplication.class.getResource("message-pop-up.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(url);
