@@ -30,7 +30,7 @@ public class StudyingApplication extends Application {
         }catch(UserNotFoundException e){
             e.printStackTrace();
         }
-        StudyingApplication.jumpToView("sign-up-view.fxml");
+        StudyingApplication.jumpToView("log-in-view.fxml");
         stage.show();
     }
 

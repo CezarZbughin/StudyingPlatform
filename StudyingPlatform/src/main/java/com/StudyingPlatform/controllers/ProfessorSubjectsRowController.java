@@ -25,7 +25,17 @@ public class ProfessorSubjectsRowController {
 
     }
     @FXML
-    public void onWeightsButtonClick(){
+    public void onWeightsButtonClick() throws IOException {
+        Stage stage = new Stage();
+        URL url = StudyingApplication.class.getResource("set-weights.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Parent root = (Parent) fxmlLoader.load();
+        SetWeightsController controller = fxmlLoader.<SetWeightsController>getController();
+        controller.create( stage);
+        Scene scene = new Scene(root, 300, 90);
+          stage.setTitle("Message");
+         stage.setScene(scene);
+          stage.show();
 
     }
     @FXML
@@ -37,4 +47,5 @@ public class ProfessorSubjectsRowController {
         this.displayedSubject = subject;
         nameLabel.setText(subject.getName());
     }
+
 }
