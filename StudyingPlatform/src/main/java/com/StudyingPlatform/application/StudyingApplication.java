@@ -1,11 +1,11 @@
 package com.StudyingPlatform.application;
 import com.StudyingPlatform.controllers.SuperController;
-import com.StudyingPlatform.model.Address;
-import com.StudyingPlatform.model.ScheduleTime;
-import com.StudyingPlatform.model.Student;
-import com.StudyingPlatform.model.User;
+import com.StudyingPlatform.model.*;
 import com.StudyingPlatform.service.DataBaseService;
+import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
+import com.StudyingPlatform.service.ProfessorService;
+import com.StudyingPlatform.service.SubjectProfessorService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,8 +22,7 @@ public class StudyingApplication extends Application {
     private static Stage primaryStage;
     @Override
     public void start(Stage stage) throws IOException {
-        ScheduleTime scheduleTime = new ScheduleTime(DayOfWeek.valueOf("THURSDAY"),3);
-        System.out.println(scheduleTime.getDayOfWeek());
+        //start
         primaryStage = stage;
         primaryStage.setTitle("Studying Platform");
         try {

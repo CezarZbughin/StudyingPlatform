@@ -2,6 +2,7 @@ package com.StudyingPlatform.controllers;
 
 import com.StudyingPlatform.application.StudyingApplication;
 import com.StudyingPlatform.model.Subject;
+import com.StudyingPlatform.model.SubjectProfessor;
 import com.StudyingPlatform.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,7 @@ public class ProfessorSubjectsRowController {
     @FXML
     private Label nameLabel;
 
-    private Subject displayedSubject;
+    private SubjectProfessor displayedSubject;
 
     @FXML
     public void onViewButtonClick(){
@@ -39,11 +40,20 @@ public class ProfessorSubjectsRowController {
 
     }
     @FXML
-    public void onScheduleButtonClick(){
-
+    public void onScheduleButtonClick() throws IOException{
+        Stage stage = new Stage();
+        URL url = StudyingApplication.class.getResource("schedule-activities.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Parent root = (Parent) fxmlLoader.load();
+        ScheduleActivitiesController controller = fxmlLoader.<ScheduleActivitiesController>getController();
+        controller.create(displayedSubject,stage);
+        Scene scene = new Scene(root, 300, 165);
+        stage.setTitle("Schedule Activities");
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void setSubject(Subject subject){
+    public void setSubject(SubjectProfessor subject){
         this.displayedSubject = subject;
         nameLabel.setText(subject.getName());
     }

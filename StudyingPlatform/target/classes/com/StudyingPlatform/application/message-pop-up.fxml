@@ -5,12 +5,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="270.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.MessageController">
    <children>
       <HBox alignment="BOTTOM_CENTER" prefHeight="37.0" prefWidth="285.0">
          <children>
-            <Label fx:id="messageLabel3" alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="247.0" text="messageLabel" textFill="RED" wrapText="true" />
+            <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="247.0" text="messageLabel" textFill="RED" wrapText="true" />
          </children>
       </HBox>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="33.0" prefWidth="285.0">

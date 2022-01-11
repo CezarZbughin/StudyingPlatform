@@ -1,9 +1,6 @@
 package com.StudyingPlatform.service;
 
-import com.StudyingPlatform.model.Address;
-import com.StudyingPlatform.model.Professor;
-import com.StudyingPlatform.model.Subject;
-import com.StudyingPlatform.model.User;
+import com.StudyingPlatform.model.*;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 
@@ -57,14 +54,18 @@ public class ProfessorService {
         stmt.execute();
     }
 
-    public static List<Subject> professorGetSubjects(Professor professor) throws SQLException, SubjectNotFoundException {
+    public static List<SubjectProfessor> professorGetSubjects(Professor professor) throws SQLException, SubjectNotFoundException {
         Connection connection = DataBaseService.getConnection();
         CallableStatement stmt = connection.prepareCall("call  professor_get_subjects(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY);
         stmt.setInt(1, professor.getId());
         ResultSet resultSet = stmt.executeQuery();
         try {
-            return SubjectService.mapFullResultSet(resultSet);
+            List<SubjectProfessor> mySubjects = SubjectProfessorService.mapFullResultSet(resultSet);
+            for(SubjectProfessor subjectProfessor: mySubjects){
+                subjectProfessor.setProfessor(professor);
+            }
+            return mySubjects;
         } catch (EmptyResultSetException e) {
             throw new SubjectNotFoundException();
         }

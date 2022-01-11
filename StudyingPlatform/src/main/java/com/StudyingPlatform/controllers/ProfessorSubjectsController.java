@@ -3,6 +3,7 @@ package com.StudyingPlatform.controllers;
 import com.StudyingPlatform.application.StudyingApplication;
 import com.StudyingPlatform.model.Professor;
 import com.StudyingPlatform.model.Subject;
+import com.StudyingPlatform.model.SubjectProfessor;
 import com.StudyingPlatform.service.DataBaseService;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 import com.StudyingPlatform.service.ProfessorService;
@@ -25,7 +26,7 @@ public class ProfessorSubjectsController implements Initializable {
     @FXML
     VBox subjectsVBox;
 
-    private List<Subject> listedSubjects;
+    private List<SubjectProfessor> listedSubjects;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -46,7 +47,7 @@ public class ProfessorSubjectsController implements Initializable {
 
     private void updateList() throws IOException {
         subjectsVBox.getChildren().clear();
-        for (Subject subject : listedSubjects) {
+        for (SubjectProfessor subject : listedSubjects) {
             URL url = StudyingApplication.class.getResource("professor-subjects-row.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             Parent row = (Parent) fxmlLoader.load();
