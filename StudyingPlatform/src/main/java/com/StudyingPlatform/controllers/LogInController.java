@@ -30,7 +30,8 @@ public class LogInController {
     @FXML
     public void onLogInButtonClick() throws IOException {
         try {
-            SuperController.activeUser = AccountService.logIn(usernameField.getText(), passwordField.getText());
+           // SuperController.activeUser = AccountService.logIn(usernameField.getText(), passwordField.getText());
+            SuperController.activeUser = AccountService.logIn("CezarZbughin", "buna");
         }catch(LoginException e){
             switch(e.getMessage()){
                 case "username not found":

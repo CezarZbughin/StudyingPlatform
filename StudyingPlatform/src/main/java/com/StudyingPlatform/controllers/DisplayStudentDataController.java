@@ -29,4 +29,12 @@ public class DisplayStudentDataController extends DisplayUserDataController{
         displayUser();
         yearField.setText(String.valueOf(((Student) SuperController.activeUser).getYear()));
     }
+    @FXML
+    public void onBackButtonClick() throws IOException {
+        Stage stage = StudyingApplication.getPrimaryStage();
+        URL url = StudyingApplication.class.getResource("home-student.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+        stage.setScene(scene);
+    }
 }
