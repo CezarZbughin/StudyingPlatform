@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 public class ProfessorSubjectsController implements Initializable {
     @FXML
-    VBox subjectsVBox;
+    private VBox subjectsVBox;
 
 
     private List<SubjectProfessor> listedSubjects;

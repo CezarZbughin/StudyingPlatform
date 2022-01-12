@@ -11,7 +11,9 @@ import java.net.URL;
 
 public class HomeStudentController {
     @FXML
-    public void onTodayButtonClick() throws IOException {}
+    public void onTodayButtonClick() throws IOException {
+        StudyingApplication.jumpToView("today.fxml");
+    }
     @FXML
     public void onCatalogButtonClick() throws IOException {}
     @FXML

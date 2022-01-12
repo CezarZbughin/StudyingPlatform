@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.TodayController">
+   <children>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="57.0" prefWidth="400.0" style="-fx-background-color: #E8E8E8;">
+         <children>
+            <Label text="Today">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox prefHeight="394.0" prefWidth="400.0">
+         <children>
+            <ScrollPane prefHeight="399.0" prefWidth="400.0">
+               <content>
+                  <VBox fx:id="vBox" prefHeight="592.0" prefWidth="378.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="400.0" style="-fx-background-color: #E8E8E8;">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="32.0" prefWidth="70.0" text="Back" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

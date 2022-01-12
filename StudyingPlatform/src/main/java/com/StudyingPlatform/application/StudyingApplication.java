@@ -27,11 +27,7 @@ public class StudyingApplication extends Application {
         //start
         primaryStage = stage;
         primaryStage.setTitle("Studying Platform");
-        try {
-            SuperController.activeUser = DataBaseService.getUserById(2);
-        }catch(UserNotFoundException e){
-            e.printStackTrace();
-        }
+
         StudyingApplication.jumpToView("log-in-view.fxml");
         stage.show();
     }

@@ -30,7 +30,9 @@ public class HomeProfessorController {
         }
     }
     @FXML
-    public void onTodayButtonClick() throws IOException {}
+    public void onTodayButtonClick() throws IOException {
+        StudyingApplication.jumpToView("today.fxml");
+    }
     @FXML
     public void onCatalogButtonClick() throws IOException {
         Stage stage = StudyingApplication.getPrimaryStage();
@@ -41,19 +43,11 @@ public class HomeProfessorController {
     }
     @FXML
     public void onMyProfileButtonClick() throws IOException {
-        Stage stage = StudyingApplication.getPrimaryStage();
-        URL url = StudyingApplication.class.getResource("display-professor-data.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-        stage.setScene(scene);
+        StudyingApplication.jumpToView("display-professor-data.fxml");
     }
    @FXML
     public void onMyCoursesButtonClick() throws IOException {
-        Stage stage = StudyingApplication.getPrimaryStage();
-        URL url = StudyingApplication.class.getResource("professor-subjects.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-        stage.setScene(scene);
+        StudyingApplication.jumpToView("professor-subjects.fxml");
     }
     @FXML
     public void onAdminButtonClick() throws IOException {
