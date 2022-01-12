@@ -51,7 +51,7 @@ public class StudyingApplication extends Application {
             Scene scene = new Scene(fxmlLoader.load(), 400, 500);
             primaryStage.setScene(scene);
         }catch (IOException e){
-            SuperController.popError("Failed to jump to "+ view);
+            SuperController.popError("Failed to jump to " + view);
             e.printStackTrace();
         }
     }

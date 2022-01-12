@@ -13,7 +13,7 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT" layoutX="177.0" layoutY="10.0" prefHeight="35.0" prefWidth="97.0" style="-fx-pref-width: 75;">
          <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#onScheduleButtonClick" prefHeight="25.0" prefWidth="65.0" style="-fx-pref-width: 65; -fx-pref-height: 43;" text="schedule activities" textAlignment="CENTER" wrapText="true" />
+            <Button fx:id="scheduleButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onScheduleButtonClick" prefHeight="25.0" prefWidth="65.0" style="-fx-pref-width: 65; -fx-pref-height: 43;" text="schedule activities" textAlignment="CENTER" wrapText="true" />
          </children>
       </HBox>
       <HBox alignment="CENTER_RIGHT" layoutX="295.0" layoutY="10.0" prefHeight="35.0" prefWidth="97.0" style="-fx-pref-width: 75;">

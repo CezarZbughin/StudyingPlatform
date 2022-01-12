@@ -2,74 +2,73 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.SetWeightsController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.SetWeightsController">
    <children>
-      <HBox alignment="TOP_CENTER">
+      <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="320.0" style="-fx-pref-height: 65;">
          <children>
-            <HBox prefHeight="62.0" prefWidth="70.0">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <VBox>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="29.0" prefWidth="100.0" style="-fx-pref-height: 25;">
                      <children>
-                        <Label fx:id="messageLabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="53.0" text="Lecture" textFill="#101010" wrapText="true" />
-                        <TextField fx:id="lectureText" prefHeight="26.0" prefWidth="56.0" />
+                        <Label text="Lecture(%)" />
                      </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="62.0" prefWidth="70.0">
-               <children>
-                  <VBox>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="100.0" style="-fx-pref-height: 35;">
                      <children>
-                        <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="62.0" text="Seminar" textFill="#101010" wrapText="true" />
-                        <TextField fx:id="seminarText" prefHeight="26.0" prefWidth="60.0" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox alignment="TOP_RIGHT" prefHeight="62.0" prefWidth="70.0">
-               <children>
-                  <VBox alignment="BOTTOM_RIGHT">
-                     <children>
-                        <Label fx:id="messageLabel2" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="74.0" text="Laboratour" textFill="#101010" wrapText="true" />
-                        <TextField fx:id="laboratourText" prefHeight="26.0" prefWidth="60.0" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="68.0" prefWidth="270.0">
-         <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="239.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#onCloseButtonClick" prefHeight="33.0" prefWidth="70.0" text="Close">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="66.0" prefWidth="138.0">
-                     <children>
-                        <Label fx:id="messageText" prefHeight="26.0" prefWidth="119.0" text="Incorect value!" textFill="#ff2600" visible="false">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
+                        <Spinner fx:id="lectureSpinner" editable="true" style="-fx-pref-width: 65;" />
                      </children>
                   </HBox>
                </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="92.0">
+            </VBox>
+            <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onSetButtonClick" prefHeight="26.0" prefWidth="62.0" text="Set">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-pref-height: 25;">
+                     <children>
+                        <Label text="Seminar(%)" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="38.0" prefWidth="100.0" style="-fx-pref-height: 35;">
+                     <children>
+                        <Spinner fx:id="seminarSpinner" editable="true" style="-fx-pref-width: 65;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="100.0" style="-fx-pref-height: 25;">
+                     <children>
+                        <Label text="Lab(%)" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="39.0" prefWidth="100.0" style="-fx-pref-height: 35;">
+                     <children>
+                        <Spinner fx:id="labSpinner" editable="true" style="-fx-pref-width: 65;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="325.0" style="-fx-pref-height: 40;">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="149.0" style="-fx-pref-width: 70;">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onCancelButtonClick" style="-fx-pref-width: 55;" text="Cancel" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" style="-fx-pref-width: 120;">
+               <children>
+                  <Label fx:id="errorLabel" prefHeight="40.0" prefWidth="120.0" text="Label" textFill="RED" visible="false" wrapText="true" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" layoutX="160.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" style="-fx-pref-width: 70;">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onSetButtonClick" style="-fx-pref-width: 55;" text="Set" />
                </children>
             </HBox>
          </children>

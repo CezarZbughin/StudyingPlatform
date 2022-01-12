@@ -97,21 +97,50 @@ public class SubjectProfessorService {
         return subjectList;
     }
 
-    public static void schedule_activities(SubjectProfessor subjectProfessor)throws SQLException{
+    public static void schedule_activities(SubjectProfessor subjectProfessor) throws SQLException {
         Connection connection = DataBaseService.getConnection();
         CallableStatement stmt = connection.prepareCall("call schedule_activities(?,?,?,?,?,?,?,?,?,?,?,?)");
-        stmt.setInt(1,subjectProfessor.getProfessor().getId());
-        stmt.setInt(2,subjectProfessor.getId());
-        stmt.setString(3,subjectProfessor.getScheduleLecture().getDayOfWeek().toString());
-        stmt.setInt(4,subjectProfessor.getScheduleLecture().getHour());
-        stmt.setInt(5,subjectProfessor.getScheduleLecture().getDuration());
-        stmt.setString(6,subjectProfessor.getScheduleSeminar().getDayOfWeek().toString());
-        stmt.setInt(7,subjectProfessor.getScheduleSeminar().getHour());
-        stmt.setInt(8,subjectProfessor.getScheduleSeminar().getDuration());
-        stmt.setString(9,subjectProfessor.getScheduleLab().getDayOfWeek().toString());
-        stmt.setInt(10,subjectProfessor.getScheduleLab().getHour());
-        stmt.setInt(11,subjectProfessor.getScheduleLab().getDuration());
-        stmt.setInt(12,subjectProfessor.getStudentsCapacity());
+        stmt.setInt(1, subjectProfessor.getProfessor().getId());
+        stmt.setInt(2, subjectProfessor.getId());
+        if (subjectProfessor.getHasLecture()) {
+            stmt.setString(3, subjectProfessor.getScheduleLecture().getDayOfWeek().toString());
+            stmt.setInt(4, subjectProfessor.getScheduleLecture().getHour());
+            stmt.setInt(5, subjectProfessor.getScheduleLecture().getDuration());
+        } else {
+            stmt.setString(3, null);
+            stmt.setInt(4, 0);
+            stmt.setInt(5, 0);
+        }
+        if (subjectProfessor.getHasSeminar()) {
+            stmt.setString(6, subjectProfessor.getScheduleSeminar().getDayOfWeek().toString());
+            stmt.setInt(7, subjectProfessor.getScheduleSeminar().getHour());
+            stmt.setInt(8, subjectProfessor.getScheduleSeminar().getDuration());
+        } else {
+            stmt.setString(6, null);
+            stmt.setInt(7, 0);
+            stmt.setInt(8, 0);
+        }
+        if (subjectProfessor.getHasLab()) {
+            stmt.setString(9, subjectProfessor.getScheduleLab().getDayOfWeek().toString());
+            stmt.setInt(10, subjectProfessor.getScheduleLab().getHour());
+            stmt.setInt(11, subjectProfessor.getScheduleLab().getDuration());
+        } else {
+            stmt.setString(9,null);
+            stmt.setInt(10, 0);
+            stmt.setInt(11, 0);
+        }
+        stmt.setInt(12, subjectProfessor.getStudentsCapacity());
+        stmt.executeUpdate();
+    }
+
+    public static void setWeights(Subject subject,Professor professor, float weightLecture, float weightSeminar, float weightLab) throws SQLException{
+        Connection connection = DataBaseService.getConnection();
+        CallableStatement stmt = connection.prepareCall("call set_weight(?,?,?,?,?)");
+        stmt.setInt(1,professor.getId());
+        stmt.setInt(2, subject.getId());
+        stmt.setFloat(3,weightLecture);
+        stmt.setFloat(4,weightSeminar);
+        stmt.setFloat(5,weightLab);
         stmt.executeUpdate();
     }
 }

@@ -1,6 +1,8 @@
 package com.StudyingPlatform.model;
 
-public class ScheduleEntry {
+import com.StudyingPlatform.model.Interfaces.Overlapable;
+
+public class ScheduleEntry implements Comparable<ScheduleEntry>, Overlapable<ScheduleEntry> {
     private ScheduleTime time;
     private String type;
     private String name;
@@ -14,6 +16,8 @@ public class ScheduleEntry {
         this.type = type;
         this.name = name;
     }
+
+
 
     public ScheduleTime getTime() {
         return time;
@@ -37,5 +41,15 @@ public class ScheduleEntry {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public int compareTo(ScheduleEntry o) {
+        return this.time.compareTo(o.time);
+    }
+
+    @Override
+    public boolean overlaps(ScheduleEntry o) {
+        return this.time.overlaps(o.time);
     }
 }
