@@ -34,7 +34,6 @@ public class ProfessorSubjectsRowController {
         SetWeightsController controller = fxmlLoader.<SetWeightsController>getController();
         controller.create( stage);
         Scene scene = new Scene(root, 300, 90);
-          stage.setTitle("Message");
          stage.setScene(scene);
           stage.show();
 

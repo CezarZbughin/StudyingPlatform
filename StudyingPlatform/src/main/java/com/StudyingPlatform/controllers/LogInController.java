@@ -45,6 +45,7 @@ public class LogInController {
             errorLabel.setVisible(true);
             return;
         }
+
         if("STUDENT".equals(SuperController.activeUser.getRole())){
             StudyingApplication.jumpToView("home-student.fxml");
         }else if("PROFESSOR".equals(SuperController.activeUser.getRole())){
