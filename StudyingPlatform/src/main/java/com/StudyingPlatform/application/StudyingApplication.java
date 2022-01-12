@@ -2,9 +2,11 @@ package com.StudyingPlatform.application;
 import com.StudyingPlatform.controllers.SuperController;
 import com.StudyingPlatform.model.*;
 import com.StudyingPlatform.service.DataBaseService;
+import com.StudyingPlatform.service.Exceptions.ScheduleException;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
 import com.StudyingPlatform.service.ProfessorService;
+import com.StudyingPlatform.service.StudentService;
 import com.StudyingPlatform.service.SubjectProfessorService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +32,7 @@ public class StudyingApplication extends Application {
         }catch(UserNotFoundException e){
             e.printStackTrace();
         }
-        StudyingApplication.jumpToView("admin-view.fxml");
+        StudyingApplication.jumpToView("log-in-view.fxml");
         stage.show();
     }
 

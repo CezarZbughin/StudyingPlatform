@@ -33,6 +33,7 @@ public class ProfessorSubjectsController implements Initializable {
         try {
             listedSubjects = ProfessorService.professorGetSubjects((Professor) SuperController.activeUser);
         } catch (SQLException e) {
+            e.printStackTrace();
             listedSubjects = new ArrayList<>();
         } catch (SubjectNotFoundException e) {
             listedSubjects = new ArrayList<>();

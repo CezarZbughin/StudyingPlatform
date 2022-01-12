@@ -2,12 +2,14 @@ package com.StudyingPlatform.service;
 
 import com.StudyingPlatform.model.*;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
+import com.StudyingPlatform.service.Exceptions.ScheduleException;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProfessorService {
@@ -69,5 +71,37 @@ public class ProfessorService {
         } catch (EmptyResultSetException e) {
             throw new SubjectNotFoundException();
         }
+    }
+
+    public static List<ScheduleEntry> professorGetSchedule(Professor professor) throws ScheduleException {
+        List<ScheduleEntry> schedule = new ArrayList<>();
+        List<SubjectProfessor> subjects;
+        try {
+            subjects = ProfessorService.professorGetSubjects(professor);
+        }catch (SubjectNotFoundException e){
+            subjects = new ArrayList<>();
+        }catch (SQLException e){
+            throw new ScheduleException(e.getMessage());
+        }
+
+        for(SubjectProfessor subject:subjects){
+            if(!subject.isFinishedSchedule())continue;
+            if(subject.getHasLecture()){
+                schedule.add(
+                        new ScheduleEntry(subject.getScheduleLecture(),"LECTURE",subject.getName())
+                );
+            }
+            if(subject.getHasSeminar()){
+                schedule.add(
+                        new ScheduleEntry(subject.getScheduleSeminar(),"SEMINAR",subject.getName())
+                );
+            }
+            if(subject.getHasLab()){
+                schedule.add(
+                        new ScheduleEntry(subject.getScheduleLab(),"LAB",subject.getName())
+                );
+            }
+        }
+        return  schedule;
     }
 }
