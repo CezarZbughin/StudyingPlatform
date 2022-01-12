@@ -36,7 +36,7 @@ public class AdminController {
         stage.setScene(scene);
     }
     @FXML
-    public void onBackClick() throws IOException {
+    public void onBackButtonClick() throws IOException {
         URL url;
         Stage stage = StudyingApplication.getPrimaryStage();
         if(SuperController.activeUser.equals("STUDENT")) {

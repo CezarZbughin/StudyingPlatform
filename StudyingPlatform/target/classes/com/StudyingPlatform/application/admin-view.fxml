@@ -54,7 +54,7 @@
                <children>
                   <HBox alignment="BOTTOM_LEFT" prefHeight="101.0" prefWidth="385.0">
                      <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="66.0" prefWidth="114.0" style="-fx-pref-height: 45;" text="Back">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="66.0" prefWidth="114.0" style="-fx-pref-height: 45;" text="Back">
                            <font>
                               <Font size="24.0" />
                            </font>

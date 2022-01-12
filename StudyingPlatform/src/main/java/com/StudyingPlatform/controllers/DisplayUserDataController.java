@@ -45,7 +45,7 @@ abstract class DisplayUserDataController implements Initializable{
     @FXML
     private TextField contractNumberField;
     @FXML
-    public void onBackButtonClick(){
+    public void onBackButtonClick() throws IOException {
         System.out.println("back");
     }
   /*  public void displayStudent(String firstNameField, String lastNameField,String emailField, String phoneField, String CNP,

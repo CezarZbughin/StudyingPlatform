@@ -17,7 +17,7 @@ public class DataBaseService {
     //CONNECTION
     //
     public final static String DB_USERNAME = "root";
-    public final static String DB_PASSWORD = "root";
+    public final static String DB_PASSWORD = "alabala";
     public final static String DB_NAME = "StudyingPlatform";
     public final static String DB_CONNECTION_LINK = "jdbc:mysql://localhost:3306/";
 

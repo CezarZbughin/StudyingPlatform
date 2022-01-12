@@ -29,4 +29,12 @@ public class DisplayProfessorDataController extends DisplayUserDataController{
         displayUser();
         departmentField.setText(((Professor) SuperController.activeUser).getDepartment());
     }
+    @FXML
+    public void onBackButtonClick() throws IOException {
+        Stage stage = StudyingApplication.getPrimaryStage();
+        URL url = StudyingApplication.class.getResource("home-professor.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+        stage.setScene(scene);
+    }
 }
