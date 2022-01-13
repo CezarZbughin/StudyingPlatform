@@ -66,7 +66,5 @@ public class Studying {
         return professorId;
     }
 
-    public void setProfessorId(int professorId) {
-        this.professorId = professorId;
-    }
+    public void setProfessorId(int professorId) {this.professorId = professorId;}
 }

@@ -1,7 +1,6 @@
 package com.StudyingPlatform.controllers;
 
 import com.StudyingPlatform.application.StudyingApplication;
-import com.StudyingPlatform.model.Student;
 import com.StudyingPlatform.model.User;
 import com.StudyingPlatform.service.DataBaseService;
 import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
@@ -21,7 +20,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.zip.InflaterOutputStream;
 
 public class UserListController implements Initializable {
     @FXML
@@ -40,95 +38,99 @@ public class UserListController implements Initializable {
     List<User> listedUsers;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle){
-        try {
-            onAnyButtonClick();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        onAnyButtonClick();
     }
 
     @FXML
-    public void onAnyButtonClick() throws IOException {
+    public void onAnyButtonClick() {
         studentButton.setDisable(false);
         professorButton.setDisable(false);
         anyButton.setDisable(true);
-
         try {
             listedUsers = DataBaseService.getAllUsers();
-        }catch(SQLException e){
-
+        } catch (SQLException e) {
             e.printStackTrace();
-        }catch (UserNotFoundException e){
-            //consider showing error here;
+            listedUsers = new ArrayList<>();
+        } catch (UserNotFoundException e) {
+            SuperController.popError("No user was found.");
             listedUsers = new ArrayList<>();
         }
         updateList();
     }
+
     @FXML
-    public void onStudentButtonClick() throws IOException{
+    public void onStudentButtonClick() {
         studentButton.setDisable(true);
         professorButton.setDisable(false);
         anyButton.setDisable(false);
-
         try {
             listedUsers = DataBaseService.getAllStudents();
-        }catch(SQLException e){
+        } catch (UserNotFoundException e) {
+            SuperController.popError("No user was found.");
+            listedUsers = new ArrayList<>();
+        } catch (SQLException e) {
             e.printStackTrace();
-        }catch (UserNotFoundException e){
-            //consider showing error here;
             listedUsers = new ArrayList<>();
         }
         updateList();
     }
+
     @FXML
-    public void onProfessorButtonClick() throws IOException{
+    public void onProfessorButtonClick() {
         studentButton.setDisable(false);
         professorButton.setDisable(true);
         anyButton.setDisable(false);
 
         try {
             listedUsers = DataBaseService.getAllProfessor();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }catch (UserNotFoundException e){
-            //consider showing error here;
+            listedUsers = new ArrayList<>();
+        } catch (UserNotFoundException e) {
+            SuperController.popError("No user was found.");
             listedUsers = new ArrayList<>();
         }
         updateList();
     }
+
     @FXML
-    public void onSearchButtonClick() throws IOException{
+    public void onSearchButtonClick() {
+        if(firstNameField.getText().equals("") && lastNameField.getText().equals("")){
+            onAnyButtonClick();
+            return;
+        }
         studentButton.setDisable(false);
         professorButton.setDisable(false);
         anyButton.setDisable(true);
         try {
-            listedUsers = DataBaseService.getUsersByName(firstNameField.getText(),lastNameField.getText());
+            listedUsers = DataBaseService.getUsersByName(firstNameField.getText(), lastNameField.getText());
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (UserNotFoundException e) {
-            //show error
             listedUsers = new ArrayList<>();
         }
         updateList();
     }
+
     @FXML
-    public void onBackButtonClick() throws IOException{
-        Stage stage = StudyingApplication.getPrimaryStage();
-        URL url = StudyingApplication.class.getResource("admin-view.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-        stage.setScene(scene);
+    public void onBackButtonClick() throws IOException {
+        StudyingApplication.jumpToView("admin-view.fxml");
     }
-    private void updateList() throws IOException{
+
+    private void updateList() {
         usersVBox.getChildren().clear();
-        for(User user:listedUsers){
-            URL url = StudyingApplication.class.getResource("user-list-row.fxml");
-            FXMLLoader fxmlLoader = new FXMLLoader(url);
-            Parent row = (Parent)fxmlLoader.load();
-            UserListRowController controller = fxmlLoader.<UserListRowController>getController();
-            controller.setUser(user);
-            usersVBox.getChildren().add(row);
+        for (User user : listedUsers) {
+            try {
+                URL url = StudyingApplication.class.getResource("user-list-row.fxml");
+                FXMLLoader fxmlLoader = new FXMLLoader(url);
+                Parent row = fxmlLoader.load();
+                UserListRowController controller = fxmlLoader.getController();
+                controller.setUser(user);
+                usersVBox.getChildren().add(row);
+            } catch (IOException e){
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.StudyingPlatform.service;
 
-import com.StudyingPlatform.model.Address;
 import com.StudyingPlatform.model.User;
 import com.StudyingPlatform.service.Exceptions.SignupException;
 import com.StudyingPlatform.service.Exceptions.UserNotFoundException;

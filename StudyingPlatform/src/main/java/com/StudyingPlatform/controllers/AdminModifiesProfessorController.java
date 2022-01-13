@@ -3,7 +3,6 @@ package com.StudyingPlatform.controllers;
 import com.StudyingPlatform.model.Professor;
 import com.StudyingPlatform.service.DataBaseService;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;

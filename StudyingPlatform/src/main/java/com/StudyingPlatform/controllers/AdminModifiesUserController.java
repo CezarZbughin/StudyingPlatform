@@ -2,10 +2,8 @@ package com.StudyingPlatform.controllers;
 
 import com.StudyingPlatform.application.StudyingApplication;
 import com.StudyingPlatform.model.User;
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

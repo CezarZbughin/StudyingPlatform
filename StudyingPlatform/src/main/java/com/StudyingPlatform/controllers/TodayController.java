@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -69,7 +70,7 @@ public class TodayController implements Initializable {
             }
         }
         for (ScheduleEntry e : schedule) {
-            if(!e.getTime().getDayOfWeek().equals(DayOfWeek.MONDAY))
+            if(!e.getTime().getDayOfWeek().equals(LocalDateTime.now().getDayOfWeek()))
                 continue;
             int hour = e.getTime().getHour();
             int duration = e.getTime().getDuration();

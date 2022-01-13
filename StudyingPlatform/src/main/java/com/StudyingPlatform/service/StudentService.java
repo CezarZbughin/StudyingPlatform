@@ -1,6 +1,9 @@
 package com.StudyingPlatform.service;
 
-import com.StudyingPlatform.model.*;
+import com.StudyingPlatform.model.Address;
+import com.StudyingPlatform.model.ScheduleEntry;
+import com.StudyingPlatform.model.Student;
+import com.StudyingPlatform.model.SubjectStudent;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
 import com.StudyingPlatform.service.Exceptions.ScheduleException;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;

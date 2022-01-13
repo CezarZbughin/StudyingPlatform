@@ -1,22 +1,20 @@
 package com.StudyingPlatform.controllers;
 
 import com.StudyingPlatform.application.StudyingApplication;
-import com.StudyingPlatform.model.Student;
 import com.StudyingPlatform.model.Subject;
-import com.StudyingPlatform.model.User;
 import com.StudyingPlatform.service.DataBaseService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.ZoneId;
-import java.util.Calendar;
 
 public class AdminModifiesSubjectController {
     @FXML
