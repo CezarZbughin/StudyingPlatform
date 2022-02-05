@@ -1,9 +1,6 @@
 package com.StudyingPlatform.service;
 
-import com.StudyingPlatform.model.Professor;
-import com.StudyingPlatform.model.Student;
-import com.StudyingPlatform.model.Subject;
-import com.StudyingPlatform.model.User;
+import com.StudyingPlatform.model.*;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
@@ -17,7 +14,7 @@ public class DataBaseService {
     //CONNECTION
     //
     public final static String DB_USERNAME = "root";
-    public final static String DB_PASSWORD = "root";
+    public final static String DB_PASSWORD = "alabala";
     public final static String DB_NAME = "StudyingPlatform";
     public final static String DB_CONNECTION_LINK = "jdbc:mysql://localhost:3306/";
 
@@ -64,6 +61,21 @@ public class DataBaseService {
             idList.add(resultSet.getInt("id"));
         }
         return usersByIdList(idList);
+    }
+    public static List<Group> getStudentGroups(Integer id) throws SQLException, EmptyResultSetException {
+        List<Group> groupList = new ArrayList<>();
+        CallableStatement stmt = connection.prepareCall("call get_student_groups(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1,id);
+        ResultSet resultSet = stmt.executeQuery();
+        return GroupService.mapResultSet(resultSet);
+    }
+    public static List<Subject> getSubjectsByIdStudent(Integer id) throws SQLException, EmptyResultSetException {
+        CallableStatement stmt = connection.prepareCall("call student_get_subjects(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1,id);
+        ResultSet resultSet = stmt.executeQuery();
+        return SubjectService.mapFullResultSet(resultSet);
     }
 
     public static List<User> getAllUsers() throws SQLException, UserNotFoundException{
@@ -237,4 +249,27 @@ public class DataBaseService {
         stmt.setDate(8, subject.getDateEnd());
         stmt.execute();
     }
+    public static void createGroup(String nume, Integer id) throws SQLException {
+        String insertGroupQuery = "call insert_group(?,?)";
+        CallableStatement stmt = connection.prepareCall(insertGroupQuery);
+        stmt.setString(1,nume);
+        stmt.setInt(2,id);
+        stmt.execute();
+    }
+    public static boolean checkGroup(Integer studentID,Integer groupId) throws SQLException {
+        CallableStatement stmt = connection.prepareCall("call check_student_group(?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1,studentID);
+        stmt.setInt(2,groupId);
+        ResultSet resultSet = stmt.executeQuery();
+        return resultSet.next();
+    }
+    public static void insertStudentGroup(Integer studentId, Integer groupId) throws SQLException {
+        String insertGroupQuery = "call insert_student_into_group(?,?)";
+        CallableStatement stmt = connection.prepareCall(insertGroupQuery);
+        stmt.setInt(1,studentId);
+        stmt.setInt(2,groupId);
+        stmt.execute();
+    }
+
 }

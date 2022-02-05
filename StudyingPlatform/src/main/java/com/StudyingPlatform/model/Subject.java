@@ -93,4 +93,9 @@ public class Subject {
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
     }
+
+    @Override
+    public String toString() {
+        return  name;
+    }
 }

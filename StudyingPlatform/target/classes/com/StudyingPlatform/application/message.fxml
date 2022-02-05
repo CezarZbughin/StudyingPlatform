@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="message" prefHeight="66.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.SingleMessageController">
+   <children>
+      <Label fx:id="senderName" prefHeight="18.0" prefWidth="111.0" text="  " />
+      <Label fx:id="text" prefHeight="50.0" prefWidth="330.0" textFill="#897474" />
+   </children>
+</VBox>
