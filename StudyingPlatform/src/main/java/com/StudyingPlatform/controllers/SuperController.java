@@ -19,7 +19,7 @@ public class SuperController {
             URL url = StudyingApplication.class.getResource("message-pop-up.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             Parent root = (Parent) fxmlLoader.load();
-            MessageController controller = fxmlLoader.<MessageController>getController();
+            MessagePopupController controller = fxmlLoader.<MessagePopupController>getController();
             controller.create(message, stage, color);
             Scene scene = new Scene(root, 270, 70);
             stage.setTitle("Message");

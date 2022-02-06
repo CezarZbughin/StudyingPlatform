@@ -15,9 +15,10 @@ public class GroupService {
         List<Group> groups = new ArrayList<>();
         while (resultSet.next()) {
             Group studentGroup = new Group(
-                    resultSet.getInt("idgrup"),
-                    resultSet.getString("nume"
-                    ));
+                    resultSet.getInt("id"),
+                    resultSet.getString("name"),
+                    resultSet.getInt("subject_id")
+            );
             groups.add(studentGroup);
         }
         return groups;

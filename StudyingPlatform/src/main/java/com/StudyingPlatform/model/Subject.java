@@ -1,10 +1,6 @@
 package com.StudyingPlatform.model;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-
 import java.sql.Date;
-import java.time.DayOfWeek;
 
 public class Subject {
     private int id;

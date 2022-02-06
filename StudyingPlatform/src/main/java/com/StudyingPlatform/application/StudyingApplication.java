@@ -1,5 +1,7 @@
 package com.StudyingPlatform.application;
 import com.StudyingPlatform.controllers.SuperController;
+import com.StudyingPlatform.service.DataBaseService;
+import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +15,11 @@ public class StudyingApplication extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         primaryStage.setTitle("Studying Platform");
-        StudyingApplication.jumpToView("log-in-view.fxml");
+        try{
+            SuperController.activeUser = DataBaseService.getUserById(1);
+        }catch (Exception e){
+        }
+        StudyingApplication.jumpToView("chat.fxml",550,500);
         stage.show();
     }
 
@@ -26,10 +32,13 @@ public class StudyingApplication extends Application {
     }
 
     public static void jumpToView(String view){
+        jumpToView(view,400,500);
+    }
+    public static void jumpToView(String view, int xSize, int ySize){
         try {
             URL url = StudyingApplication.class.getResource(view);
             FXMLLoader fxmlLoader = new FXMLLoader(url);
-            Scene scene = new Scene(fxmlLoader.load(), 400, 500);
+            Scene scene = new Scene(fxmlLoader.load(), xSize, ySize);
             primaryStage.setScene(scene);
         }catch (IOException e){
             SuperController.popError("Failed to jump to " + view);

@@ -18,16 +18,12 @@ public class AccountService {
             if(resultSet.next()){
                 String logInStatus = resultSet.getString("log_in_status");
                 int userId = resultSet.getInt("user_id");
-                switch (logInStatus){
-                    case "successful":
-                        return DataBaseService.getUserById(userId);
-                    case "username not found":
-                        throw new LoginException("username not found");
-                    case "wrong password":
-                        throw new LoginException("wrong password");
-                    default:
-                        throw new LoginException("failed");
-                }
+                return switch (logInStatus) {
+                    case "successful" -> DataBaseService.getUserById(userId);
+                    case "username not found" -> throw new LoginException("username not found");
+                    case "wrong password" -> throw new LoginException("wrong password");
+                    default -> throw new LoginException("failed");
+                };
             }
         }catch(SQLException | UserNotFoundException e){
             throw new LoginException("failed");

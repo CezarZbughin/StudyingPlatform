@@ -1,9 +1,7 @@
 package com.StudyingPlatform.service;
 
 import com.StudyingPlatform.model.*;
-import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
-import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
-import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
+import com.StudyingPlatform.service.Exceptions.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ public class DataBaseService {
     //CONNECTION
     //
     public final static String DB_USERNAME = "root";
-    public final static String DB_PASSWORD = "alabala";
+    public final static String DB_PASSWORD = "root";
     public final static String DB_NAME = "StudyingPlatform";
     public final static String DB_CONNECTION_LINK = "jdbc:mysql://localhost:3306/";
 
@@ -62,14 +60,7 @@ public class DataBaseService {
         }
         return usersByIdList(idList);
     }
-    public static List<Group> getStudentGroups(Integer id) throws SQLException, EmptyResultSetException {
-        List<Group> groupList = new ArrayList<>();
-        CallableStatement stmt = connection.prepareCall("call get_student_groups(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY);
-        stmt.setInt(1,id);
-        ResultSet resultSet = stmt.executeQuery();
-        return GroupService.mapResultSet(resultSet);
-    }
+
     public static List<Subject> getSubjectsByIdStudent(Integer id) throws SQLException, EmptyResultSetException {
         CallableStatement stmt = connection.prepareCall("call student_get_subjects(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY);
@@ -249,21 +240,28 @@ public class DataBaseService {
         stmt.setDate(8, subject.getDateEnd());
         stmt.execute();
     }
-    public static void createGroup(String nume, Integer id) throws SQLException {
-        String insertGroupQuery = "call insert_group(?,?)";
-        CallableStatement stmt = connection.prepareCall(insertGroupQuery);
-        stmt.setString(1,nume);
+    //
+    // GROUPS
+    //
+    public static Group getGroupById(int id) throws SQLException, GroupNotFoundException{
+        CallableStatement stmt = connection.prepareCall("call get_group_by_id(?)");
+        stmt.setInt(1,id);
+        ResultSet rs = stmt.executeQuery();
+        try {
+            List<Group> groups = GroupService.mapResultSet(rs);
+            return groups.get(0);
+        }catch (EmptyResultSetException e){
+            throw new GroupNotFoundException("no group with id "+ id);
+        }
+    }
+
+    public static void createGroup(String name, Integer id) throws SQLException {
+        CallableStatement stmt = connection.prepareCall("call insert_group(?,?)");
+        stmt.setString(1,name);
         stmt.setInt(2,id);
         stmt.execute();
     }
-    public static boolean checkGroup(Integer studentID,Integer groupId) throws SQLException {
-        CallableStatement stmt = connection.prepareCall("call check_student_group(?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY);
-        stmt.setInt(1,studentID);
-        stmt.setInt(2,groupId);
-        ResultSet resultSet = stmt.executeQuery();
-        return resultSet.next();
-    }
+
     public static void insertStudentGroup(Integer studentId, Integer groupId) throws SQLException {
         String insertGroupQuery = "call insert_student_into_group(?,?)";
         CallableStatement stmt = connection.prepareCall(insertGroupQuery);
@@ -272,4 +270,54 @@ public class DataBaseService {
         stmt.execute();
     }
 
+    public static List<Group> getUserGroups(User user) throws SQLException, EmptyResultSetException {
+        List<Group> groupList = new ArrayList<>();
+        CallableStatement stmt;
+        if("STUDENT".equals(user.getRole())){
+            stmt = connection.prepareCall("call get_student_groups(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        }else if("PROFESSOR".equals(user.getRole())){
+            stmt = connection.prepareCall("call get_professor_groups(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        }else throw new IllegalStateException("Unexpected role for user");
+        stmt.setInt(1,user.getId());
+        ResultSet resultSet = stmt.executeQuery();
+        return GroupService.mapResultSet(resultSet);
+    }
+
+    public static List<Group> getUserJoinableGroups(User user) throws SQLException, EmptyResultSetException {
+        List<Group> groupList = new ArrayList<>();
+        CallableStatement stmt;
+        if("STUDENT".equals(user.getRole())){
+            stmt = connection.prepareCall("call get_student_joinable_groups(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        }else if("PROFESSOR".equals(user.getRole())){
+            stmt = connection.prepareCall("call get_professor_joinable_groups(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        }else throw new IllegalStateException("Unexpected role for user");
+        stmt.setInt(1,user.getId());
+        ResultSet resultSet = stmt.executeQuery();
+        return GroupService.mapResultSet(resultSet);
+    }
+
+    public static List<Message> getMessages(Group group, Timestamp startTime,int limit) throws SQLException,MessageNotFoundException{
+        CallableStatement stmt = connection.prepareCall("call get_messages(?,?,?)");
+        stmt.setInt(1,group.getId());
+        stmt.setTimestamp(2,startTime);
+        stmt.setInt(3,limit);
+        ResultSet resultSet = stmt.executeQuery();
+        try {
+            return MessageService.mapResultSet(resultSet);
+        }catch (EmptyResultSetException e){
+            throw new MessageNotFoundException("get empty result set");
+        }
+    }
+    public static void sendMessage(String text,Group group,Timestamp sentTime,User user)throws SQLException{
+        CallableStatement stmt = connection.prepareCall("call send_messages(?,?,?,?)");
+        stmt.setString(1,text);
+        stmt.setInt(2,group.getId());
+        stmt.setTimestamp(3,sentTime);
+        stmt.setInt(4,user.getId());
+        stmt.executeUpdate();
+    }
 }

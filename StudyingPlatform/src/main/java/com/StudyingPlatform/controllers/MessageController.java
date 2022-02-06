@@ -1,24 +1,38 @@
 package com.StudyingPlatform.controllers;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 public class MessageController {
     @FXML
-    private Label messageLabel;
-
-    private Stage myStage;
-
+    private VBox bigBox;
     @FXML
-    public void onCloseButtonClick(){
-        myStage.close();
-    }
+    private VBox smallBox;
+    @FXML
+    private Label usernameLabel;
+    @FXML
+    private Label message;
 
-    public void create(String message, Stage stage,Color color){
-        myStage = stage;
-        messageLabel.setText(message);
-        messageLabel.setTextFill(color);
+    public void set(String message, String username, boolean isRight) {
+        this.message.setText(message);
+        this.usernameLabel.setText(username);
+
+        if(isRight){
+            bigBox.setAlignment(Pos.TOP_RIGHT);
+            smallBox.setBackground(new Background(new BackgroundFill(Color.valueOf("#e0fcd4"),
+                    CornerRadii.EMPTY,
+                    Insets.EMPTY)));
+        }else{
+            bigBox.setAlignment(Pos.TOP_LEFT);
+            smallBox.setBackground(new Background(new BackgroundFill(Color.WHITE,
+                    CornerRadii.EMPTY,
+                    Insets.EMPTY)));
+        }
+
     }
 }

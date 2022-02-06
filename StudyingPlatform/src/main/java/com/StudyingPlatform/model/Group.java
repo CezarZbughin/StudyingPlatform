@@ -1,36 +1,40 @@
 package com.StudyingPlatform.model;
 
 public class Group {
-    private Integer id;
-    private Integer subjectId;
-    private String nume;
+    private int id;
+    private String name;
+    private int subjectId;
 
-    public Group(Integer id, String nume) {
-        this.id=id;
-        this.nume=nume;
+    public Group(){
+
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
+    public Group(int id, String name, int subjectId ) {
         this.id = id;
-    }
-
-    public Integer getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(Integer subjectId) {
+        this.name = name;
         this.subjectId = subjectId;
     }
 
-    public String getNume() {
-        return nume;
+    public int getId() {
+        return id;
     }
 
-    public void setNume(String nume) {
-        this.nume = nume;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
