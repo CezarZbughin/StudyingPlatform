@@ -46,12 +46,7 @@ public class LogInController {
             errorLabel.setVisible(true);
             return;
         }
-
-        if("STUDENT".equals(SuperController.activeUser.getRole())){
-            StudyingApplication.jumpToView("home-student.fxml");
-        }else if("PROFESSOR".equals(SuperController.activeUser.getRole())){
-            StudyingApplication.jumpToView("home-professor.fxml");
-        }else throw new IllegalStateException("Unexpected user role");
+        StudyingApplication.jumpToView("home.fxml");
     }
 
     @FXML

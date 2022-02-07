@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.HomeProfessorController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.HomeController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="400.0" style="-fx-background-color: #E8E8E8;">
          <children>
@@ -21,7 +21,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="57.0" prefWidth="165.0">
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="71.0" prefWidth="186.0">
                <children>
                   <MenuButton fx:id="menuButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #E8E8E8;" text="MenuButton">
                      <items>
@@ -45,7 +45,12 @@
       </HBox>
       <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="135.0" prefHeight="55.0" prefWidth="400.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onGradesButtonClick" prefHeight="26.0" prefWidth="191.0" text="Grades" />
+            <Button mnemonicParsing="false" onAction="#onGroupsButtonClick" prefHeight="26.0" prefWidth="191.0" text="Groups" />
+         </children>
+      </HBox>
+      <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="135.0" prefHeight="55.0" prefWidth="400.0">
+         <children>
+            <Button fx:id="gradesButton" mnemonicParsing="false" onAction="#onGradesButtonClick" prefHeight="26.0" prefWidth="191.0" text="Grades" />
          </children>
       </HBox>
    </children>

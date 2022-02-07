@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -29,8 +28,6 @@ import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
     @FXML
-    private Label groupName;
-    @FXML
     private VBox messageVBox;
     @FXML
     private VBox groupsVBox;
@@ -40,6 +37,8 @@ public class ChatController implements Initializable {
     private ScrollPane messageScroll;
 
     private Group selectedGroup;
+    private InboxRowController selectedInboxRow;
+
     private Timestamp lastLoadedMessageTime;
     private boolean shouldScroll = false;
 
@@ -60,12 +59,7 @@ public class ChatController implements Initializable {
 
     @FXML
     public void onBackButtonClick() {
-        Stage stage = StudyingApplication.getPrimaryStage();
-        if ("STUDENT".equals(SuperController.activeUser.getRole())) {
-            StudyingApplication.jumpToView("home-student.fxml");
-        } else if ("PROFESSOR".equals(SuperController.activeUser.getRole())) {
-            StudyingApplication.jumpToView("home-professor.fxml");
-        } else throw new IllegalStateException("Unexpected role for user");
+        StudyingApplication.jumpToView("home.fxml");
     }
 
     @FXML
@@ -87,7 +81,7 @@ public class ChatController implements Initializable {
                     SuperController.activeUser
             );
             shouldScroll = true;
-            insertMessage(messageVBox.getChildren().size(),sentMessage);
+            insertMessage(messageVBox.getChildren().size(), sentMessage);
             messageTextField.setText("");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,13 +90,22 @@ public class ChatController implements Initializable {
         }
     }
 
-    private class JoinButton extends HBox{
-        JoinButton(){
+    private class JoinButton extends HBox {
+        JoinButton() {
             Button button = new Button("join");
             button.setPrefHeight(40);
             button.setPrefWidth(80);
             button.setOnAction(actionEvent -> {
-                System.out.println("joining");
+                if (selectedGroup == null)
+                    return;
+                try {
+                    DataBaseService.userJoinGroup(SuperController.activeUser, selectedGroup);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    SuperController.popError("Couldn\'t join the group.");
+                    return;
+                }
+                StudyingApplication.jumpToView("chat.fxml",550,500);
             });
             this.setMinHeight(365);
             this.setMinWidth(330);
@@ -111,8 +114,8 @@ public class ChatController implements Initializable {
         }
     }
 
-    private class ShowMoreButton extends HBox{
-        ShowMoreButton(){
+    private class ShowMoreButton extends HBox {
+        ShowMoreButton() {
             Button button = new Button("show more");
             button.setPrefHeight(40);
             button.setPrefWidth(80);
@@ -183,7 +186,7 @@ public class ChatController implements Initializable {
     }
 
     public void messagesListInit() {
-        if(selectedGroup == null)
+        if (selectedGroup == null)
             return;
         messageVBox.getChildren().clear();
         messageVBox.getChildren().add(new ShowMoreButton());
@@ -206,7 +209,7 @@ public class ChatController implements Initializable {
         messageVBox.getChildren().add(new JoinButton());
     }
 
-    private void insertMessage(int index,Message message){
+    private void insertMessage(int index, Message message) {
         try {
             URL url = StudyingApplication.class.getResource("message.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(url);
@@ -222,13 +225,22 @@ public class ChatController implements Initializable {
             return;
         }
     }
+
     private void insertMessages(List<Message> messages) {
-        for(Message message:messages) {
-            insertMessage(1,message);
+        for (Message message : messages) {
+            insertMessage(1, message);
         }
     }
 
     public void setSelectedGroup(Group group) {
         this.selectedGroup = group;
+    }
+
+    public void setSelectedInboxRow(InboxRowController selectedInboxRow) {
+        this.selectedInboxRow = selectedInboxRow;
+    }
+
+    public InboxRowController getSelectedInboxRow() {
+        return selectedInboxRow;
     }
 }

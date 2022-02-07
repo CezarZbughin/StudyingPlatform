@@ -15,10 +15,8 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,11 +28,7 @@ public class TodayController implements Initializable {
 
     @FXML
     public void onBackButtonClick() {
-        if("STUDENT".equals(SuperController.activeUser.getRole())){
-            StudyingApplication.jumpToView("home-student.fxml");
-        }else if("PROFESSOR".equals(SuperController.activeUser.getRole())){
-            StudyingApplication.jumpToView("home-professor.fxml");
-        }else throw new IllegalStateException("Unexpected role for user");
+        StudyingApplication.jumpToView("home.fxml");
     }
 
     @Override
@@ -70,7 +64,7 @@ public class TodayController implements Initializable {
             }
         }
         for (ScheduleEntry e : schedule) {
-            if(!e.getTime().getDayOfWeek().equals(LocalDateTime.now().getDayOfWeek()))
+            if (!e.getTime().getDayOfWeek().equals(LocalDateTime.now().getDayOfWeek()))
                 continue;
             int hour = e.getTime().getHour();
             int duration = e.getTime().getDuration();
@@ -79,7 +73,7 @@ public class TodayController implements Initializable {
             for (int i = controllersIndex + 1; i < controllersIndex + duration; i++) {
                 controllers.get(i).setBlock(null);
             }
-            controllers.get(controllersIndex + duration -1).addSpacing();
+            controllers.get(controllersIndex + duration - 1).addSpacing();
         }
     }
 }

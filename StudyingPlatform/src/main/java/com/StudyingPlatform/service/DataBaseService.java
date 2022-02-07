@@ -262,14 +262,6 @@ public class DataBaseService {
         stmt.execute();
     }
 
-    public static void insertStudentGroup(Integer studentId, Integer groupId) throws SQLException {
-        String insertGroupQuery = "call insert_student_into_group(?,?)";
-        CallableStatement stmt = connection.prepareCall(insertGroupQuery);
-        stmt.setInt(1,studentId);
-        stmt.setInt(2,groupId);
-        stmt.execute();
-    }
-
     public static List<Group> getUserGroups(User user) throws SQLException, EmptyResultSetException {
         List<Group> groupList = new ArrayList<>();
         CallableStatement stmt;
@@ -300,6 +292,21 @@ public class DataBaseService {
         return GroupService.mapResultSet(resultSet);
     }
 
+    public static void userJoinGroup(User user,Group group) throws SQLException{
+        CallableStatement stmt;
+        if("STUDENT".equals(user.getRole())){
+            stmt = connection.prepareCall("call student_join_group(?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        }else if("PROFESSOR".equals(user.getRole())){
+            stmt = connection.prepareCall("call professor_join_group(?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+        }else throw new IllegalStateException("Unexpected role for user");
+        stmt.setInt(1,user.getId());
+        stmt.setInt(2,group.getId());
+        stmt.executeUpdate();
+    }
+
+
     public static List<Message> getMessages(Group group, Timestamp startTime,int limit) throws SQLException,MessageNotFoundException{
         CallableStatement stmt = connection.prepareCall("call get_messages(?,?,?)");
         stmt.setInt(1,group.getId());
@@ -312,6 +319,7 @@ public class DataBaseService {
             throw new MessageNotFoundException("get empty result set");
         }
     }
+
     public static void sendMessage(String text,Group group,Timestamp sentTime,User user)throws SQLException{
         CallableStatement stmt = connection.prepareCall("call send_messages(?,?,?,?)");
         stmt.setString(1,text);
@@ -320,4 +328,6 @@ public class DataBaseService {
         stmt.setInt(4,user.getId());
         stmt.executeUpdate();
     }
+
+
 }

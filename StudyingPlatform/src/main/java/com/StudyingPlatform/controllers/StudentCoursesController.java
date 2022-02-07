@@ -56,7 +56,7 @@ public class StudentCoursesController implements Initializable {
     private void updateList() throws IOException {
         studentsVBox.getChildren().clear();
         for (SubjectStudent subject : listedSubjects) {
-            URL url = StudyingApplication.class.getResource("student-my-courses-row.fxml");
+            URL url = StudyingApplication.class.getResource("student-my-subjects-row.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             Parent row = (Parent) fxmlLoader.load();
             StudentMyCoursesController controller = fxmlLoader.<StudentMyCoursesController>getController();
@@ -66,7 +66,7 @@ public class StudentCoursesController implements Initializable {
     }
     private void updateList1() throws IOException {
         studentsVBox1.getChildren().clear();
-            URL url = StudyingApplication.class.getResource("student-my-courses-row.fxml");
+            URL url = StudyingApplication.class.getResource("student-my-subjects-row.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             Parent row = (Parent) fxmlLoader.load();
             StudentSearchCoursesController controller = fxmlLoader.<StudentSearchCoursesController>getController();
@@ -83,17 +83,12 @@ public class StudentCoursesController implements Initializable {
             e.printStackTrace();
         } catch (SubjectNotFoundException e) {
             //show error
-            subjects=  new ArrayList<>();
+            subjects =  new ArrayList<>();
         }
         updateList1();
     }
     @FXML
     public void onBackButtonClick() throws IOException {
-        URL url;
-        Stage stage = StudyingApplication.getPrimaryStage();
-        url = StudyingApplication.class.getResource("home-student.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-        stage.setScene(scene);
+        StudyingApplication.jumpToView("home.fxml");
     }
 }

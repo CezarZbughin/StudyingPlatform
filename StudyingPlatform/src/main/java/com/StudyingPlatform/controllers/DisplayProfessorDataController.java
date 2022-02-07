@@ -24,7 +24,7 @@ public class DisplayProfessorDataController extends DisplayUserDataController{
     @FXML
     public void onBackButtonClick() throws IOException {
         Stage stage = StudyingApplication.getPrimaryStage();
-        URL url = StudyingApplication.class.getResource("home-professor.fxml");
+        URL url = StudyingApplication.class.getResource("home.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Scene scene = new Scene(fxmlLoader.load(), 400, 500);
         stage.setScene(scene);

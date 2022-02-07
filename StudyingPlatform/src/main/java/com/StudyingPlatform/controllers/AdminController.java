@@ -22,11 +22,6 @@ public class AdminController {
 
     @FXML
     public void onBackButtonClick() {
-        Stage stage = StudyingApplication.getPrimaryStage();
-        if ("STUDENT".equals(SuperController.activeUser.getRole())) {
-            StudyingApplication.jumpToView("home-student.fxml");
-        } else if ("PROFESSOR".equals(SuperController.activeUser.getRole())) {
-            StudyingApplication.jumpToView("home-professor.fxml");
-        } else throw new IllegalStateException("Unexpected role for user");
+        StudyingApplication.jumpToView("home.fxml");
     }
 }

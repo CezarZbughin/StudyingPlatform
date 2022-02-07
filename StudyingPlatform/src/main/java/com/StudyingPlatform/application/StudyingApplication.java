@@ -15,11 +15,11 @@ public class StudyingApplication extends Application {
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
         primaryStage.setTitle("Studying Platform");
-        try{
-            SuperController.activeUser = DataBaseService.getUserById(1);
-        }catch (Exception e){
-        }
-        StudyingApplication.jumpToView("chat.fxml",550,500);
+       // try{
+       //     SuperController.activeUser = DataBaseService.getUserById(1);
+       // }catch (Exception e){
+       // }
+        StudyingApplication.jumpToView("log-in-view.fxml",400,500);
         stage.show();
     }
 

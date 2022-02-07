@@ -19,12 +19,7 @@ public class StudentMyCoursesController {
     public void onQuitButtonClick() throws IOException {}
     @FXML
     public void onStudyingGroupsButtonClick() throws IOException {
-        URL url;
-        Stage stage = StudyingApplication.getPrimaryStage();
-        url = StudyingApplication.class.getResource("chat.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-        stage.setScene(scene);
+
     }
     @FXML
     public void onViewGradesButtonClick() throws IOException {
