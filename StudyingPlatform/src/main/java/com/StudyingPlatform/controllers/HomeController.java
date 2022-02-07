@@ -44,7 +44,7 @@ public class HomeController implements Initializable {
     @FXML
     public void onCoursesButtonClick(){
         if("STUDENT".equals(SuperController.activeUser.getRole())){
-            StudyingApplication.jumpToView("student-subjects.fxml");
+            StudyingApplication.jumpToView("student-subjects.fxml",550,500);
         }else if("PROFESSOR".equals(SuperController.activeUser.getRole())){
             StudyingApplication.jumpToView("professor-subjects.fxml");
         }else throw new IllegalStateException("Unexpected role for user");

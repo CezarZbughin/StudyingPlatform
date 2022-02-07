@@ -10,7 +10,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.HomeController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="400.0" style="-fx-background-color: #E8E8E8;">
+      <HBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="400.0" style="-fx-background-color: #E8E8E8;">
          <children>
             <HBox alignment="BOTTOM_LEFT">
                <children>
@@ -33,24 +33,24 @@
             </HBox>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="53.0" prefWidth="400.0">
+      <HBox alignment="BOTTOM_CENTER" prefHeight="53.0" prefWidth="400.0" style="-fx-pref-height: 60;">
          <children>
-            <Button mnemonicParsing="false" onAction="#onTodayButtonClick" prefHeight="26.0" prefWidth="191.0" text="Today" />
+            <Button mnemonicParsing="false" onAction="#onTodayButtonClick" prefHeight="26.0" prefWidth="191.0" style="-fx-pref-width: 200; -fx-pref-height: 30;" text="Today" />
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="55.0" prefWidth="400.0">
+      <HBox alignment="BOTTOM_CENTER" prefHeight="55.0" prefWidth="400.0" style="-fx-pref-height: 60;">
          <children>
-            <Button mnemonicParsing="false" onAction="#onCoursesButtonClick" prefHeight="26.0" prefWidth="191.0" text="Courses" />
+            <Button mnemonicParsing="false" onAction="#onCoursesButtonClick" prefHeight="26.0" prefWidth="191.0" style="-fx-pref-width: 200; -fx-pref-height: 30;" text="Courses" />
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="135.0" prefHeight="55.0" prefWidth="400.0">
+      <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="135.0" prefHeight="55.0" prefWidth="400.0" style="-fx-pref-height: 60;">
          <children>
-            <Button mnemonicParsing="false" onAction="#onGroupsButtonClick" prefHeight="26.0" prefWidth="191.0" text="Groups" />
+            <Button mnemonicParsing="false" onAction="#onGroupsButtonClick" prefHeight="26.0" prefWidth="191.0" style="-fx-pref-width: 200; -fx-pref-height: 30;" text="Groups" />
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="135.0" prefHeight="55.0" prefWidth="400.0">
+      <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="135.0" prefHeight="55.0" prefWidth="400.0" style="-fx-pref-height: 60;">
          <children>
-            <Button fx:id="gradesButton" mnemonicParsing="false" onAction="#onGradesButtonClick" prefHeight="26.0" prefWidth="191.0" text="Grades" />
+            <Button fx:id="gradesButton" mnemonicParsing="false" onAction="#onGradesButtonClick" prefHeight="26.0" prefWidth="191.0" style="-fx-pref-width: 200; -fx-pref-height: 30;" text="Grades" />
          </children>
       </HBox>
    </children>

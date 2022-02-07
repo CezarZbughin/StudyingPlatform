@@ -1,9 +1,6 @@
 package com.StudyingPlatform.service;
 
-import com.StudyingPlatform.model.Address;
-import com.StudyingPlatform.model.ScheduleEntry;
-import com.StudyingPlatform.model.Student;
-import com.StudyingPlatform.model.SubjectStudent;
+import com.StudyingPlatform.model.*;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
 import com.StudyingPlatform.service.Exceptions.ScheduleException;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
@@ -64,6 +61,20 @@ public class StudentService{
             return mySubjects;
         } catch (EmptyResultSetException e) {
             throw new SubjectNotFoundException();
+        }
+    }
+
+    public static List<Subject> studentGetJoinableSubjects(Student student) throws SQLException{
+        Connection connection = DataBaseService.getConnection();
+        CallableStatement stmt = connection.prepareCall("call  joinable_subjects(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1, student.getId());
+        ResultSet resultSet = stmt.executeQuery();
+        try{
+        List<Subject> mySubjects = SubjectService.mapFullResultSet(resultSet);
+        return mySubjects;
+        } catch (EmptyResultSetException e) {
+            return new ArrayList<Subject>();
         }
     }
 

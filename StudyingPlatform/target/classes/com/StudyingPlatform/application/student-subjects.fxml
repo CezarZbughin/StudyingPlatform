@@ -6,78 +6,56 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.StudentCoursesController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.StudentSubjectsController">
    <children>
-      <HBox prefHeight="99.0" prefWidth="400.0">
+      <HBox alignment="BOTTOM_LEFT" prefHeight="75.0" prefWidth="550.0" style="-fx-background-color: #E8E8E8; -fx-pref-height: 75;">
          <children>
-            <Label alignment="CENTER" prefHeight="94.0" prefWidth="400.0" text="Courses">
+            <Label text="      My Courses">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="System Bold" size="22.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <Line endX="299.29290771484375" endY="0.8929039239883423" startX="-100.0" />
-      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="400.0">
+      <HBox alignment="CENTER" prefHeight="52.0" prefWidth="550.0" style="-fx-pref-height: 50;">
          <children>
-            <Label prefHeight="48.0" prefWidth="367.0" text="My Courses">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <HBox prefHeight="118.0" prefWidth="400.0">
-         <children>
-            <ScrollPane prefHeight="355.0" prefWidth="401.0">
-               <content>
-                  <VBox fx:id="studentsVBox" prefHeight="200.0" prefWidth="100.0" />
-               </content>
-            </ScrollPane>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="400.0">
-         <children>
-            <Label prefHeight="48.0" prefWidth="367.0" text="All Courses">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="59.0" prefWidth="400.0">
-         <children>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="52.0" prefWidth="118.0">
+            <HBox alignment="CENTER" layoutX="285.0" layoutY="10.0" prefHeight="61.0" prefWidth="141.0" style="-fx-pref-width: 150;" />
+            <HBox alignment="CENTER" style="-fx-pref-width: 200;">
                <children>
-                  <TextField fx:id="courseNameField" focusTraversable="false" prefHeight="26.0" prefWidth="97.0" promptText="Course Name" />
+                  <TextField fx:id="subjectNameField" promptText="Course name" style="-fx-pref-height: 30; -fx-pref-width: 190;" />
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_CENTER">
+            <HBox alignment="CENTER" prefHeight="61.0" prefWidth="141.0" style="-fx-pref-width: 100;">
                <children>
-                  <Button focusTraversable="false" mnemonicParsing="false" onAction="#onSearchButtonClick" text="Search" />
+                  <Button mnemonicParsing="false" onAction="#onSearchButtonClick" style="-fx-pref-height: 30; -fx-pref-width: 90;" text="Search" />
                </children>
             </HBox>
          </children>
       </HBox>
-      <HBox prefHeight="118.0" prefWidth="400.0">
+      <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="210.0" prefHeight="304.0" prefWidth="550.0" style="-fx-pref-height: 340;">
          <children>
-            <ScrollPane prefHeight="114.0" prefWidth="400.0">
+            <ScrollPane prefHeight="313.0" prefWidth="437.0" style="-fx-pref-width: 440;">
                <content>
-                  <VBox fx:id="studentsVBox1" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox fx:id="subjectsVBox" alignment="TOP_CENTER" />
                </content>
             </ScrollPane>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="107.0" prefWidth="400.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="105.0" prefHeight="87.0" prefWidth="550.0" style="-fx-pref-height: 75;">
          <children>
-            <Button mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="38.0" prefWidth="70.0" text="Back">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
+            <HBox alignment="CENTER" prefHeight="61.0" prefWidth="141.0" style="-fx-pref-height: 90; -fx-pref-width: 150;">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onBackButtonClick" style="-fx-pref-height: 30; -fx-pref-width: 140;" text="Back" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="210.0" layoutY="10.0" prefHeight="61.0" prefWidth="141.0" style="-fx-pref-height: 90; -fx-pref-width: 150;">
+               <children>
+                  <Button fx:id="joinButton" mnemonicParsing="false" onAction="#onJoinButtonClick" style="-fx-pref-height: 30; -fx-pref-width: 140;" text="Join Course" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="285.0" layoutY="10.0" prefHeight="61.0" prefWidth="141.0" style="-fx-pref-height: 90; -fx-pref-width: 150;" />
          </children>
       </HBox>
    </children>
