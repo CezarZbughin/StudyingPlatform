@@ -38,7 +38,7 @@ public class InboxRowController {
     public void onMousePressed() throws SQLException {
         parentController.setSelectedGroup(group);
         if(isJoined){
-            parentController.loadMessages(group);
+            parentController.messagesListInit();
         }else{
             parentController.showJoinButton();
         }

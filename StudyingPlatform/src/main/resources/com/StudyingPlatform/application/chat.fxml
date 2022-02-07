@@ -48,7 +48,7 @@
       </VBox>
       <VBox prefHeight="501.0" prefWidth="370.0">
          <children>
-            <Label fx:id="groupName" alignment="CENTER" prefHeight="45.0" prefWidth="322.0" />
+            <Label fx:id="groupName" alignment="CENTER" prefHeight="44.0" prefWidth="322.0" />
             <HBox alignment="CENTER" prefHeight="366.0" prefWidth="370.0">
                <children>
                   <ScrollPane fx:id="messageScroll" prefHeight="366.0" prefWidth="350.0" style="-fx-background-color: #E8E8E8;">
