@@ -49,7 +49,8 @@ public class StudentSubjectsController implements Initializable {
             return;
         }
 
-        List<Subject> foundSubjects,joinableSubjects,result = new ArrayList<>();
+        List<Subject> foundSubjects,result = new ArrayList<>();
+        List<SubjectStudent> mySubjects;
         try {
             foundSubjects =
                     DataBaseService.getSubjectsByName(subjectNameField.getText());
@@ -63,27 +64,42 @@ public class StudentSubjectsController implements Initializable {
         }
 
         try {
-            joinableSubjects =
-                    StudentService.studentGetJoinableSubjects((Student)SuperController.activeUser);
-        }catch (SQLException e){
+            mySubjects =
+                    StudentService.studentGetSubjects((Student)SuperController.activeUser);
+        }catch (SQLException | SubjectNotFoundException e){
             e.printStackTrace();
             SuperController.popError("Something went wrong when searching for courses!");
             return;
         }
 
-        for(Subject foundSubject:foundSubjects){
-            boolean contains = false;
-            for(Subject joinableSubject:joinableSubjects){
-                if(joinableSubject.getId() == foundSubject.getId()){
-                    contains = true;
-                    break;
+        if(showJoinable){
+           for(Subject subject:foundSubjects){
+               boolean hasJoinedTheSubject = false;
+               for(SubjectStudent mySubject:mySubjects){
+                   if(subject.getId() == mySubject.getId()){
+                       hasJoinedTheSubject = true;
+                       break;
+                   }
+               }
+               if(!hasJoinedTheSubject){
+                   result.add(subject);
+               }
+           }
+        }else{
+            for(SubjectStudent mySubject : mySubjects){
+                boolean wasFound = false;
+                for(Subject foundSubject:foundSubjects){
+                    if(foundSubject.getId() == mySubject.getId()){
+                        wasFound = true;
+                        break;
+                    }
+                }
+                if(wasFound){
+                    result.add(mySubject);
                 }
             }
-            if(showJoinable && contains)
-                result.add(foundSubject);
-            if(!showJoinable && !contains)
-                result.add(foundSubject);
         }
+
         if(result.isEmpty()){
             if(!showJoinable){
                 SuperController.popMessage("You are not enrolled in this course.");
@@ -139,7 +155,7 @@ public class StudentSubjectsController implements Initializable {
         }
     }
 
-    private void addSubjects(List<? extends Subject> subjects, boolean isJoinable){
+    private void addSubjects(List<? extends  Subject> subjects, boolean isJoinable){
         for(Subject subject:subjects){
             try {
                 URL url = StudyingApplication.class.getResource("student-subjects-row.fxml");

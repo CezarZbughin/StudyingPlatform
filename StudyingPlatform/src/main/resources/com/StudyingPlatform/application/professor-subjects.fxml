@@ -7,33 +7,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.ProfessorSubjectsController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" style="-fx-pref-height: 500; -fx-pref-width: 550;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.ProfessorSubjectsController">
    <children>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="57.0" prefWidth="400.0">
+      <HBox alignment="BOTTOM_LEFT" prefHeight="57.0" prefWidth="400.0" style="-fx-pref-height: 75; -fx-background-color: #e8e8e8;">
          <children>
-            <Label text="My Courses">
+            <Label text="    My Courses">
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="22.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <HBox prefHeight="374.0" prefWidth="400.0">
+      <HBox alignment="CENTER" prefHeight="374.0" prefWidth="400.0" style="-fx-pref-height: 350;">
          <children>
-            <ScrollPane prefHeight="355.0" prefWidth="401.0">
+            <ScrollPane prefHeight="350.0" prefWidth="475.0">
                <content>
-                  <VBox fx:id="subjectsVBox" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox fx:id="subjectsVBox" />
                </content>
             </ScrollPane>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="51.0" prefWidth="400.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="51.0" prefWidth="400.0" style="-fx-pref-height: 75;">
          <children>
-            <Button mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="38.0" prefWidth="70.0" text="Back">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Button>
+            <Button mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="38.0" prefWidth="70.0" style="-fx-pref-height: 30; -fx-pref-width: 200;" text="Back" />
          </children>
       </HBox>
    </children>

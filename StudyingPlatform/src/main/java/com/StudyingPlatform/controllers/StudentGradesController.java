@@ -5,16 +5,12 @@ import com.StudyingPlatform.model.Subject;
 import com.StudyingPlatform.service.Exceptions.GradesNotFoundException;
 import com.StudyingPlatform.service.StudentService;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
-public class StudentGradesRowController {
-    @FXML
-    private Label courseNameLabel;
+public class StudentGradesController {
     @FXML
     private Label lectureGrade;
     @FXML
@@ -22,9 +18,18 @@ public class StudentGradesRowController {
     @FXML
     private Label labGrade;
 
-    public void set(Student student, Subject subject, Stage myStage)  {
-       courseNameLabel.setText(subject.getName());
-        int [] grades= new int[3];
+    private Stage myStage;
+
+    @FXML
+    public void onCloseButtonClick() {
+        if (myStage != null){
+            myStage.close();
+        }
+    }
+
+    public void set(Student student, Subject subject, Stage myStage) {
+        this.myStage = myStage;
+        int[] grades = null;
         try {
             grades = StudentService.studentGetGrades(student, subject);
 
@@ -33,23 +38,23 @@ public class StudentGradesRowController {
             SuperController.popError("Something went wrong");
             return;
         }
-        if(subject.getHasLecture()){
-            if(grades[0] != 0)
+        if (subject.getHasLecture()) {
+            if (grades[0] != 0)
                 lectureGrade.setText(String.valueOf(grades[0]));
             else
-                lectureGrade.setText("NECULES");
+                lectureGrade.setText("necules");
         }
-        if(subject.getHasSeminar()){
-            if(grades[1] != 0)
+        if (subject.getHasSeminar()) {
+            if (grades[1] != 0)
                 seminarGrade.setText(String.valueOf(grades[1]));
             else
-                seminarGrade.setText("NECULES");
+                seminarGrade.setText("necules");
         }
-        if(subject.getHasLecture()){
-            if(grades[2] != 0)
+        if (subject.getHasLecture()) {
+            if (grades[2] != 0)
                 labGrade.setText(String.valueOf(grades[2]));
             else
-                labGrade.setText("NECULES");
+                labGrade.setText("necules");
         }
 
     }
