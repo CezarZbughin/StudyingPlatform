@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.StudentGradesRowController">
+    <children>
+        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="242.0">
+         <children>
+            <Label fx:id="courseNameLabel" prefHeight="18.0" prefWidth="134.0" />
+         </children>
+        </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="242.0">
+         <children>
+            <Label fx:id="lectureGrade" prefHeight="18.0" prefWidth="134.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="242.0">
+         <children>
+            <Label fx:id="seminarGrade" prefHeight="18.0" prefWidth="134.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="242.0">
+         <children>
+            <Label fx:id="labGrade" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="134.0" />
+         </children>
+      </HBox>
+    </children>
+</HBox>

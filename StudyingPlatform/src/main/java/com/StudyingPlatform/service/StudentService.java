@@ -2,6 +2,7 @@ package com.StudyingPlatform.service;
 
 import com.StudyingPlatform.model.*;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
+import com.StudyingPlatform.service.Exceptions.GradesNotFoundException;
 import com.StudyingPlatform.service.Exceptions.ScheduleException;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 
@@ -109,4 +110,20 @@ public class StudentService{
         }
         return  schedule;
     }
+    public static int[] studentGetGrades (Student student, Subject subject) throws GradesNotFoundException, SQLException{
+        Connection connection = DataBaseService.getConnection();
+        CallableStatement stmt = connection.prepareCall("call  get_grades(?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1, student.getId());
+        stmt.setInt(2, subject.getId());
+        ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                int[] myGrades = new int[3];
+                myGrades[0] = resultSet.getInt("grade_lecture");
+                myGrades[1] = resultSet.getInt("grade_seminar");
+                myGrades[2] = resultSet.getInt("grade_lab");
+                return myGrades;
+            } else
+                throw new GradesNotFoundException();
+        }
 }
