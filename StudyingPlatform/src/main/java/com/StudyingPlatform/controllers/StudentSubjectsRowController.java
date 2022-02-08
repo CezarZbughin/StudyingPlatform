@@ -2,6 +2,7 @@ package com.StudyingPlatform.controllers;
 
 import com.StudyingPlatform.application.StudyingApplication;
 import com.StudyingPlatform.model.Subject;
+import com.StudyingPlatform.model.SubjectProfessor;
 import com.StudyingPlatform.model.SubjectStudent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

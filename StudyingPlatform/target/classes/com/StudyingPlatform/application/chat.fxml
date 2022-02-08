@@ -13,12 +13,16 @@
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="501.0" prefWidth="180.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="133.0" text="Inbox">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
-            </Label>
-            <HBox alignment="CENTER" prefHeight="343.0" prefWidth="180.0">
+            <HBox alignment="BOTTOM_CENTER" style="-fx-pref-height: 75; -fx-background-color: #E8E8E8;">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Inbox">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="247.0" prefWidth="180.0" style="-fx-pref-height: 345;">
                <children>
                   <ScrollPane prefHeight="343.0" prefWidth="169.0">
                      <content>
@@ -27,48 +31,40 @@
                   </ScrollPane>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="180.0">
+            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="180.0" style="-fx-pref-height: 40;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onCreateButtonClick" prefHeight="40.0" prefWidth="154.0" style="-fx-pref-height: 40;" text="Create Group">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onCreateButtonClick" prefHeight="40.0" prefWidth="154.0" style="-fx-pref-height: 30;" text="Create Group" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="180.0">
+            <HBox alignment="CENTER" prefHeight="55.0" prefWidth="180.0" style="-fx-pref-height: 40;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="40.0" prefWidth="154.0" style="-fx-pref-height: 40;" text="Back">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="0.0" prefWidth="154.0" style="-fx-pref-height: 30;" text="Back" />
                </children>
             </HBox>
          </children>
       </VBox>
       <VBox prefHeight="501.0" prefWidth="370.0">
          <children>
-            <Region prefHeight="45.0" prefWidth="370.0" />
-            <HBox alignment="CENTER" prefHeight="366.0" prefWidth="370.0">
+            <Region prefHeight="45.0" prefWidth="370.0" style="-fx-pref-height: 75; -fx-background-color: #E8E8E8;" />
+            <HBox alignment="CENTER" prefHeight="366.0" prefWidth="370.0" style="-fx-pref-height: 345;">
                <children>
                   <ScrollPane fx:id="messageScroll" prefHeight="366.0" prefWidth="350.0" style="-fx-background-color: #E8E8E8;">
                      <content>
-                        <VBox fx:id="messageVBox" style="-fx-background-color: #E8E8E8;" />
+                        <VBox fx:id="messageVBox" style="-fx-background-color: #F3F3F3;" />
                      </content>
                   </ScrollPane>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="91.0" prefWidth="370.0">
+            <HBox alignment="CENTER" prefHeight="91.0" prefWidth="370.0" style="-fx-pref-height: 80;">
                <children>
                   <HBox alignment="CENTER" prefHeight="62.0" prefWidth="289.0">
                      <children>
-                        <TextField fx:id="messageTextField" prefHeight="40.0" prefWidth="293.0" style="-fx-pref-height: 40;" />
+                        <TextField fx:id="messageTextField" prefHeight="40.0" prefWidth="293.0" style="-fx-pref-height: 30;" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="62.0" prefWidth="49.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#onSendButtonClick" prefHeight="46.0" prefWidth="45.0" style="-fx-pref-height: 40;" text="Send" />
+                        <Button mnemonicParsing="false" onAction="#onSendButtonClick" prefHeight="46.0" prefWidth="45.0" style="-fx-pref-height: 30;" text="Send" />
                      </children>
                   </HBox>
                </children>
