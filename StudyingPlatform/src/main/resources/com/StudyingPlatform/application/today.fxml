@@ -7,30 +7,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.TodayController">
    <children>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="57.0" prefWidth="400.0" style="-fx-background-color: #E8E8E8;">
+      <HBox alignment="BOTTOM_CENTER" prefHeight="57.0" prefWidth="400.0" style="-fx-background-color: #E8E8E8; -fx-pref-height: 75;">
          <children>
-            <Label text="Today">
+            <Label alignment="CENTER" text="Today">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="22.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <VBox prefHeight="394.0" prefWidth="400.0">
+      <VBox prefHeight="345.0" prefWidth="400.0" style="-fx-pref-height: 350;">
          <children>
             <ScrollPane prefHeight="399.0" prefWidth="400.0">
                <content>
-                  <VBox fx:id="vBox" prefHeight="592.0" prefWidth="378.0" />
+                  <VBox fx:id="vBox" />
                </content>
             </ScrollPane>
          </children>
       </VBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="400.0" style="-fx-background-color: #E8E8E8;">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="400.0" style="-fx-background-color: #E8E8E8; -fx-pref-height: 75;">
          <children>
-            <Button mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="32.0" prefWidth="70.0" text="Back" />
+            <Button mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="32.0" prefWidth="70.0" style="-fx-pref-height: 30; -fx-pref-width: 200;" text="Back" />
          </children>
       </HBox>
    </children>

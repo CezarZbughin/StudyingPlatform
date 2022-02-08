@@ -4,6 +4,8 @@ import com.StudyingPlatform.application.StudyingApplication;
 import com.StudyingPlatform.model.Student;
 import com.StudyingPlatform.model.Subject;
 import com.StudyingPlatform.model.SubjectStudent;
+import com.StudyingPlatform.model.User;
+import com.StudyingPlatform.service.DataBaseService;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 import com.StudyingPlatform.service.StudentService;
 import javafx.fxml.FXML;
@@ -38,7 +40,60 @@ public class StudentSubjectsController implements Initializable {
 
     @FXML
     public void onSearchButtonClick() {
+        if(subjectNameField.getText().equals("")){
+            if(showJoinable){
+                showJoinableCourses();
+            }else{
+                showPersonalCourses();
+            }
+            return;
+        }
 
+        List<Subject> foundSubjects,joinableSubjects,result = new ArrayList<>();
+        try {
+            foundSubjects =
+                    DataBaseService.getSubjectsByName(subjectNameField.getText());
+        }catch (SQLException e) {
+            e.printStackTrace();
+            SuperController.popError("Something went wrong when trying to search for course.");
+            return;
+        }catch (SubjectNotFoundException e) {
+            SuperController.popMessage("There is no Course with this name.");
+            return;
+        }
+
+        try {
+            joinableSubjects =
+                    StudentService.studentGetJoinableSubjects((Student)SuperController.activeUser);
+        }catch (SQLException e){
+            e.printStackTrace();
+            SuperController.popError("Something went wrong when searching for courses!");
+            return;
+        }
+
+        for(Subject foundSubject:foundSubjects){
+            boolean contains = false;
+            for(Subject joinableSubject:joinableSubjects){
+                if(joinableSubject.getId() == foundSubject.getId()){
+                    contains = true;
+                    break;
+                }
+            }
+            if(showJoinable && contains)
+                result.add(foundSubject);
+            if(!showJoinable && !contains)
+                result.add(foundSubject);
+        }
+        if(result.isEmpty()){
+            if(!showJoinable){
+                SuperController.popMessage("You are not enrolled in this course.");
+            }else{
+                SuperController.popMessage("You are already enrolled in this course.");
+            }
+            return;
+        }
+        subjectsVBox.getChildren().clear();
+        addSubjects(result,showJoinable);
     }
 
     @FXML
