@@ -328,6 +328,4 @@ public class DataBaseService {
         stmt.setInt(4,user.getId());
         stmt.executeUpdate();
     }
-
-
 }
