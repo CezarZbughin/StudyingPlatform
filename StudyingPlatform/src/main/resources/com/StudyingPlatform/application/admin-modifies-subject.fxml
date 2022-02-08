@@ -7,70 +7,68 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.AdminModifiesSubjectController">
    <children>
-      <HBox>
+      <HBox alignment="BOTTOM_CENTER" style="-fx-pref-height: 75; -fx-background-color: #e8e8e8;">
          <children>
-            <Label alignment="CENTER" prefHeight="58.0" prefWidth="400.0" text="Subject Data">
+            <Label alignment="CENTER" prefHeight="32.0" prefWidth="143.0" text="Subject Data">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="System Bold" size="22.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0">
+      <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0" style="-fx-pref-height: 50;">
          <children>
-            <HBox alignment="CENTER" style="-fx-pref-width: 120;">
+            <HBox alignment="CENTER" style="-fx-pref-width: 100;">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="135.0" text="Name: " />
+                  <Label alignment="CENTER_RIGHT" text="Name: " />
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="287.0" style="-fx-pref-width: 230;">
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="287.0" style="-fx-pref-width: 220;">
                <children>
                   <TextField fx:id="nameField" disable="true" prefHeight="25.0" prefWidth="191.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-pref-width: 120;">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-pref-width: 100;">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditNameFieldClick" prefHeight="26.0" prefWidth="75.0" text="Edit" />
+                  <Button fx:id="nameEditButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditNameFieldClick" prefHeight="26.0" prefWidth="75.0" style="-fx-pref-height: 25; -fx-pref-width: 60;" text="Edit" />
                </children>
             </HBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0">
+      <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0" style="-fx-pref-height: 75;">
          <children>
-            <HBox alignment="CENTER" style="-fx-pref-width: 120;">
+            <HBox alignment="CENTER" style="-fx-pref-width: 100;">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="167.0" text="Description: " />
+                  <Label alignment="CENTER_RIGHT" text="Description: " />
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="225.0" style="-fx-pref-width: 230;">
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="225.0" style="-fx-pref-width: 220;">
                <children>
                   <TextArea fx:id="descriptionText" disable="true" prefHeight="57.0" prefWidth="191.0" wrapText="true" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-pref-width: 120;">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-pref-width: 100;">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditDescriptionTextClick" prefHeight="26.0" prefWidth="75.0" text="Edit" />
+                  <Button fx:id="descriptionEditButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditDescriptionTextClick" prefHeight="26.0" prefWidth="75.0" style="-fx-pref-height: 25; -fx-pref-width: 60;" text="Edit" />
                </children>
             </HBox>
          </children>
       </HBox>
-      <Region prefHeight="22.0" prefWidth="400.0" />
-      <HBox alignment="CENTER" prefHeight="98.0" prefWidth="400.0">
+      <HBox alignment="CENTER" prefHeight="98.0" prefWidth="400.0" style="-fx-pref-height: 125;">
          <children>
-            <HBox alignment="TOP_CENTER">
+            <HBox alignment="CENTER" prefHeight="125.0" prefWidth="75.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="174.0" text="Activities:     " />
+                  <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="80.0" prefWidth="57.0" text="Activities:  " />
                </children>
             </HBox>
-            <HBox prefHeight="98.0" prefWidth="194.0">
+            <HBox>
                <children>
-                  <VBox alignment="BASELINE_LEFT" prefHeight="90.0" prefWidth="85.0">
+                  <VBox alignment="CENTER_LEFT" prefHeight="125.0" prefWidth="120.0">
                      <children>
                         <CheckBox fx:id="lectureCheckBox" disable="true" mnemonicParsing="false" prefHeight="11.0" prefWidth="79.0" text="Lecture">
                            <font>
@@ -93,16 +91,16 @@
             </HBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="73.0" prefWidth="400.0">
+      <HBox alignment="CENTER" prefHeight="117.0" prefWidth="400.0" style="-fx-pref-height: 100;">
          <children>
-            <HBox alignment="TOP_CENTER" prefHeight="74.0" prefWidth="158.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="75.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="134.0" text="Period:     " />
+                  <Label alignment="TOP_CENTER" prefHeight="67.0" prefWidth="53.0" text="Period: " />
                </children>
             </HBox>
-            <HBox prefHeight="74.0" prefWidth="167.0">
+            <HBox>
                <children>
-                  <VBox prefHeight="74.0" prefWidth="182.0">
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="125.0" style="-fx-pref-width: 120;">
                            <children>
@@ -120,24 +118,16 @@
             </HBox>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="82.0" prefWidth="400.0">
+      <HBox alignment="CENTER" prefHeight="82.0" prefWidth="400.0" style="-fx-pref-height: 75;">
          <children>
-            <HBox alignment="BOTTOM_LEFT" style="-fx-pref-width: 155;">
+            <HBox alignment="CENTER" style="-fx-pref-width: 155;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onBackButtonClick" style="-fx-pref-width: 140;" text="Back">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onBackButtonClick" style="-fx-pref-width: 120; -fx-pref-height: 30;" text="Back" />
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="28.0" prefWidth="119.0" style="-fx-pref-width: 155;">
+            <HBox alignment="CENTER" prefHeight="28.0" prefWidth="119.0" style="-fx-pref-width: 155;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onSaveChangesButtonClick" style="-fx-pref-width: 140;" text="Save Changes">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
+                  <Button fx:id="saveChangesButton" mnemonicParsing="false" onAction="#onSaveChangesButtonClick" style="-fx-pref-width: 120; -fx-pref-height: 30;" text="Save Changes" />
                </children>
             </HBox>
          </children>

@@ -12,16 +12,16 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.AddSubjectController">
    <children>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="63.0" prefWidth="400.0">
+      <HBox alignment="BOTTOM_CENTER" prefHeight="63.0" prefWidth="400.0" style="-fx-pref-height: 75; -fx-background-color: #e8e8e8;">
          <children>
             <Label text="Add a new course">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="System Bold" size="22.0" />
                </font>
             </Label>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="47.0" prefWidth="400.0">
+      <HBox alignment="CENTER" prefHeight="47.0" prefWidth="400.0">
          <children>
             <TextField fx:id="nameField" prefHeight="29.0" prefWidth="245.0" promptText="Name / title">
                <font>
@@ -30,9 +30,9 @@
             </TextField>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="60.0" prefHeight="89.0" prefWidth="400.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="89.0" prefWidth="400.0">
          <children>
-            <VBox alignment="BOTTOM_CENTER" prefHeight="89.0" prefWidth="247.0">
+            <VBox alignment="CENTER" prefHeight="89.0" prefWidth="247.0">
                <children>
                   <TextArea fx:id="descriptionText" prefHeight="72.0" prefWidth="201.0" promptText="Description" wrapText="true">
                      <font>
@@ -43,7 +43,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="44.0" prefWidth="400.0">
+      <HBox alignment="CENTER" prefHeight="44.0" prefWidth="400.0">
          <children>
             <Label text="Choose activities">
                <font>
@@ -52,9 +52,9 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="85.0" prefWidth="400.0">
+      <HBox alignment="CENTER" prefHeight="85.0" prefWidth="400.0">
          <children>
-            <VBox alignment="BASELINE_LEFT" prefHeight="117.0" prefWidth="79.0">
+            <VBox alignment="CENTER" prefHeight="117.0" prefWidth="79.0">
                <children>
                   <CheckBox fx:id="lectureCheckBox" mnemonicParsing="false" prefHeight="11.0" prefWidth="79.0" text="Lecture">
                      <font>
@@ -75,7 +75,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="183.0" prefHeight="39.0" prefWidth="400.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="183.0" prefHeight="39.0" prefWidth="400.0">
          <children>
             <Label prefHeight="16.0" prefWidth="103.0" text="Choose period">
                <font>
@@ -84,21 +84,21 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="36.0" prefWidth="400.0">
+      <HBox alignment="CENTER" prefHeight="36.0" prefWidth="400.0">
          <children>
-            <HBox alignment="BOTTOM_LEFT" prefHeight="39.0" prefWidth="125.0" style="-fx-pref-width: 120;">
+            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="125.0" style="-fx-pref-width: 130;">
                <children>
                   <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="99.0" promptText="Start date" style="-fx-pref-width: 110; -fx-pref-height: 30;" />
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="39.0" prefWidth="145.0" style="-fx-pref-width: 120;">
+            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="145.0" style="-fx-pref-width: 130;">
                <children>
                   <DatePicker fx:id="finishDatePicker" prefHeight="25.0" prefWidth="116.0" promptText="Finish date" style="-fx-pref-width: 110; -fx-pref-height: 30;" />
                </children>
             </HBox>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="339.0" prefHeight="34.0" prefWidth="400.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="339.0" prefHeight="31.0" prefWidth="400.0">
          <children>
             <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="256.0" text="We are sorry! Something went wrong." textFill="RED" visible="false">
                <font>
@@ -107,24 +107,16 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="323.0" prefHeight="38.0" prefWidth="400.0">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="323.0" prefHeight="38.0" prefWidth="400.0" style="-fx-pref-height: 75;">
          <children>
-            <HBox alignment="BOTTOM_LEFT" prefHeight="39.0" prefWidth="125.0" style="-fx-pref-width: 110;">
+            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="125.0" style="-fx-pref-width: 155;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onCancelButtonClick" style="-fx-pref-width: 100; -fx-pref-height: 30;" text="cancel">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onCancelButtonClick" style="-fx-pref-width: 120; -fx-pref-height: 30;" text="cancel" />
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="39.0" prefWidth="145.0" style="-fx-pref-width: 110;">
+            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="145.0" style="-fx-pref-width: 155;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onAddCourseButtonClick" style="-fx-pref-width: 100; -fx-pref-height: 30;" text="add course">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onAddCourseButtonClick" style="-fx-pref-width: 120; -fx-pref-height: 30;" text="add course" />
                </children>
             </HBox>
          </children>

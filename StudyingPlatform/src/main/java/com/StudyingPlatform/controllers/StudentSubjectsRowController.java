@@ -66,7 +66,7 @@ public class StudentSubjectsRowController {
     public void onSecondButtonClick() throws IOException{
         if (isJoinable) {
             //view
-
+            jumpToViewSubject();
         } else {
             //grades
             if (popUpGrades != null){
@@ -90,13 +90,20 @@ public class StudentSubjectsRowController {
     }
 
     @FXML
-    public void onViewButtonClick() {
-
+    public void onViewButtonClick() throws IOException {
+        jumpToViewSubject();
     }
 
     @FXML
     public void onQuitButtonClick() {
-
+        try {
+            StudentService.studentQuitSubject((Student) SuperController.activeUser, subject);
+        }catch (SQLException e){
+            e.printStackTrace();
+            SuperController.popError("Something went wrong, couldn\nt quit subject.");
+            return;
+        }
+        StudyingApplication.jumpToView("student-subjects.fxml",550,500);
     }
 
     public void set(Subject subject, boolean isJoinable) {
@@ -115,5 +122,15 @@ public class StudentSubjectsRowController {
                 firstButton.setDisable(true);
             }
         }
+    }
+
+    private void jumpToViewSubject() throws IOException{
+        URL url = StudyingApplication.class.getResource("admin-modifies-subject.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Parent root = (Parent)fxmlLoader.load();
+        AdminModifiesSubjectController controller = fxmlLoader.<AdminModifiesSubjectController>getController();
+        controller.setSubject(subject,false);
+        Stage stage = StudyingApplication.getPrimaryStage();
+        stage.setScene(new Scene(root, 400, 500));
     }
 }

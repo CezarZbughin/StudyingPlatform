@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 
 public class ProfessorSubjectsRowController {
     @FXML
@@ -25,9 +26,16 @@ public class ProfessorSubjectsRowController {
     private SubjectProfessor displayedSubject;
 
     @FXML
-    public void onViewButtonClick(){
-
+    public void onViewButtonClick() throws IOException {
+        URL url = StudyingApplication.class.getResource("admin-modifies-subject.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Parent root = (Parent)fxmlLoader.load();
+        AdminModifiesSubjectController controller = fxmlLoader.<AdminModifiesSubjectController>getController();
+        controller.setSubject(displayedSubject,false);
+        Stage stage = StudyingApplication.getPrimaryStage();
+        stage.setScene(new Scene(root, 550, 500));
     }
+
     @FXML
     public void onWeightsButtonClick() throws IOException {
         Stage stage = new Stage();

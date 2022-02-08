@@ -29,7 +29,7 @@ public class AddGradesController implements Initializable {
 
     @FXML
     public void onBackButtonClick() throws IOException {
-        StudyingApplication.jumpToView("catalog.fxml");
+        StudyingApplication.jumpToView("professor-grades.fxml");
     }
     @FXML
     public void onDownloadButtonClick() throws IOException {

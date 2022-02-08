@@ -165,4 +165,12 @@ public class StudentService {
         stmt.setInt(2, subject.getId());
         stmt.executeUpdate();
     }
+    public static void studentQuitSubject(Student student, Subject subject) throws SQLException{
+        Connection connection = DataBaseService.getConnection();
+        CallableStatement stmt = connection.prepareCall("call student_quit_subject(?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1, student.getId());
+        stmt.setInt(2, subject.getId());
+        stmt.executeUpdate();
+    }
 }

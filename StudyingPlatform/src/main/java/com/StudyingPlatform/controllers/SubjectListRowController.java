@@ -27,7 +27,7 @@ public class SubjectListRowController {
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             Parent root = (Parent)fxmlLoader.load();
             AdminModifiesSubjectController controller = fxmlLoader.<AdminModifiesSubjectController>getController();
-            controller.setSubject(listedSubject);
+            controller.setSubject(listedSubject,true);
             Stage stage = StudyingApplication.getPrimaryStage();
             stage.setScene(new Scene(root, 400, 500));
     }

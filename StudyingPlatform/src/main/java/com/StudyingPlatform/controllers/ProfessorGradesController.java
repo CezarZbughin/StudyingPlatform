@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CatalogController implements Initializable {
+public class ProfessorGradesController implements Initializable {
     @FXML
     VBox subjectsVBox;
 
@@ -46,10 +46,10 @@ public class CatalogController implements Initializable {
     private void updateList() throws IOException {
         subjectsVBox.getChildren().clear();
         for (SubjectProfessor subject : listedSubjects) {
-            URL url = StudyingApplication.class.getResource("catalog-row.fxml");
+            URL url = StudyingApplication.class.getResource("professor-grades-row.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             Parent row = (Parent) fxmlLoader.load();
-            CatalogRowController controller = fxmlLoader.<CatalogRowController>getController();
+            ProfessorGradesRowController controller = fxmlLoader.<ProfessorGradesRowController>getController();
             controller.setSubject(subject);
             subjectsVBox.getChildren().add(row);
         }

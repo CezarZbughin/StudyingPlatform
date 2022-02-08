@@ -11,10 +11,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-public class CatalogRowController {
+public class ProfessorGradesRowController {
     @FXML
     private Label nameLabel;
-    Subject listedSubject;
+    private Subject listedSubject;
 
     @FXML
     public void onAddGradesButtonClick() throws IOException {
