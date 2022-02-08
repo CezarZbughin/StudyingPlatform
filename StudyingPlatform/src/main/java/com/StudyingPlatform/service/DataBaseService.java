@@ -12,7 +12,7 @@ public class DataBaseService {
     //CONNECTION
     //
     public final static String DB_USERNAME = "root";
-    public final static String DB_PASSWORD = "root";
+    public final static String DB_PASSWORD = "alabala";
     public final static String DB_NAME = "StudyingPlatform";
     public final static String DB_CONNECTION_LINK = "jdbc:mysql://localhost:3306/";
 
@@ -240,6 +240,13 @@ public class DataBaseService {
         stmt.setDate(8, subject.getDateEnd());
         stmt.execute();
     }
+    public static void studentLeaveSubject(Integer studentId,Integer subjectId) throws SQLException {
+        CallableStatement stmt = connection.prepareCall("call student_quit_subject(?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1,studentId);
+        stmt.setInt(2,subjectId);
+        stmt.executeQuery();
+    }
     //
     // GROUPS
     //
@@ -328,6 +335,41 @@ public class DataBaseService {
         stmt.setInt(4,user.getId());
         stmt.executeUpdate();
     }
+    public static List<String> getStudentMembersGroup(Integer id) throws SQLException, UserNotFoundException, EmptyResultSetException {
+        CallableStatement stmt = connection.prepareCall("call get_members_by_group_id(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1,id);
+        ResultSet resultSet = stmt.executeQuery();
+        List<String> studentMembers = new ArrayList<>();
+        while (resultSet.next()) {
+            studentMembers.add(resultSet.getString("First_name")+" "+resultSet.getString("Last_name"));
+        }
+        return studentMembers;
+    }
+    public static List<String> getProfessorMembersGroup(Integer id) throws SQLException, UserNotFoundException, EmptyResultSetException {
+        CallableStatement stmt = connection.prepareCall("call get_members_by_group_id_2(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1,id);
+        ResultSet resultSet = stmt.executeQuery();
+        List<String> professorMembers = new ArrayList<>();
+        while (resultSet.next()) {
+            professorMembers.add(resultSet.getString("First_name")+" "+resultSet.getString("Last_name"));
 
-
+        }
+        return professorMembers;
+    }
+    public static void studentLeaveGroup(Integer studentId,Integer groupId) throws SQLException {
+        CallableStatement stmt = connection.prepareCall("call student_quit_group(?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1,studentId);
+        stmt.setInt(2,groupId);
+        stmt.executeQuery();
+    }
+    public static void professorLeaveGroup(Integer professorId,Integer groupId) throws SQLException {
+        CallableStatement stmt = connection.prepareCall("call student_quit_group(?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1,professorId);
+        stmt.setInt(2,groupId);
+        stmt.executeQuery();
+    }
 }
