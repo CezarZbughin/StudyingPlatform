@@ -32,7 +32,7 @@ public class AddGradesController implements Initializable {
 
     }
 
-    private void updateList() throws IOException, GradesNotFoundException, SQLException, SubjectNotFoundException {
+    private void updateList(){
     }
 
     @FXML
