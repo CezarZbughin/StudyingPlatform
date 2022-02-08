@@ -3,6 +3,7 @@ package com.StudyingPlatform.service;
 import com.StudyingPlatform.model.Address;
 import com.StudyingPlatform.model.Group;
 import com.StudyingPlatform.model.Student;
+import com.StudyingPlatform.model.User;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
 
 import java.sql.ResultSet;
@@ -23,4 +24,5 @@ public class GroupService {
         }
         return groups;
     }
+
 }
