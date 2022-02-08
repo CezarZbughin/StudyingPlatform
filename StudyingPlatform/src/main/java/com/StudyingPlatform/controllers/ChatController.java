@@ -3,17 +3,17 @@ package com.StudyingPlatform.controllers;
 import com.StudyingPlatform.application.StudyingApplication;
 import com.StudyingPlatform.model.Group;
 import com.StudyingPlatform.model.Message;
+import com.StudyingPlatform.model.User;
 import com.StudyingPlatform.service.DataBaseService;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
 import com.StudyingPlatform.service.Exceptions.MessageNotFoundException;
+import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -35,6 +35,13 @@ public class ChatController implements Initializable {
     private TextField messageTextField;
     @FXML
     private ScrollPane messageScroll;
+    @FXML
+    private Label groupNameLabel;
+    @FXML
+    private MenuItem viewMembers;
+    @FXML
+    private MenuItem leaveGroup;
+
 
     private Group selectedGroup;
     private InboxRowController selectedInboxRow;
@@ -92,6 +99,7 @@ public class ChatController implements Initializable {
 
     private class JoinButton extends HBox {
         JoinButton() {
+            groupNameLabel.setText(selectedGroup.getName());
             Button button = new Button("join");
             button.setPrefHeight(40);
             button.setPrefWidth(80);
@@ -188,6 +196,7 @@ public class ChatController implements Initializable {
     public void messagesListInit() {
         if (selectedGroup == null)
             return;
+
         messageVBox.getChildren().clear();
         messageVBox.getChildren().add(new ShowMoreButton());
         try {
@@ -196,6 +205,7 @@ public class ChatController implements Initializable {
                     new Timestamp(System.currentTimeMillis() + 10),
                     10
             );
+            groupNameLabel.setText(selectedGroup.getName());
             lastLoadedMessageTime = messages.get(messages.size() - 1).getTimeSent();
             insertMessages(messages);
             messageScroll.setVvalue(1.0);
@@ -208,6 +218,35 @@ public class ChatController implements Initializable {
         messageVBox.getChildren().clear();
         messageVBox.getChildren().add(new JoinButton());
     }
+
+    public void onViewMembersClick() throws UserNotFoundException, SQLException, EmptyResultSetException {
+        messageVBox.getChildren().clear();
+        messageVBox.getChildren().add(new Label("Members:"));
+        List<String> members = DataBaseService.getStudentMembersGroup(selectedGroup.getId());
+
+        for (String m : members) {
+            System.out.println(m);
+            messageVBox.getChildren().add(new Label(m));
+        }
+        List<String> professorMembers = DataBaseService.getProfessorMembersGroup(selectedGroup.getId());
+
+        for (String m : professorMembers) {
+            System.out.println(m);
+            messageVBox.getChildren().add(new Label(m));
+        }
+    }
+    public void onLeaveGroupClick() throws SQLException {
+        if(SuperController.activeUser.getRole().equals("STUDENT"))
+        DataBaseService.studentLeaveGroup(SuperController.activeUser.getId(),selectedGroup.getId());
+        else{
+            DataBaseService.professorLeaveGroup(SuperController.activeUser.getId(),selectedGroup.getId());
+        }
+
+
+    }
+    public void onAddActivityClick(){}
+
+
 
     private void insertMessage(int index, Message message) {
         try {

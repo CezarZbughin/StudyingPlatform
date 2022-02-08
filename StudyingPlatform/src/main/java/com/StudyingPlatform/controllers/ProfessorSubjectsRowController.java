@@ -4,6 +4,8 @@ import com.StudyingPlatform.application.StudyingApplication;
 import com.StudyingPlatform.model.Subject;
 import com.StudyingPlatform.model.SubjectProfessor;
 import com.StudyingPlatform.model.User;
+import com.StudyingPlatform.service.DataBaseService;
+import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 
 public class ProfessorSubjectsRowController {
     @FXML
@@ -62,6 +65,7 @@ public class ProfessorSubjectsRowController {
             scheduleButton.setDisable(true);
         }
     }
+
 
     public void disableScheduleButton(){
         scheduleButton.setDisable(true);

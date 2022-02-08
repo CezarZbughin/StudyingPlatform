@@ -4,6 +4,7 @@ import com.StudyingPlatform.application.StudyingApplication;
 import com.StudyingPlatform.model.Student;
 import com.StudyingPlatform.model.Subject;
 import com.StudyingPlatform.model.SubjectStudent;
+import com.StudyingPlatform.service.DataBaseService;
 import com.StudyingPlatform.service.StudentService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -95,8 +96,8 @@ public class StudentSubjectsRowController {
     }
 
     @FXML
-    public void onQuitButtonClick() {
-
+    public void onQuitButtonClick() throws SQLException {
+        DataBaseService.studentLeaveSubject(SuperController.activeUser.getId(),subject.getId());
     }
 
     public void set(Subject subject, boolean isJoinable) {

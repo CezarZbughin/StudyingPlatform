@@ -10,12 +10,12 @@
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="204.0">
          <children>
-            <Label fx:id="nameLabel" prefHeight="20.0" prefWidth="128.0" text="studentName" />
+            <Label fx:id="nameLabel" prefHeight="20.0" prefWidth="128.0" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="56.0" prefWidth="125.0" style="-fx-pref-width: 190;">
          <children>
-            <TextField fx:id="firstNameField2" disable="true" prefHeight="30.0" prefWidth="30.0">
+            <TextField fx:id="lectureGrade" disable="true" prefHeight="30.0" prefWidth="30.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -24,7 +24,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="56.0" prefWidth="125.0" style="-fx-pref-width: 190;">
          <children>
-            <TextField fx:id="firstNameField" disable="true" prefHeight="30.0" prefWidth="30.0">
+            <TextField fx:id="seminarGrade" disable="true" prefHeight="30.0" prefWidth="30.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -33,7 +33,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="56.0" prefWidth="125.0" style="-fx-pref-width: 190;">
          <children>
-            <TextField fx:id="firstNameField1" disable="true" prefHeight="30.0" prefWidth="30.0">
+            <TextField fx:id="laboratourGrade" disable="true" prefHeight="30.0" prefWidth="30.0">
                <font>
                   <Font size="14.0" />
                </font>

@@ -104,4 +104,18 @@ public class ProfessorService {
         }
         return  schedule;
     }
+    public static List<SubjectStudent> professorGetStudentsBySubject(Professor professor,Subject subject) throws SQLException, SubjectNotFoundException {
+        Connection connection = DataBaseService.getConnection();
+        CallableStatement stmt = connection.prepareCall("call  professor_get_students_by_subjects(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1, professor.getId());
+        stmt.setInt(2,subject.getId());
+        ResultSet resultSet = stmt.executeQuery();
+        try {
+            List<SubjectStudent> mySubjects = SubjectStudentService.mapFullResultSet(resultSet);
+            return mySubjects;
+        } catch (EmptyResultSetException e) {
+            throw new SubjectNotFoundException();
+        }
+    }
 }
