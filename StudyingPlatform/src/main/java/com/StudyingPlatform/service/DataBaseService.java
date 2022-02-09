@@ -12,7 +12,7 @@ public class DataBaseService {
     //CONNECTION
     //
     public final static String DB_USERNAME = "root";
-    public final static String DB_PASSWORD = "alabala";
+    public final static String DB_PASSWORD = "root";
     public final static String DB_NAME = "StudyingPlatform";
     public final static String DB_CONNECTION_LINK = "jdbc:mysql://localhost:3306/";
 
@@ -99,7 +99,7 @@ public class DataBaseService {
         return usersByIdList(idList);
     }
 
-    private static List<User> usersByIdList(List<Integer> idList) throws UserNotFoundException{
+    public static List<User> usersByIdList(List<Integer> idList) throws UserNotFoundException{
         List<User> users = new ArrayList<>();
         for(int id:idList) {
             try {
@@ -346,6 +346,7 @@ public class DataBaseService {
         }
         return studentMembers;
     }
+
     public static List<String> getProfessorMembersGroup(Integer id) throws SQLException, UserNotFoundException, EmptyResultSetException {
         CallableStatement stmt = connection.prepareCall("call get_members_by_group_id_2(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY);
@@ -358,6 +359,7 @@ public class DataBaseService {
         }
         return professorMembers;
     }
+
     public static void studentLeaveGroup(Integer studentId,Integer groupId) throws SQLException {
         CallableStatement stmt = connection.prepareCall("call student_quit_group(?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY);
@@ -365,7 +367,7 @@ public class DataBaseService {
         stmt.setInt(2,groupId);
         stmt.executeQuery();
     }
-    
+
     public static void professorLeaveGroup(Integer professorId,Integer groupId) throws SQLException {
         CallableStatement stmt = connection.prepareCall("call student_quit_group(?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY);

@@ -2,14 +2,18 @@ package com.StudyingPlatform.controllers;
 
 import com.StudyingPlatform.application.StudyingApplication;
 import com.StudyingPlatform.model.Professor;
+import com.StudyingPlatform.model.Student;
 import com.StudyingPlatform.model.SubjectProfessor;
+import com.StudyingPlatform.model.SubjectStudent;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 import com.StudyingPlatform.service.ProfessorService;
+import com.StudyingPlatform.service.StudentService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -22,15 +26,23 @@ import java.util.ResourceBundle;
 
 public class ProfessorGradesController implements Initializable {
     @FXML
-    VBox subjectsVBox;
+    private VBox subjectsVBox;
+    @FXML
+    private VBox studentsVBox;
+    @FXML
+    private TextField selectedSubjectField;
 
+    private List<Student> students;
     private List<SubjectProfessor> listedSubjects;
+    private SubjectProfessor selectedSubject;
+    private ProfessorGradesSubjectRowController selectedController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             listedSubjects = ProfessorService.professorGetSubjects((Professor) SuperController.activeUser);
         } catch (SQLException e) {
+            e.printStackTrace();
             listedSubjects = new ArrayList<>();
         } catch (SubjectNotFoundException e) {
             listedSubjects = new ArrayList<>();
@@ -46,23 +58,78 @@ public class ProfessorGradesController implements Initializable {
     private void updateList() throws IOException {
         subjectsVBox.getChildren().clear();
         for (SubjectProfessor subject : listedSubjects) {
-            URL url = StudyingApplication.class.getResource("professor-grades-row.fxml");
+            URL url = StudyingApplication.class.getResource("professor-grades-subject-row.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             Parent row = (Parent) fxmlLoader.load();
-            ProfessorGradesRowController controller = fxmlLoader.<ProfessorGradesRowController>getController();
-            controller.setSubject(subject);
+            ProfessorGradesSubjectRowController controller = fxmlLoader.<ProfessorGradesSubjectRowController>getController();
+            controller.setSubject(subject,this);
             subjectsVBox.getChildren().add(row);
         }
     }
 
     @FXML
     public void onBackButtonClick() throws IOException {
-        URL url;
-        Stage stage = StudyingApplication.getPrimaryStage();
-        url = StudyingApplication.class.getResource("home.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-        stage.setScene(scene);
+        StudyingApplication.jumpToView("home.fxml");
+    }
+    @FXML
+    public void onSaveButtonClick(){
 
+    }
+
+    public void setSelectedSubject(SubjectProfessor selectedSubject) {
+        this.selectedSubject = selectedSubject;
+        selectedSubjectField.setText(selectedSubject.getName());
+        //load new students
+        try{
+            students =
+                    ProfessorService.professorGetStudentsBySubject((Professor) SuperController.activeUser,selectedSubject);
+        }catch (SQLException e){
+            e.printStackTrace();
+            SuperController.popError("Something went wrong when loading students.");
+            students = new ArrayList<>();
+        }
+        try {
+            updateStudentList();
+        }catch (IOException e){
+            return;
+        }
+    }
+
+    private void updateStudentList() throws IOException{
+        studentsVBox.getChildren().clear();
+        for(Student student:students){
+            List<SubjectStudent> mySubjects;
+            try {
+                mySubjects = StudentService.studentGetSubjects(student);
+            } catch (SQLException e){
+                e.printStackTrace();
+                continue;
+            } catch (SubjectNotFoundException e){
+                mySubjects = new ArrayList<>();
+            }
+            SubjectStudent studentSpecificSubject = null;
+            for(SubjectStudent mySubject: mySubjects){
+                if(mySubject.getId() == selectedSubject.getId()){
+                    studentSpecificSubject = mySubject;
+                    break;
+                }
+            }
+            if(studentSpecificSubject == null)
+                return;
+            URL url = StudyingApplication.class.getResource("professor-grades-student-row.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(url);
+            Parent row = (Parent) fxmlLoader.load();
+            ProfessorGradesStudentRowController controller = fxmlLoader.<ProfessorGradesStudentRowController>getController();
+            controller.setStudent(student,studentSpecificSubject);
+            studentsVBox.getChildren().add(row);
+
+        }
+    }
+    public void setSelectedController(ProfessorGradesSubjectRowController selectedController) {
+        this.selectedController = selectedController;
+    }
+
+    public ProfessorGradesSubjectRowController getSelectedController() {
+        return selectedController;
     }
 }

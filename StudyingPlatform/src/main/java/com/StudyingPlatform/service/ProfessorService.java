@@ -4,6 +4,7 @@ import com.StudyingPlatform.model.*;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
 import com.StudyingPlatform.service.Exceptions.ScheduleException;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
+import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -104,18 +105,27 @@ public class ProfessorService {
         }
         return  schedule;
     }
-    public static List<SubjectStudent> professorGetStudentsBySubject(Professor professor,Subject subject) throws SQLException, SubjectNotFoundException {
+    public static List<Student> professorGetStudentsBySubject(Professor professor,Subject subject) throws SQLException{
         Connection connection = DataBaseService.getConnection();
-        CallableStatement stmt = connection.prepareCall("call  professor_get_students_by_subjects(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+        CallableStatement stmt = connection.prepareCall("call  professor_get_students_id_by_subject (?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY);
         stmt.setInt(1, professor.getId());
         stmt.setInt(2,subject.getId());
         ResultSet resultSet = stmt.executeQuery();
-        try {
-            List<SubjectStudent> mySubjects = SubjectStudentService.mapFullResultSet(resultSet);
-            return mySubjects;
-        } catch (EmptyResultSetException e) {
-            throw new SubjectNotFoundException();
+        List<Integer> ids = new ArrayList<>();
+        while(resultSet.next()){
+            ids.add(resultSet.getInt("student_id"));
         }
+        List<User> userList;
+        try {
+            userList = DataBaseService.usersByIdList(ids);
+        }catch (UserNotFoundException e){
+            return new ArrayList<>();
+        }
+        List<Student> students = new ArrayList<Student>();
+        for(User user: userList){
+            students.add((Student) user);
+        }
+        return students;
     }
 }

@@ -12,7 +12,7 @@
 
 <HBox alignment="CENTER" prefHeight="501.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.StudyingPlatform.controllers.ChatController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="501.0" prefWidth="180.0">
+      <VBox alignment="TOP_CENTER" prefHeight="501.0" prefWidth="180.0" style="-fx-pref-width: 190;">
          <children>
             <HBox alignment="BOTTOM_CENTER" style="-fx-pref-height: 75; -fx-background-color: #E8E8E8;">
                <children>
@@ -44,18 +44,22 @@
             </HBox>
          </children>
       </VBox>
-      <VBox prefHeight="501.0" prefWidth="370.0">
+      <VBox prefHeight="501.0" prefWidth="225.0" style="-fx-pref-width: 360;">
          <children>
-            <HBox>
+            <HBox style="-fx-background-color: #e8e8e8;">
                <children>
-                  <Label fx:id="groupNameLabel" alignment="BOTTOM_CENTER" prefHeight="74.0" prefWidth="314.0">
-                     <font>
-                        <Font name="System Bold" size="25.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="74.0" prefWidth="102.0">
+                  <HBox alignment="BOTTOM_CENTER" style="-fx-pref-width: 280;">
                      <children>
-                        <SplitMenuButton mnemonicParsing="false" prefHeight="31.0" prefWidth="70.0" text="More">
+                        <Label fx:id="groupNameLabel" alignment="BOTTOM_CENTER" style="pref: 75;" text="&lt;Group name&gt;">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="74.0" prefWidth="102.0" style="-fx-pref-width: 80;">
+                     <children>
+                        <SplitMenuButton mnemonicParsing="false" prefHeight="31.0" prefWidth="70.0" style="-fx-pref-height: 30;" text="more">
                           <items>
                               <MenuItem mnemonicParsing="false" onAction="#onAddActivityClick" text="Add Activity" />
                             <MenuItem fx:id="viewMembers" mnemonicParsing="false" onAction="#onViewMembersClick" text="View Members" />
