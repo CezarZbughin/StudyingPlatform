@@ -5,6 +5,7 @@ import com.StudyingPlatform.model.Professor;
 import com.StudyingPlatform.model.ScheduleEntry;
 import com.StudyingPlatform.model.Student;
 import com.StudyingPlatform.service.Exceptions.ScheduleException;
+import com.StudyingPlatform.service.IOService;
 import com.StudyingPlatform.service.ProfessorService;
 import com.StudyingPlatform.service.StudentService;
 import javafx.fxml.FXML;
@@ -75,5 +76,8 @@ public class TodayController implements Initializable {
             }
             controllers.get(controllersIndex + duration - 1).addSpacing();
         }
+    }
+    public void onDownloadButtonClick() throws IOException {
+        IOService.writeActivities(schedule);
     }
 }

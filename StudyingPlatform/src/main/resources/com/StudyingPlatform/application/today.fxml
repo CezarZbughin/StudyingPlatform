@@ -29,7 +29,16 @@
       </VBox>
       <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="400.0" style="-fx-background-color: #E8E8E8; -fx-pref-height: 75;">
          <children>
-            <Button mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="32.0" prefWidth="70.0" style="-fx-pref-height: 30; -fx-pref-width: 200;" text="Back" />
+            <HBox alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="32.0" prefWidth="137.0" style="-fx-pref-height: 30; -fx-pref-width: 100;" text="Back" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: #E8E8E8; -fx-pref-height: 30;">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onDownloadButtonClick" prefHeight="32.0" prefWidth="70.0" style="-fx-pref-height: 30; -fx-pref-width: 100;" text="Download" />
+               </children>
+            </HBox>
          </children>
       </HBox>
    </children>

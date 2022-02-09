@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -225,13 +226,18 @@ public class ChatController implements Initializable {
         List<String> members = DataBaseService.getStudentMembersGroup(selectedGroup.getId());
 
         for (String m : members) {
-            System.out.println(m);
             messageVBox.getChildren().add(new Label(m));
         }
         List<String> professorMembers = DataBaseService.getProfessorMembersGroup(selectedGroup.getId());
 
         for (String m : professorMembers) {
-            System.out.println(m);
+            messageVBox.getChildren().add(new Label(m));
+        }
+        messageVBox.getChildren().add(new Label());
+        messageVBox.getChildren().add(new Label());
+        messageVBox.getChildren().add(new Label("Suggestions"));
+        List<String> suggestions = DataBaseService.getSugestionGroup(selectedGroup.getId());
+        for(String m:suggestions){
             messageVBox.getChildren().add(new Label(m));
         }
     }
@@ -244,7 +250,18 @@ public class ChatController implements Initializable {
 
 
     }
-    public void onAddActivityClick(){}
+    public void onAddActivityClick() throws IOException {
+        Stage stage = new Stage();
+        URL url = StudyingApplication.class.getResource("add-activity.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Parent root = (Parent) fxmlLoader.load();
+        AddActivityController controller = fxmlLoader.<AddActivityController>getController();
+        controller.create(stage,this);
+        Scene scene = new Scene(root, 300, 165);
+        stage.setTitle("Schedule Activities");
+        stage.setScene(scene);
+        stage.show();
+    }
 
 
 

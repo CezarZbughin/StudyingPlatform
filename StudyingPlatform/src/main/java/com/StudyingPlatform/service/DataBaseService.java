@@ -12,7 +12,7 @@ public class DataBaseService {
     //CONNECTION
     //
     public final static String DB_USERNAME = "root";
-    public final static String DB_PASSWORD = "root";
+    public final static String DB_PASSWORD = "alabala";
     public final static String DB_NAME = "StudyingPlatform";
     public final static String DB_CONNECTION_LINK = "jdbc:mysql://localhost:3306/";
 
@@ -345,6 +345,17 @@ public class DataBaseService {
             studentMembers.add(resultSet.getString("First_name")+" "+resultSet.getString("Last_name"));
         }
         return studentMembers;
+    }
+    public static List<String> getSugestionGroup(Integer id) throws SQLException, UserNotFoundException, EmptyResultSetException {
+        CallableStatement stmt = connection.prepareCall("call get_not_members_by_group_id(?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1,id);
+        ResultSet resultSet = stmt.executeQuery();
+        List<String> sugestions = new ArrayList<>();
+        while (resultSet.next()) {
+            sugestions.add(resultSet.getString("First_name")+" "+resultSet.getString("Last_name"));
+        }
+        return sugestions;
     }
 
     public static List<String> getProfessorMembersGroup(Integer id) throws SQLException, UserNotFoundException, EmptyResultSetException {

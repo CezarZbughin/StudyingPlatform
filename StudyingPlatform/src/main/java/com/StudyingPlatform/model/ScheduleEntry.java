@@ -4,7 +4,7 @@ import com.StudyingPlatform.model.Interfaces.Overlapable;
 
 import java.io.Serializable;
 
-public class ScheduleEntry implements Comparable<ScheduleEntry>, Overlapable<ScheduleEntry> , Serializable {
+public class ScheduleEntry implements Comparable<ScheduleEntry>, Overlapable<ScheduleEntry>, Serializable {
     private ScheduleTime time;
     private String type;
     private String name;

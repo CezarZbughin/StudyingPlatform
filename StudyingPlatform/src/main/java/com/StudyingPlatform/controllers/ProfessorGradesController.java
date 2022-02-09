@@ -1,10 +1,7 @@
 package com.StudyingPlatform.controllers;
 
 import com.StudyingPlatform.application.StudyingApplication;
-import com.StudyingPlatform.model.Professor;
-import com.StudyingPlatform.model.Student;
-import com.StudyingPlatform.model.SubjectProfessor;
-import com.StudyingPlatform.model.SubjectStudent;
+import com.StudyingPlatform.model.*;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
 import com.StudyingPlatform.service.ProfessorService;
 import com.StudyingPlatform.service.StudentService;
@@ -73,7 +70,6 @@ public class ProfessorGradesController implements Initializable {
     }
     @FXML
     public void onSaveButtonClick(){
-
     }
 
     public void setSelectedSubject(SubjectProfessor selectedSubject) {
