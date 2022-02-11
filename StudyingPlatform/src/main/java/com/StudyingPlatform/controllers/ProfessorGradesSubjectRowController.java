@@ -2,6 +2,7 @@ package com.StudyingPlatform.controllers;
 
 import com.StudyingPlatform.model.Subject;
 import com.StudyingPlatform.model.SubjectProfessor;
+import com.StudyingPlatform.model.SubjectStudent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -15,6 +16,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProfessorGradesSubjectRowController {
     @FXML

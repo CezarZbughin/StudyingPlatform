@@ -61,7 +61,16 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="176.0" layoutY="10.0" prefHeight="75.0" prefWidth="218.0" style="-fx-pref-width: 350;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="38.0" prefWidth="70.0" style="-fx-pref-height: 30; -fx-pref-width: 170;" text="Save Changes" />
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onDownloadButtonClick" prefHeight="38.0" prefWidth="128.0" text="Download" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="148.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="38.0" prefWidth="130.0" text="Save Changes" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </children>
