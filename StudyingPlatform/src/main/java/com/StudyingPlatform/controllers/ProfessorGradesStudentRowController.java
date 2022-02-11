@@ -57,7 +57,10 @@ public class ProfessorGradesStudentRowController {
     }
 
     public boolean saveGrades() {
-        int[] newGrades = {0,0,0};
+        int[] newGrades = new int[3];
+        newGrades[0] = grades[0];
+        newGrades[1] = grades[1];
+        newGrades[2] = grades[2];
         boolean haveBeenChanged = false;
         if (subject.getHasLecture()) {
             Integer lectureGrade = this.getGrade("LECTURE");
@@ -75,16 +78,16 @@ public class ProfessorGradesStudentRowController {
         }
         if (subject.getHasLab()) {
             Integer labGrade = this.getGrade("LAB");
-            if (labGrade != null && !labGrade.equals(Integer.valueOf(grades[2]))){
+            if (labGrade != null && !labGrade.equals(Integer.valueOf(grades[2]))) {
                 haveBeenChanged = true;
                 newGrades[2] = labGrade;
             }
         }
-        if(haveBeenChanged){
+        if (haveBeenChanged) {
             try {
                 ProfessorService.gradeStudent(student, subject, newGrades);
                 return true;
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
@@ -100,7 +103,7 @@ public class ProfessorGradesStudentRowController {
                 case "LAB" -> Integer.parseInt(labTextField.getText());
                 default -> throw new IllegalStateException("Unexpected string value in type/getGrades/" + getClass().getName());
             };
-            if(grade < 1 || grade > 10){
+            if (grade < 1 || grade > 10) {
                 return null;
             }
             return grade;

@@ -68,7 +68,7 @@ public class ProfessorGradesController implements Initializable {
 
     @FXML
     public void onBackButtonClick() throws IOException {
-        StudyingApplication.jumpToView("home.fxml");
+        StudyingApplication.jumpToView("home.fxml",550,500);
     }
     @FXML
     public void onSaveButtonClick(){

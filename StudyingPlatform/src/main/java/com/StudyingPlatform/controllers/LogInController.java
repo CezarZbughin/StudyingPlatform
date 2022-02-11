@@ -46,7 +46,7 @@ public class LogInController {
             errorLabel.setVisible(true);
             return;
         }
-        StudyingApplication.jumpToView("home.fxml");
+        StudyingApplication.jumpToView("home.fxml",550,500);
     }
 
     @FXML

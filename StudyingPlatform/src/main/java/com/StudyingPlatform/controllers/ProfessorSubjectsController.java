@@ -62,13 +62,7 @@ public class ProfessorSubjectsController implements Initializable {
 
     @FXML
     public void onBackButtonClick() throws IOException {
-        URL url;
-        Stage stage = StudyingApplication.getPrimaryStage();
-        url = StudyingApplication.class.getResource("home.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-        stage.setScene(scene);
-
+        StudyingApplication.jumpToView("home.fxml",550,500);
     }
 
 

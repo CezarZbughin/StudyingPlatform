@@ -29,7 +29,7 @@ public class TodayController implements Initializable {
 
     @FXML
     public void onBackButtonClick() {
-        StudyingApplication.jumpToView("home.fxml");
+        StudyingApplication.jumpToView("home.fxml",550,500);
     }
 
     @Override

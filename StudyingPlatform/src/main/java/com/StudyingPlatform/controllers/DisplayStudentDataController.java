@@ -23,6 +23,6 @@ public class DisplayStudentDataController extends DisplayUserDataController{
     }
     @FXML
     public void onBackButtonClick(){
-        StudyingApplication.jumpToView("home.fxml");
+        StudyingApplication.jumpToView("home.fxml",550,500);
     }
 }
