@@ -3,6 +3,7 @@ package com.StudyingPlatform.controllers;
 import com.StudyingPlatform.application.StudyingApplication;
 import com.StudyingPlatform.model.*;
 import com.StudyingPlatform.service.Exceptions.SubjectNotFoundException;
+import com.StudyingPlatform.service.IOService;
 import com.StudyingPlatform.service.ProfessorService;
 import com.StudyingPlatform.service.StudentService;
 import javafx.fxml.FXML;
@@ -69,6 +70,15 @@ public class ProfessorGradesController implements Initializable {
     @FXML
     public void onBackButtonClick() throws IOException {
         StudyingApplication.jumpToView("home.fxml",550,500);
+    }
+    @FXML
+    public void onDownloadButtonClick() throws IOException {
+        List<SubjectStudent> grades= new ArrayList<>();
+        int i=0;
+        for(ProfessorGradesStudentRowController studentGrades: studentRowControllers){
+            grades.add(studentGrades.getSubjectStudent());
+        }
+        IOService.writeGrades(grades);
     }
     @FXML
     public void onSaveButtonClick(){
