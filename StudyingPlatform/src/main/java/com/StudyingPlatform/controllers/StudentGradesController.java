@@ -56,6 +56,5 @@ public class StudentGradesController {
             else
                 labGrade.setText("necules");
         }
-
     }
 }

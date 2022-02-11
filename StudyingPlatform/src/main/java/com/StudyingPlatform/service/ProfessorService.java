@@ -65,7 +65,7 @@ public class ProfessorService {
         ResultSet resultSet = stmt.executeQuery();
         try {
             List<SubjectProfessor> mySubjects = SubjectProfessorService.mapFullResultSet(resultSet);
-            for(SubjectProfessor subjectProfessor: mySubjects){
+            for (SubjectProfessor subjectProfessor : mySubjects) {
                 subjectProfessor.setProfessor(professor);
             }
             return mySubjects;
@@ -79,53 +79,65 @@ public class ProfessorService {
         List<SubjectProfessor> subjects;
         try {
             subjects = ProfessorService.professorGetSubjects(professor);
-        }catch (SubjectNotFoundException e){
+        } catch (SubjectNotFoundException e) {
             subjects = new ArrayList<>();
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new ScheduleException(e.getMessage());
         }
 
-        for(SubjectProfessor subject:subjects){
-            if(!subject.isFinishedSchedule())continue;
-            if(subject.getHasLecture()){
+        for (SubjectProfessor subject : subjects) {
+            if (!subject.isFinishedSchedule()) continue;
+            if (subject.getHasLecture()) {
                 schedule.add(
-                        new ScheduleEntry(subject.getScheduleLecture(),"LECTURE",subject.getName())
+                        new ScheduleEntry(subject.getScheduleLecture(), "LECTURE", subject.getName())
                 );
             }
-            if(subject.getHasSeminar()){
+            if (subject.getHasSeminar()) {
                 schedule.add(
-                        new ScheduleEntry(subject.getScheduleSeminar(),"SEMINAR",subject.getName())
+                        new ScheduleEntry(subject.getScheduleSeminar(), "SEMINAR", subject.getName())
                 );
             }
-            if(subject.getHasLab()){
+            if (subject.getHasLab()) {
                 schedule.add(
-                        new ScheduleEntry(subject.getScheduleLab(),"LAB",subject.getName())
+                        new ScheduleEntry(subject.getScheduleLab(), "LAB", subject.getName())
                 );
             }
         }
-        return  schedule;
+        return schedule;
     }
-    public static List<Student> professorGetStudentsBySubject(Professor professor,Subject subject) throws SQLException{
+
+    public static List<Student> professorGetStudentsBySubject(Professor professor, Subject subject) throws SQLException {
         Connection connection = DataBaseService.getConnection();
         CallableStatement stmt = connection.prepareCall("call  professor_get_students_id_by_subject (?,?)", ResultSet.TYPE_SCROLL_INSENSITIVE,
                 ResultSet.CONCUR_READ_ONLY);
         stmt.setInt(1, professor.getId());
-        stmt.setInt(2,subject.getId());
+        stmt.setInt(2, subject.getId());
         ResultSet resultSet = stmt.executeQuery();
         List<Integer> ids = new ArrayList<>();
-        while(resultSet.next()){
+        while (resultSet.next()) {
             ids.add(resultSet.getInt("student_id"));
         }
         List<User> userList;
         try {
             userList = DataBaseService.usersByIdList(ids);
-        }catch (UserNotFoundException e){
+        } catch (UserNotFoundException e) {
             return new ArrayList<>();
         }
         List<Student> students = new ArrayList<Student>();
-        for(User user: userList){
+        for (User user : userList) {
             students.add((Student) user);
         }
         return students;
+    }
+
+    public static void gradeStudent(Student student, Subject subject, int[] grades) throws SQLException {
+        CallableStatement stmt = DataBaseService.getConnection().prepareCall("call set_grades(?,?,?,?,?)",ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        stmt.setInt(1,student.getId());
+        stmt.setInt(2,subject.getId());
+        stmt.setInt(3,grades[0]);
+        stmt.setInt(4,grades[1]);
+        stmt.setInt(5,grades[2]);
+        stmt.executeUpdate();
     }
 }

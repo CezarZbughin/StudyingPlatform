@@ -10,7 +10,7 @@ import java.util.List;
 public class IOService {
     public static void writeActivities (List<ScheduleEntry> schedule) throws IOException {
         String now = Long.toString(System.currentTimeMillis());
-        String myDocument = "C:\\Users\\Bogdan\\Desktop\\Schedule" + now + ".csv";
+        String myDocument = "C:\\Users\\Cezar\\Desktop\\Schedule" + now + ".csv";
         FileWriter fileOut = new FileWriter(myDocument);
         fileOut.write("Name:" + "," + "Type:" + "," + "Day:" + ","+ "Hour:" + ","+ "Duration\n");
         for (int i = 0; i < schedule.size(); i++) {

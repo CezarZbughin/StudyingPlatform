@@ -34,6 +34,8 @@ public class ProfessorGradesController implements Initializable {
     private SubjectProfessor selectedSubject;
     private ProfessorGradesSubjectRowController selectedController;
 
+    private List<ProfessorGradesStudentRowController> studentRowControllers = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -70,6 +72,15 @@ public class ProfessorGradesController implements Initializable {
     }
     @FXML
     public void onSaveButtonClick(){
+        int changedEntities = 0;
+        for(ProfessorGradesStudentRowController controller: studentRowControllers){
+            boolean success = controller.saveGrades();
+            if(success){
+                changedEntities++;
+            }
+        }
+        SuperController.popMessage("Changes saved!\nUpdated "+changedEntities +
+                " students out of "+studentRowControllers.size());
     }
 
     public void setSelectedSubject(SubjectProfessor selectedSubject) {
@@ -93,6 +104,7 @@ public class ProfessorGradesController implements Initializable {
 
     private void updateStudentList() throws IOException{
         studentsVBox.getChildren().clear();
+        studentRowControllers.clear();
         for(Student student:students){
             List<SubjectStudent> mySubjects;
             try {
@@ -117,6 +129,7 @@ public class ProfessorGradesController implements Initializable {
             Parent row = (Parent) fxmlLoader.load();
             ProfessorGradesStudentRowController controller = fxmlLoader.<ProfessorGradesStudentRowController>getController();
             controller.setStudent(student,studentSpecificSubject);
+            studentRowControllers.add(controller);
             studentsVBox.getChildren().add(row);
 
         }
