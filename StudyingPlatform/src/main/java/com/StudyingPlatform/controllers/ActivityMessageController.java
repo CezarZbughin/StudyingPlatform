@@ -33,8 +33,10 @@ public class ActivityMessageController {
             preparedStatement.executeUpdate();
         }catch (SQLIntegrityConstraintViolationException e){
             SuperController.popError("you already joined.");
+            return;
         }catch (SQLException e){
             SuperController.popError("something went wrong");
+            return;
         }
         SuperController.popMessage("Joined activity.");
     }
