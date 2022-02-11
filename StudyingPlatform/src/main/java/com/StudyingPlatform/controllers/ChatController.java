@@ -221,6 +221,9 @@ public class ChatController implements Initializable {
     }
 
     public void onViewMembersClick() throws UserNotFoundException, SQLException, EmptyResultSetException {
+        if(selectedGroup==null){
+            return;
+        }
         messageVBox.getChildren().clear();
         messageVBox.getChildren().add(new Label("Members:"));
         List<String> members = DataBaseService.getStudentMembersGroup(selectedGroup.getId());
@@ -242,15 +245,22 @@ public class ChatController implements Initializable {
         }
     }
     public void onLeaveGroupClick() throws SQLException {
-        if(SuperController.activeUser.getRole().equals("STUDENT"))
-        DataBaseService.studentLeaveGroup(SuperController.activeUser.getId(),selectedGroup.getId());
-        else{
-            DataBaseService.professorLeaveGroup(SuperController.activeUser.getId(),selectedGroup.getId());
+        if(selectedGroup==null){
+            return;
         }
-
-
+        if(SuperController.activeUser.getRole().equals("STUDENT")){
+            DataBaseService.studentLeaveGroup(SuperController.activeUser.getId(),selectedGroup.getId());
+        }
+        else if(SuperController.activeUser.getRole().equals("PROFESSOR")){
+            DataBaseService.professorLeaveGroup(SuperController.activeUser.getId(),selectedGroup.getId());
+        }else throw new IllegalStateException("unexpected role for user in onLeaveGroupButton.");
+        StudyingApplication.jumpToView("chat.fxml",550,500);
     }
+
     public void onAddActivityClick() throws IOException {
+        if(selectedGroup==null){
+            return;
+        }
         Stage stage = new Stage();
         URL url = StudyingApplication.class.getResource("add-activity.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
@@ -262,8 +272,6 @@ public class ChatController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-
 
     private void insertMessage(int index, Message message) {
         try {
