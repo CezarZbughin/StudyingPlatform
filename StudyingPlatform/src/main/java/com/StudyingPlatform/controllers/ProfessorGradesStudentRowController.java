@@ -111,4 +111,8 @@ public class ProfessorGradesStudentRowController {
             return null;
         }
     }
+
+    public SubjectStudent getSubjectStudent() {
+        return subject;
+    }
 }
