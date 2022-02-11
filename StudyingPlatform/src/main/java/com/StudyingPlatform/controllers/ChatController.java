@@ -1,13 +1,14 @@
 package com.StudyingPlatform.controllers;
 
 import com.StudyingPlatform.application.StudyingApplication;
+import com.StudyingPlatform.model.Activity;
 import com.StudyingPlatform.model.Group;
 import com.StudyingPlatform.model.Message;
-import com.StudyingPlatform.model.User;
 import com.StudyingPlatform.service.DataBaseService;
 import com.StudyingPlatform.service.Exceptions.EmptyResultSetException;
 import com.StudyingPlatform.service.Exceptions.MessageNotFoundException;
 import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
+import com.StudyingPlatform.service.GroupService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -67,7 +68,7 @@ public class ChatController implements Initializable {
 
     @FXML
     public void onBackButtonClick() {
-        StudyingApplication.jumpToView("home.fxml",550,500);
+        StudyingApplication.jumpToView("home.fxml", 550, 500);
     }
 
     @FXML
@@ -114,7 +115,7 @@ public class ChatController implements Initializable {
                     SuperController.popError("Couldn\'t join the group.");
                     return;
                 }
-                StudyingApplication.jumpToView("chat.fxml",550,500);
+                StudyingApplication.jumpToView("chat.fxml", 550, 500);
             });
             this.setMinHeight(365);
             this.setMinWidth(330);
@@ -197,7 +198,6 @@ public class ChatController implements Initializable {
     public void messagesListInit() {
         if (selectedGroup == null)
             return;
-
         messageVBox.getChildren().clear();
         messageVBox.getChildren().add(new ShowMoreButton());
         try {
@@ -213,6 +213,29 @@ public class ChatController implements Initializable {
         } catch (SQLException | MessageNotFoundException e) {
             return;
         }
+        List<Activity> activities;
+        try {
+            activities = GroupService.groupGetActivities(selectedGroup);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+        for (Activity activity : activities) {
+            try {
+                URL url = StudyingApplication.class.getResource("activity-message.fxml");
+                FXMLLoader fxmlLoader = new FXMLLoader(url);
+                Parent row = (Parent) fxmlLoader.load();
+                ActivityMessageController controller = fxmlLoader.<ActivityMessageController>getController();
+                controller.set(activity, this);
+                messageVBox.getChildren().add(
+                        messageVBox.getChildren().size(),
+                        row
+                );
+            } catch (IOException e) {
+                e.printStackTrace();
+                continue;
+            }
+        }
     }
 
     public void showJoinButton() {
@@ -221,7 +244,7 @@ public class ChatController implements Initializable {
     }
 
     public void onViewMembersClick() throws UserNotFoundException, SQLException, EmptyResultSetException {
-        if(selectedGroup==null){
+        if (selectedGroup == null) {
             return;
         }
         messageVBox.getChildren().clear();
@@ -240,25 +263,25 @@ public class ChatController implements Initializable {
         messageVBox.getChildren().add(new Label());
         messageVBox.getChildren().add(new Label("Suggestions"));
         List<String> suggestions = DataBaseService.getSugestionGroup(selectedGroup.getId());
-        for(String m:suggestions){
+        for (String m : suggestions) {
             messageVBox.getChildren().add(new Label(m));
         }
     }
+
     public void onLeaveGroupClick() throws SQLException {
-        if(selectedGroup==null){
+        if (selectedGroup == null) {
             return;
         }
-        if(SuperController.activeUser.getRole().equals("STUDENT")){
-            DataBaseService.studentLeaveGroup(SuperController.activeUser.getId(),selectedGroup.getId());
-        }
-        else if(SuperController.activeUser.getRole().equals("PROFESSOR")){
-            DataBaseService.professorLeaveGroup(SuperController.activeUser.getId(),selectedGroup.getId());
-        }else throw new IllegalStateException("unexpected role for user in onLeaveGroupButton.");
-        StudyingApplication.jumpToView("chat.fxml",550,500);
+        if (SuperController.activeUser.getRole().equals("STUDENT")) {
+            DataBaseService.studentLeaveGroup(SuperController.activeUser.getId(), selectedGroup.getId());
+        } else if (SuperController.activeUser.getRole().equals("PROFESSOR")) {
+            DataBaseService.professorLeaveGroup(SuperController.activeUser.getId(), selectedGroup.getId());
+        } else throw new IllegalStateException("unexpected role for user in onLeaveGroupButton.");
+        StudyingApplication.jumpToView("chat.fxml", 550, 500);
     }
 
     public void onAddActivityClick() throws IOException {
-        if(selectedGroup==null){
+        if (selectedGroup == null) {
             return;
         }
         Stage stage = new Stage();
@@ -266,7 +289,7 @@ public class ChatController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Parent root = (Parent) fxmlLoader.load();
         AddActivityController controller = fxmlLoader.<AddActivityController>getController();
-        controller.create(stage,this);
+        controller.create(stage, this);
         Scene scene = new Scene(root, 300, 165);
         stage.setTitle("Schedule Activities");
         stage.setScene(scene);
@@ -306,5 +329,13 @@ public class ChatController implements Initializable {
 
     public InboxRowController getSelectedInboxRow() {
         return selectedInboxRow;
+    }
+
+    public Group getSelectedGroup() {
+        return selectedGroup;
+    }
+
+    public VBox getMessageVBox() {
+        return messageVBox;
     }
 }

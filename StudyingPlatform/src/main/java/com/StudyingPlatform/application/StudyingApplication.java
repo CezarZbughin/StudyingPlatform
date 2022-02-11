@@ -1,18 +1,20 @@
 package com.StudyingPlatform.application;
+
 import com.StudyingPlatform.controllers.SuperController;
-import com.StudyingPlatform.service.DataBaseService;
-import com.StudyingPlatform.service.Exceptions.UserNotFoundException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 
 public class StudyingApplication extends Application {
     private static Stage primaryStage;
     @Override
     public void start(Stage stage) throws IOException {
+        System.out.println(new Timestamp(System.currentTimeMillis()));
         primaryStage = stage;
         primaryStage.setTitle("Studying Platform");
        // try{
